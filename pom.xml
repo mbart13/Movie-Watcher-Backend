@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.codecool</groupId>
-    <artifactId>movie-addict</artifactId>
+    <artifactId>movie-watcher</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>movie-addict</name>
-    <description>Demo project for Spring Boot</description>
+    <name>movie-watcher</name>
+    <description></description>
 
     <properties>
         <java.version>11</java.version>
