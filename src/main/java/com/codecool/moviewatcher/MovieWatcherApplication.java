@@ -1,13 +1,13 @@
-package com.codecool.movieaddict;
+package com.codecool.moviewatcher;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MovieAddictApplication {
+public class MovieWatcherApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MovieAddictApplication.class, args);
+        SpringApplication.run(MovieWatcherApplication.class, args);
     }
 
 }
