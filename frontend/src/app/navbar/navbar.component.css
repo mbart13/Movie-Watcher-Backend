@@ -1,0 +1,46 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-left-side {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    letter-spacing: .3rem;
+    font-size: 1.6em;
+}
+
+#red-logo {
+    color: var(--clr-red)
+}
+
+#white-logo {
+    color: var(--clr-white)
+}
+
+.menu {
+    margin-left: 1.2rem;
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--clr-white)
+}
+
+ul li {
+    list-style-type: none;
+    margin: .8rem;
+    font-weight: bold;
+}
+
+ul li:hover {
+    cursor: pointer;
+}
+
+.fas {
+    font-size: 1.2rem;
+    color: var(--clr-white);
+}

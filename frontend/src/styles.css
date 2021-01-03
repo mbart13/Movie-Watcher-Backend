@@ -7,6 +7,7 @@
     --clr-grey: #ADACBB;
     --clr-white: #fff;
     --ff-primary: "Roboto", sans-serif;
+    --max-width: 1170px;
 }
 
 *, ::after, ::before {
@@ -16,6 +17,26 @@
 }
 
 body {
+    color: var(--clr-grey);
     font-family: var(--ff-primary);
     background: var(--clr-bg-primary);
+}
+
+.btn {
+    border: none;
+    font-size: 1.1rem;
+    border-radius: 20px;
+    color: var(--clr-grey);
+    background: var(--clr-bg-secondary);
+    padding: .4em 1em;
+}
+
+.btn-active {
+    color: var(--clr-white);
+    background: var(--clr-red);
+    font-weight: bold;
+}
+
+.btn:hover {
+    cursor: pointer;
 }
