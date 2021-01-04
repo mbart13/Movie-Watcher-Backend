@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Genre } from 'src/app/genre';
+import { GenreService } from 'src/app/genre.service';
 
 @Component({
   selector: 'app-filter-panel',
@@ -7,12 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterPanelComponent implements OnInit {
 
+  genres$: Observable<Genre[]>;
   sortingExpanded: boolean = false;
   filterExpanded: boolean = false;
 
-  constructor() { }
+  constructor(private genreService: GenreService) { }
 
   ngOnInit(): void {
+    this.genres$ = this.genreService.getGenres();
   }
 
   toggleSortingOptions() {

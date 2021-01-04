@@ -33,18 +33,8 @@
     </div>
     <div class="sort-filter-options" (click)="$event.stopPropagation()">
         <h5 class="filter-name">Genres</h5>
-        <div class="genres">
-            <button class="btn genre">Action</button>
-            <button class="btn genre">Adventure</button>
-            <button class="btn genre">Animation</button>
-            <button class="btn genre">Comedy</button>
-            <button class="btn genre btn-active">Crime</button>
-            <button class="btn genre">Documentary</button>
-            <button class="btn genre">Drama</button>
-            <button class="btn genre">Family</button>
-            <button class="btn genre">Fantasy</button>
-            <button class="btn genre">History</button>
-            <button class="btn genre">Horror</button>
+        <div class="genres" >    
+            <button class="btn genre" *ngFor="let genre of (genres$ | async)" [id]="genre.id">{{ genre.name }}</button>
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MovieBrowserComponent } from './movie-browser/movie-browser.component';
 import { FilterPanelComponent } from './movie-browser/filter-panel/filter-panel.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FilterPanelComponent } from './movie-browser/filter-panel/filter-panel.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
