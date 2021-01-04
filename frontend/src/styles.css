@@ -19,11 +19,13 @@
 body {
     color: var(--clr-grey);
     font-family: var(--ff-primary);
+    font-size: 1rem;
     background: var(--clr-bg-primary);
 }
 
 .btn {
     border: none;
+    outline: none;
     font-size: 1.1rem;
     border-radius: 20px;
     color: var(--clr-grey);
@@ -31,12 +33,33 @@ body {
     padding: .4em 1em;
 }
 
-.btn-active {
+.btn-active, .btn:hover {
     color: var(--clr-white);
     background: var(--clr-red);
-    font-weight: bold;
 }
 
 .btn:hover {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+select, input {
+    border: none;
+    outline: none;
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+select:hover {
     cursor: pointer;
 }

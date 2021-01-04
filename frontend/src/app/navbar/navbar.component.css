@@ -1,17 +1,12 @@
-.navbar {
+.navbar, .nav-menu  {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.nav-left-side {
-    display: flex;
-    align-items: center;
-}
-
 .logo {
     letter-spacing: .3rem;
-    font-size: 1.6em;
+    font-size: 1.7em;
 }
 
 #red-logo {
@@ -26,17 +21,14 @@
     margin-left: 1.2rem;
     display: flex;
     font-size: 1.2rem;
-    font-weight: normal;
     color: var(--clr-white)
 }
 
-ul li {
-    list-style-type: none;
+.menu-item {
     margin: .8rem;
-    font-weight: bold;
 }
 
-ul li:hover {
+.menu-item:hover {
     cursor: pointer;
 }
 

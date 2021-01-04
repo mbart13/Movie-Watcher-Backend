@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterPanelComponent implements OnInit {
 
+  sortingExpanded: boolean = false;
+  filterExpanded: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleSortingOptions() {
+    this.sortingExpanded = !this.sortingExpanded;    
+  }
+
+  toggleFilterOptions() {
+    this.filterExpanded = !this.filterExpanded;    
   }
 
 }

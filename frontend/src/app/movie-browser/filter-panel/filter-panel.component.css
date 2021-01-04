@@ -7,8 +7,12 @@
 .panel {
     border: 1px solid var(--clr-grey);
     border-radius: 12px;
-    padding: .8em;
+    padding: .8em .8em 0 .8em;
     margin-bottom: .8em;
+}
+
+.panel-header:hover {
+    cursor: pointer;
 }
 
 hr {
@@ -18,12 +22,32 @@ hr {
 
 .panel-header {
     font-size: 1.4em;
-
+    padding-bottom: .5em;
 }
 
-.sort-results {
+.sort-filter-options {
     width: 100%;
     position: relative;
+    border-top: 1px solid var(--clr-grey);
+    padding-top: .5em;
+    position: relative;
+    display: none;
+}
+
+.fa-chevron-down {
+    display: none;
+}
+
+.expand .fa-chevron-down {
+    display: block;
+}
+
+.expand .fa-chevron-right {
+    display: none;
+}
+
+.expand .sort-filter-options {
+    display: block;
 }
 
 .filter-name {
@@ -31,19 +55,22 @@ hr {
     margin-bottom: .8em;
 }
 
+.select-options-wrapper {
+    position: relative;
+    padding-bottom: .8em;
+}
+
 select {
     width: 100%;    
     background: var(--clr-bg-secondary);
     color: var(--clr-grey);
-    padding: .3em;
-    border: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
+    padding: .6em;
 }
 
 .fa-sort-down {
     position: absolute;
     right: 2%;
+    top: 12%;
 }
 
 .btn-apply {
@@ -55,3 +82,4 @@ select {
     margin: 0 .5em .8em 0;
     font-size: .9em;
 }
+

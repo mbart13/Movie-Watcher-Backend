@@ -10,7 +10,6 @@
     background: var(--clr-bg-secondary);
     border-radius: 20px;
     color: #727180;
-    border: none;
     width: 100%;
     font-size: 1.4em;
     padding: .6em .8em;
@@ -33,7 +32,7 @@
 }
 
 app-filter-panel {
-    width: 33%;
+    width: 30%;
     min-width: 300px;
     display: block;
     margin-top: 2em;

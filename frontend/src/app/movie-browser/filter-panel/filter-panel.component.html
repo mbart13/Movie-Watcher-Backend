@@ -1,39 +1,51 @@
-<div class="panel sort-panel">
+<div class="panel sort-panel" 
+    [ngClass]="{ 'expand': sortingExpanded }" 
+    (click)="toggleSortingOptions()">
     <div class="panel-header">
         <h4>Sort</h4>
-        <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-down"></i> 
+        <i class="fas fa-chevron-right"></i>
     </div>
-    <hr>
-    <div class="sort-results">
+    <div class="sort-filter-options" (click)="$event.stopPropagation()">
         <h5 class="filter-name">Sort results by</h5>
-        <select name="sort-results" id="sort-results">
-            <option value="">Popularity Descending</option>
-            <option value="">Popularity Ascending</option>
-            <option value="">Rating Descending</option>
-            <option value="">Rating Ascending</option>
-            <option value="">Release Date Descending</option>
-            <option value="">Release Date Ascending</option>
-            <option value="">Title (A-Z)</option>
-        </select>
-        <i class="fas fa-sort-down"></i>
+        <div class="select-options-wrapper">
+            <select name="sort-results" id="sort-results">
+                <option value="">Popularity Descending</option>
+                <option value="">Popularity Ascending</option>
+                <option value="">Rating Descending</option>
+                <option value="">Rating Ascending</option>
+                <option value="">Release Date Descending</option>
+                <option value="">Release Date Ascending</option>
+                <option value="">Title (A-Z)</option>
+                <option value="">Title (Z-A)</option>
+            </select>
+            <i class="fas fa-sort-down"></i>
+        </div>
     </div>
 </div>
-<div class="panel filter-panel">
+<div class="panel filter-panel" 
+    [ngClass]="{ 'expand': filterExpanded }" 
+    (click)="toggleFilterOptions()">
     <div class="panel-header">
         <h4>Filters</h4>
         <i class="fas fa-chevron-down"></i>
+        <i class="fas fa-chevron-right"></i>
     </div>
-    <hr>
-    <h5 class="filter-name">Genres</h5>
-    <div class="genres">
-        <button class="btn genre">Action</button>
-        <button class="btn genre">Adventure</button>
-        <button class="btn genre">Animation</button>
-        <button class="btn genre">Comedy</button>
-        <button class="btn genre btn-active">Crime</button>
-        <button class="btn genre">Documentary</button>
-        <button class="btn genre">Drama</button>
-        <button class="btn genre">Family</button>
+    <div class="sort-filter-options" (click)="$event.stopPropagation()">
+        <h5 class="filter-name">Genres</h5>
+        <div class="genres">
+            <button class="btn genre">Action</button>
+            <button class="btn genre">Adventure</button>
+            <button class="btn genre">Animation</button>
+            <button class="btn genre">Comedy</button>
+            <button class="btn genre btn-active">Crime</button>
+            <button class="btn genre">Documentary</button>
+            <button class="btn genre">Drama</button>
+            <button class="btn genre">Family</button>
+            <button class="btn genre">Fantasy</button>
+            <button class="btn genre">History</button>
+            <button class="btn genre">Horror</button>
+        </div>
     </div>
 </div>
 <button class="btn btn-active btn-apply">
