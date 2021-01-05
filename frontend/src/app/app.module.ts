@@ -7,13 +7,17 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MovieBrowserComponent } from './movie-browser/movie-browser.component';
 import { FilterPanelComponent } from './movie-browser/filter-panel/filter-panel.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MovieListComponent } from './movie-browser/movie-list/movie-list.component';
+import { MovieCardComponent } from './movie-browser/movie-list/movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     MovieBrowserComponent,
-    FilterPanelComponent
+    FilterPanelComponent,
+    MovieListComponent,
+    MovieCardComponent
   ],
   imports: [
     BrowserModule,

@@ -31,9 +31,14 @@
     margin: .3em;
 }
 
+.main-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
+}
+
 app-filter-panel {
     width: 30%;
     min-width: 300px;
-    display: block;
-    margin-top: 2em;
+    margin-right: 1.5em;
 }

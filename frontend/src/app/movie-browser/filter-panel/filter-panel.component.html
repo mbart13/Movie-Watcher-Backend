@@ -33,8 +33,9 @@
     </div>
     <div class="sort-filter-options" (click)="$event.stopPropagation()">
         <h5 class="filter-name">Genres</h5>
-        <div class="genres" >    
-            <button class="btn genre" *ngFor="let genre of (genres$ | async)" [id]="genre.id">{{ genre.name }}</button>
+        <div class="genres">    
+            <button class="btn genre" *ngFor="let genre of (genres$ | async)" [id]="genre.id">{{ genre.name }}
+            </button>
         </div>
     </div>
 </div>

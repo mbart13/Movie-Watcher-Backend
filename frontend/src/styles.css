@@ -63,3 +63,7 @@ select {
 select:hover {
     cursor: pointer;
 }
+
+img {
+    width: 100%;
+}

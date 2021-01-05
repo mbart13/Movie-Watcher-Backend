@@ -1,0 +1,23 @@
+.movie-card {
+    width: 140px;
+    margin-bottom: 1.2em;
+    text-align: center;
+    color: var(--clr-white);
+}
+
+img {
+    border-radius: 12px;
+}
+
+.title {
+    font-size: 1em;
+}
+
+.release-date {
+    margin: .3em;
+    font-size: .7em;
+}
+
+.genres {
+    font-size: .8em;
+}
