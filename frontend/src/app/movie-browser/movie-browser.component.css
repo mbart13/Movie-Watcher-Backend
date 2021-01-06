@@ -29,6 +29,7 @@
 
 .btn {
     margin: .3em;
+    font-size: .9em;
 }
 
 .main-section {
@@ -41,4 +42,8 @@ app-filter-panel {
     width: 30%;
     min-width: 300px;
     margin-right: 1.5em;
+}
+
+app-movie-list {
+    text-align: center;
 }

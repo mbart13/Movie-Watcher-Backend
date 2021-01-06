@@ -19,5 +19,17 @@ img {
 }
 
 .genres {
-    font-size: .8em;
+    font-size: .7em;
+}
+
+@media screen and (max-width: 1160px) {
+    .movie-card {
+        width: 160px;
+    }
+}
+
+@media screen and (max-width: 1095px) {
+    .movie-card {
+        width: 200px;
+    }
 }

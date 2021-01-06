@@ -38,10 +38,6 @@ body {
     background: var(--clr-red);
 }
 
-.btn:hover {
-    cursor: pointer;
-}
-
 a {
     text-decoration: none;
 }
@@ -60,7 +56,7 @@ select {
     -webkit-appearance: none;
 }
 
-select:hover {
+a:hover, select:hover, .btn:hover {
     cursor: pointer;
 }
 

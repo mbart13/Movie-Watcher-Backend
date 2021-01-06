@@ -11,6 +11,11 @@
     margin-bottom: .8em;
 }
 
+.panel-header {
+    font-size: 1.2em;
+    padding-bottom: .5em;
+}
+
 .panel-header:hover {
     cursor: pointer;
 }
@@ -18,11 +23,6 @@
 hr {
     margin: .8em 0;
     border-color: var(--clr-grey);
-}
-
-.panel-header {
-    font-size: 1.4em;
-    padding-bottom: .5em;
 }
 
 .sort-filter-options {
@@ -51,7 +51,7 @@ hr {
 }
 
 .filter-name {
-    font-size: .8em;
+    font-size: 1em;
     margin-bottom: .8em;
 }
 
@@ -75,7 +75,7 @@ select {
 
 .btn-apply {
     width: 100%;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 .genres {

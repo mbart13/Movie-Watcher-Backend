@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Genre } from 'src/app/genre';
-import { GenreService } from 'src/app/genre.service';
+import { Genre } from 'src/app/models/genre';
+import { GenreService } from 'src/app/services/genre.service';
 
 @Component({
   selector: 'app-filter-panel',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Genre } from 'src/app/genre';
-import { GenreService } from 'src/app/genre.service';
-import { MOVIES } from 'src/app/mock-movies';
-import { Movie } from 'src/app/movie';
-import { MovieService } from 'src/app/movie.service';
+import { Genre } from 'src/app/models/genre';
+import { GenreService } from 'src/app/services/genre.service';
+import { Movie } from 'src/app/models/movie';
+import { MovieService } from 'src/app/services/movie.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
@@ -12,16 +12,17 @@ import { MovieService } from 'src/app/movie.service';
 })
 export class MovieListComponent implements OnInit {
 
-  movies: Movie[] = MOVIES;
-  genres: Genre[] = [];
+  movies$: Observable<Movie[]>;
+  genres: Genre[];
 
   constructor(private movieService: MovieService, private genreService: GenreService) { }
 
   ngOnInit(): void {
     this.genreService.getGenres()
-      .subscribe(data => this.genres = data)
+      .subscribe(data => this.genres = data);
+      
+    this.movies$ = this.movieService.getMovies();
 
-    
   }
 
 }
