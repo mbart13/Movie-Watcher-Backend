@@ -1,5 +1,5 @@
 <div class="panel sort-panel" 
-    [ngClass]="{ 'expand': sortingExpanded }" 
+    [class.expand]="sortingExpanded" 
     (click)="toggleSortingOptions()">
     <div class="panel-header">
         <h4>Sort</h4>
@@ -24,7 +24,7 @@
     </div>
 </div>
 <div class="panel filter-panel" 
-    [ngClass]="{ 'expand': filterExpanded }" 
+    [class.expand]="filterExpanded" 
     (click)="toggleFilterOptions()">
     <div class="panel-header">
         <h4>Filters</h4>

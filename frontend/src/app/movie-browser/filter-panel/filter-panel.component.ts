@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Genre } from 'src/app/models/genre';
-import { GenreService } from 'src/app/services/genre.service';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-filter-panel',
@@ -14,18 +14,18 @@ export class FilterPanelComponent implements OnInit {
   sortingExpanded: boolean = false;
   filterExpanded: boolean = false;
 
-  constructor(private genreService: GenreService) { }
+  constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.genres$ = this.genreService.getGenres();
+    this.genres$ = this.movieService.getGenres();
   }
 
   toggleSortingOptions() {
-    this.sortingExpanded = !this.sortingExpanded;    
+    this.sortingExpanded = !this.sortingExpanded;
   }
 
   toggleFilterOptions() {
-    this.filterExpanded = !this.filterExpanded;    
+    this.filterExpanded = !this.filterExpanded;
   }
 
 }

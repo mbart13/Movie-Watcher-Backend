@@ -8,6 +8,7 @@
     --clr-white: #fff;
     --ff-primary: "Roboto", sans-serif;
     --max-width: 1170px;
+    --border-radius: 12px;
 }
 
 *, ::after, ::before {
@@ -21,6 +22,12 @@ body {
     font-family: var(--ff-primary);
     font-size: 1rem;
     background: var(--clr-bg-primary);
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 1em auto;
+    padding: 0 1em;
 }
 
 .btn {
@@ -40,6 +47,7 @@ body {
 
 a {
     text-decoration: none;
+    color: var(--clr-white);
 }
 
 ul li {
@@ -62,4 +70,5 @@ a:hover, select:hover, .btn:hover {
 
 img {
     width: 100%;
+    border-radius: var(--border-radius);
 }

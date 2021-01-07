@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Genre } from 'src/app/models/genre';
-import { GenreService } from 'src/app/services/genre.service';
 import { Movie } from 'src/app/models/movie';
+import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MovieCardComponent implements OnInit {
 
-  env = environment.tmdb_images_w300;
+  env = environment.tmdb_imagesUrl_w300;
 
   @Input()
   genres: Genre[];
@@ -19,13 +19,13 @@ export class MovieCardComponent implements OnInit {
   @Input()
   movie: Movie;
 
-  constructor() { }
+  constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
 
   }
 
-  mapIdToGenre(id: number) {
+  findGenre(id: number) {
     return this.genres.find(genre => genre.id === id).name;
   }
 

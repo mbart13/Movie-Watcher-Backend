@@ -1,1 +1,33 @@
-<p>movie-details works!</p>
+<div class="movie-details-container" *ngIf="{movieDetails: movieDetails$ | async, 
+                                            movieCredits: movieCredits$ | async} as data;">
+    <div class="poster">
+        <img [src]="env + data.movieDetails.poster_path" [alt]="data.movieDetails.title">
+    </div>
+    <div class="movie-info">
+        <h1>{{data.movieDetails.title}} <span class="release-date">{{ ' (' + data.movieDetails.release_date.slice(0, 4) + ')' }}</span></h1>
+        <h3 class="tagline" *ngIf="data.movieDetails.tagline">{{ data.movieDetails.tagline }} </h3>
+        <div class="overview">
+            <h3>Overview</h3>
+            <p>{{ data.movieDetails.overview }}</p>
+        </div>
+        <div class="credits">
+            <div class="member">
+                <h4 *ngIf="findCrewMember(data.movieCredits.crew, 'director').length > 0">Director</h4>
+                <span *ngFor="let person of findCrewMember(data.movieCredits.crew, 'director'); last as isLast">
+                    {{person.name}}<span *ngIf="!isLast">, </span></span>
+            </div>
+            <div class="member">
+                <h4 *ngIf="findCrewMember(data.movieCredits.crew, 'writer').length > 0">Screenwriter</h4>
+                <span *ngFor="let person of findCrewMember(data.movieCredits.crew, 'writer'); last as isLast">
+                    {{person.name}}<span *ngIf="!isLast">, </span></span>
+            </div>
+
+        </div>
+        <div class="genres">
+            <button class="btn btn-active" *ngFor="let genre of data.movieDetails.genres">
+                {{genre.name}}
+            </button>
+        </div>
+    </div>
+
+</div>
