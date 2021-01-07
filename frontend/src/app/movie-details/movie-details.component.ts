@@ -7,6 +7,7 @@ import { MovieCredits } from '../models/movie-credits';
 import { Observable } from 'rxjs';
 import { Person } from '../models/person';
 import { Genre } from '../models/genre';
+import { mergeMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-details',
@@ -15,8 +16,7 @@ import { Genre } from '../models/genre';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  movieDetails$: Observable<MovieDetails>;
-  movieCredits$: Observable<MovieCredits>;
+  data: Observable<{ movieDetails: MovieDetails, movieCredits: MovieCredits }>;
   genres$: Observable<Genre[]>;
   env = environment.tmdb_imagesUrl_w300;
 
@@ -32,8 +32,14 @@ export class MovieDetailsComponent implements OnInit {
 
   getMovieDetails(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.movieDetails$ = this.movieService.getMovieDetails(id);
-    this.movieCredits$ = this.movieService.getMovieCredits(id);
+    this.data = this.movieService.getMovieDetails(id).pipe(
+      mergeMap(movieDetails => this.movieService.getMovieCredits(id).pipe(
+        map(movieCredits => ({
+          movieDetails,
+          movieCredits
+        }))
+      ))
+    );
   }
 
   findCrewMember(crew: Person[], role: string) {

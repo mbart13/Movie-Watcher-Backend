@@ -25,7 +25,7 @@ export class MovieCardComponent implements OnInit {
 
   }
 
-  findGenre(id: number) {
+  getGenreById(id: number) {
     return this.genres.find(genre => genre.id === id).name;
   }
 

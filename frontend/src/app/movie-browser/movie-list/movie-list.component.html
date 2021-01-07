@@ -1,5 +1,4 @@
-<!-- add ngif with genres -->
-<div class="movie-list-container">
+<div class="movie-list-container" *ngIf="genres">
     <app-movie-card *ngFor="let movie of (movies$ | async)" [movie]="movie" [genres]="genres">
     </app-movie-card>
 </div>

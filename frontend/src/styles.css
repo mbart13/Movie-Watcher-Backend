@@ -64,11 +64,17 @@ select {
     -webkit-appearance: none;
 }
 
-a:hover, select:hover, .btn:hover {
+a:hover, select:hover, button:hover {
     cursor: pointer;
 }
 
 img {
     width: 100%;
     border-radius: var(--border-radius);
+}
+
+@media screen and (max-width: 1000px) {
+    .btn {
+        font-size: .9rem;
+    }
 }
