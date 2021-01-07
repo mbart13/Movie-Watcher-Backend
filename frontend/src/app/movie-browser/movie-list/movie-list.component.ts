@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class MovieListComponent implements OnInit {
 
   movies$: Observable<Movie[]>;
-  genres: Genre[];
+  genres: Genre[] = [];
 
   constructor(private movieService: MovieService) { }
 
