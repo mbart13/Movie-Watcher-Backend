@@ -28,6 +28,10 @@
     grid-area: movie-info;
 }
 
+.basic-details span {
+    font-size: .9em;
+}
+
 .release-date {
     font-size: .6em;
     font-weight: normal;

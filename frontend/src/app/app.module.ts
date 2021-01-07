@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieListComponent } from './movie-browser/movie-list/movie-list.component';
 import { MovieCardComponent } from './movie-browser/movie-list/movie-card/movie-card.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { RoundPipe } from './utils/round.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     FilterPanelComponent,
     MovieListComponent,
     MovieCardComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    RoundPipe
   ],
   imports: [
     BrowserModule,

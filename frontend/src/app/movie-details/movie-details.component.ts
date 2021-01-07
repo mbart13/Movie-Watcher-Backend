@@ -26,10 +26,6 @@ export class MovieDetailsComponent implements OnInit {
     this.getMovieDetails()
   }
 
-  getGenres() {
-    this.genres$ = this.movieService.getGenres();
-  }
-
   getMovieDetails(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.data = this.movieService.getMovieDetails(id).pipe(
