@@ -1,5 +1,4 @@
 <div class="movie-list-container" *ngIf="genres">
-    <app-movie-card *ngFor="let movie of (movies$ | async)" [movie]="movie" [genres]="genres">
-    </app-movie-card>
+    <app-movie-card *ngFor="let movie of movies" [genres]="genres" [movie]="movie"></app-movie-card>
+    <button class="btn btn-active">Load More</button>
 </div>
-<button class="btn btn-active">Load More</button>

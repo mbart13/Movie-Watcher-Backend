@@ -11,7 +11,7 @@ import { MovieService } from 'src/app/services/movie.service';
 export class FilterPanelComponent implements OnInit {
 
   genres$: Observable<Genre[]>;
-  sortingExpanded: boolean = false;
+  sortExpanded: boolean = false;
   filterExpanded: boolean = false;
 
   constructor(private movieService: MovieService) { }
@@ -20,11 +20,11 @@ export class FilterPanelComponent implements OnInit {
     this.genres$ = this.movieService.getGenres();
   }
 
-  toggleSortingOptions() {
-    this.sortingExpanded = !this.sortingExpanded;
+  toggleSort() {
+    this.sortExpanded = !this.sortExpanded;
   }
 
-  toggleFilterOptions() {
+  toggleFilters() {
     this.filterExpanded = !this.filterExpanded;
   }
 

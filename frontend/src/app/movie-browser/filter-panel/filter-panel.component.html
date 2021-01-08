@@ -1,9 +1,7 @@
-<div class="panel sort-panel" 
-    [class.expand]="sortingExpanded" 
-    (click)="toggleSortingOptions()">
+<div class="panel sort-panel" [class.expand]="sortExpanded" (click)="toggleSort()">
     <div class="panel-header">
         <h4>Sort</h4>
-        <i class="fas fa-chevron-down"></i> 
+        <i class="fas fa-chevron-down"></i>
         <i class="fas fa-chevron-right"></i>
     </div>
     <div class="sort-filter-options" (click)="$event.stopPropagation()">
@@ -23,9 +21,7 @@
         </div>
     </div>
 </div>
-<div class="panel filter-panel" 
-    [class.expand]="filterExpanded" 
-    (click)="toggleFilterOptions()">
+<div class="panel filter-panel" [class.expand]="filterExpanded" (click)="toggleFilters()">
     <div class="panel-header">
         <h4>Filters</h4>
         <i class="fas fa-chevron-down"></i>
@@ -33,7 +29,7 @@
     </div>
     <div class="sort-filter-options" (click)="$event.stopPropagation()">
         <h5 class="filter-name">Genres</h5>
-        <div class="genres">    
+        <div class="genres">
             <button class="btn genre" *ngFor="let genre of (genres$ | async)" [id]="genre.id">{{ genre.name }}
             </button>
         </div>

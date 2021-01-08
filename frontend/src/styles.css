@@ -33,11 +33,11 @@ body {
 .btn {
     border: none;
     outline: none;
-    font-size: 1rem;
     border-radius: 20px;
     color: var(--clr-grey);
     background: var(--clr-bg-secondary);
     font-family: inherit;
+    font-size: inherit;
     padding: .4em 1em;
 }
 

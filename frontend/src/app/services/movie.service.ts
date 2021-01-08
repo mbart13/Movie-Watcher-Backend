@@ -7,20 +7,43 @@ import { Genre } from '../models/genre';
 import { Movie } from '../models/movie';
 import { MovieCredits } from '../models/movie-credits';
 import { MovieDetails } from '../models/movie-details';
+import { UrlParams } from '../models/url-params';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
 
+  movies$: Observable<Movie[]>;
+  urlParams: UrlParams = {
+    pageNumber: 1,
+    sortCategory: 'popularity.desc',
+    withGenres: '',
+    voteCountGte: '',
+    releaseDateGte: '',
+    releaseDateLte: ''
+  }
+
   genresUrl: string = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`
-  moviesUrl: string = `${environment.tmdb_base_url}/discover/movie?sort_by=popularity.desc&api_key=${environment.api_key}`
   movieDetailsUrl: string = `${environment.tmdb_base_url}/movie`
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
+
+  reset() {
+    this.urlParams = {
+      pageNumber: 1,
+      sortCategory: '',
+      withGenres: '',
+      voteCountGte: '',
+      releaseDateGte: '',
+      releaseDateLte: ''
+    }
+  }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<any>(this.moviesUrl)
+    return this.http.get<any>(`${environment.tmdb_base_url}/discover/movie?sort_by=${this.urlParams.sortCategory}&with_genres=${this.urlParams.withGenres}&vote_count.gte=${this.urlParams.voteCountGte}&api_key=${environment.api_key}&page=${this.urlParams.pageNumber}`)
       .pipe(map(data => data.results));
   }
 
@@ -29,11 +52,11 @@ export class MovieService {
       .pipe(map(result => result.genres));
   }
 
-  getMovieDetails(id: number) {
+  getMovieDetails(id: number): Observable<MovieDetails> {
     return this.http.get<MovieDetails>(`${this.movieDetailsUrl}/${id}?api_key=${environment.api_key}`)
   }
 
-  getMovieCredits(id: number) {
+  getMovieCredits(id: number): Observable<MovieCredits> {
     return this.http.get<MovieCredits>(`${this.movieDetailsUrl}/${id}/credits?api_key=${environment.api_key}`)
   }
 }

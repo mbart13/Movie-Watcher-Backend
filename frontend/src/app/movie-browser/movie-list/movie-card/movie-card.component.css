@@ -5,6 +5,14 @@
     color: var(--clr-white);
 }
 
+.movie-card:hover {
+    cursor: pointer;
+}
+
+.movie-card:active {
+    outline: none;
+}
+
 .title {
     font-size: 1em;
 }

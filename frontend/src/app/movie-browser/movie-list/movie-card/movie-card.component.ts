@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MovieCardComponent implements OnInit {
 
-  env = environment.tmdb_imagesUrl_w300;
+  env: string = environment.tmdb_imagesUrl_w300;
 
   @Input()
   genres: Genre[];

@@ -18,7 +18,7 @@ export class MovieDetailsComponent implements OnInit {
 
   data: Observable<{ movieDetails: MovieDetails, movieCredits: MovieCredits }>;
   genres$: Observable<Genre[]>;
-  env = environment.tmdb_imagesUrl_w300;
+  env: string = environment.tmdb_imagesUrl_w300;
 
   constructor(private movieService: MovieService, private route: ActivatedRoute) { }
 

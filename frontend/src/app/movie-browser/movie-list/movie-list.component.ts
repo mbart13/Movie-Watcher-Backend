@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Genre } from 'src/app/models/genre';
 import { Movie } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class MovieListComponent implements OnInit {
 
-  movies$: Observable<Movie[]>;
+  // movies$: Observable<Movie[]>;
+  @Input() movies: Movie[];
   genres: Genre[] = [];
 
   constructor(private movieService: MovieService) { }
@@ -20,7 +21,7 @@ export class MovieListComponent implements OnInit {
     this.movieService.getGenres()
       .subscribe(data => this.genres = data);
 
-    this.movies$ = this.movieService.getMovies();
+    // this.movies$ = this.movieService.getMovies();
 
   }
 
