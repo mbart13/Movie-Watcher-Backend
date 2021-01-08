@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 })
 export class MovieListComponent implements OnInit {
 
-  // movies$: Observable<Movie[]>;
   @Input() movies: Movie[];
   genres: Genre[] = [];
 
@@ -20,9 +19,6 @@ export class MovieListComponent implements OnInit {
   ngOnInit(): void {
     this.movieService.getGenres()
       .subscribe(data => this.genres = data);
-
-    // this.movies$ = this.movieService.getMovies();
-
   }
 
 }

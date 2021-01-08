@@ -32,6 +32,10 @@
 
 }
 
+.btn:hover {
+    color: white;
+}
+
 .main-section {
     display: flex;
     justify-content: space-between;

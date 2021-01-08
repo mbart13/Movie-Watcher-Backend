@@ -13,38 +13,34 @@ export class MovieBrowserComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.movieService.reset()
+    this.movieService.resetUrlParams()
     this.movieService.urlParams.sortCategory = 'popularity.desc'
     this.movieService.movies$ = this.movieService.getMovies()
   }
 
-  selectButton(selectedButton) {
-    switch (selectedButton) {
-      case "popular":
-        this.selectedButton = 'popular';
-        break;
-      case "now playing":
+  onButtonClicked(category: string) {
+    this.movieService.resetUrlParams();
+    if (category === 'popular' && this.selectedButton !== category) {
+      this.getPopularMovies();
+    } else if (category === 'top rated' && this.selectedButton !== category) {
+      this.getTopRatedMovies();
+    } else if (category === 'now playing' && this.selectedButton !== category) {
         this.selectedButton = 'now playing';
-        break;
-      case "top rated":
-        this.selectedButton = 'top rated';
-        break;
-      case "upcoming":
+    } else if (category === 'upcoming' && this.selectedButton !== category) {
         this.selectedButton = 'upcoming';
-        break;
     }
   }
 
-  getMovies(category: string) {
-    if (category === 'popular' && this.selectedButton !== category) {
-      this.movieService.reset()
-      this.movieService.urlParams.sortCategory = 'popularity.desc'
-      this.movieService.movies$ = this.movieService.getMovies()
-    } else if (category === 'top rated' && this.selectedButton !== category) {
-      this.movieService.reset()
-      this.movieService.urlParams.sortCategory = 'vote_average.desc'
-      this.movieService.urlParams.voteCountGte = '3000'
-      this.movieService.movies$ = this.movieService.getMovies()
-    }
+  getPopularMovies() {
+    this.movieService.urlParams.sortCategory = 'popularity.desc';
+    this.selectedButton = 'popular';
+    this.movieService.movies$ = this.movieService.getMovies();
+  }
+
+  getTopRatedMovies() {
+    this.movieService.urlParams.sortCategory = 'vote_average.desc';
+    this.movieService.urlParams.voteCountGte = '3000';
+    this.selectedButton = 'top rated';
+    this.movieService.movies$ = this.movieService.getMovies();
   }
 }

@@ -14,24 +14,22 @@ import { UrlParams } from '../models/url-params';
 })
 export class MovieService {
 
-  movies$: Observable<Movie[]>;
   urlParams: UrlParams = {
     pageNumber: 1,
-    sortCategory: 'popularity.desc',
+    sortCategory: '',
     withGenres: '',
     voteCountGte: '',
     releaseDateGte: '',
     releaseDateLte: ''
   }
-
+  
+  movies$: Observable<Movie[]>;
   genresUrl: string = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`
   movieDetailsUrl: string = `${environment.tmdb_base_url}/movie`
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { }
 
-  }
-
-  reset() {
+  resetUrlParams() {
     this.urlParams = {
       pageNumber: 1,
       sortCategory: '',

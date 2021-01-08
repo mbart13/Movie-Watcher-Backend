@@ -3,14 +3,22 @@
     <i class="fas fa-search"></i>
 </div>
 <div class="filter-buttons">
-    <button class="btn" [class.btn-active]="selectedButton === 'popular'" (click)="getMovies('popular')" (click)="selectButton('popular')">Popular
+    <button class="btn" [class.btn-active]="selectedButton === 'popular'" 
+        (click)="onButtonClicked('popular')">
+
+        Popular
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'now playing'" (click)="selectButton('now playing')">Now Playing
+    <button class="btn" [class.btn-active]="selectedButton === 'now playing'" 
+        (click)="onButtonClicked('now playing')">
+        Now Playing
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'top rated'" (click)="getMovies('top rated')" (click)="selectButton('top rated')">Top
-        Rated
+    <button class="btn" [class.btn-active]="selectedButton === 'top rated'" 
+        (click)="onButtonClicked('top rated')">
+        Top Rated
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'upcoming'" (click)="selectButton('upcoming')">Upcoming
+    <button class="btn" [class.btn-active]="selectedButton === 'upcoming'" 
+        (click)="onButtonClicked('upcoming')">
+        Upcoming
     </button>
 </div>
 <div class="main-section">
