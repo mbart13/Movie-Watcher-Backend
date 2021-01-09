@@ -22,11 +22,9 @@ export class MovieCardComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
-    // console.log(this.genres);
-    
   }
 
-  getGenreById(id: number) {
+  getGenreById(id: string) {
     return this.genres.find(genre => genre.id === id).name;
   }
 

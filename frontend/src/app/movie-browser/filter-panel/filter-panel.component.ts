@@ -12,10 +12,11 @@ export class FilterPanelComponent implements OnInit {
 
   @Input()
   sortCategory: string;
+  selectedGenre: string;
+  genresIds: string[] = [];
   genres$: Observable<Genre[]>;
   sortExpanded: boolean = false;
   filterExpanded: boolean = false;
-  selected: boolean = true;
 
   constructor(private movieService: MovieService) { }
 
@@ -31,9 +32,21 @@ export class FilterPanelComponent implements OnInit {
     this.filterExpanded = !this.filterExpanded;
   }
 
-  applyFilters() {
-    this.movieService.urlParams.sortCategory = this.sortCategory;
-    this.movieService.getMovies()
+  onButtonClicked(genreId: string) {
+    if (this.genresIds.includes(genreId)) {
+      this.genresIds = this.genresIds.filter(id => genreId !== id)
+    } else {
+      this.genresIds.push(genreId);
+    }
     
   }
+
+  applyFilters() {
+    this.movieService.urlParams.sortCategory = this.sortCategory;
+    this.movieService.urlParams.withGenres = this.genresIds.join(',');
+    this.movieService.getMovies()
+    console.log(this.movieService.urlParams.withGenres);
+    
+  }
+
 }
