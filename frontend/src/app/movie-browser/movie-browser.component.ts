@@ -11,6 +11,7 @@ import { MovieService } from '../services/movie.service';
 export class MovieBrowserComponent implements OnInit {
 
   selectedCategory: string;
+  selectedGenres: string[] = [];
   selectedButton: string = 'popular';
   movies$: Observable<Movie[]>
 
@@ -35,6 +36,7 @@ export class MovieBrowserComponent implements OnInit {
         this.getUpcomingMovies();
     }
     this.selectedCategory = this.movieService.urlParams.sortCategory;
+    this.selectedGenres = [];
   }
 
   getPopularMovies() {

@@ -11,9 +11,10 @@ import { MovieService } from 'src/app/services/movie.service';
 export class FilterPanelComponent implements OnInit {
 
   @Input()
-  sortCategory: string;
+  sortCategory: string;  
   selectedGenre: string;
-  genresIds: string[] = [];
+  @Input()
+  genresIds: string[];
   genres$: Observable<Genre[]>;
   sortExpanded: boolean = false;
   filterExpanded: boolean = false;

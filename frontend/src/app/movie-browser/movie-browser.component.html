@@ -21,6 +21,6 @@
     </button>
 </div>
 <div class="main-section">
-    <app-filter-panel [sortCategory]="selectedCategory"></app-filter-panel>
+    <app-filter-panel [sortCategory]="selectedCategory" [genresIds]="selectedGenres"></app-filter-panel>
     <app-movie-list [movies]="movies$ | async"></app-movie-list>
 </div>
