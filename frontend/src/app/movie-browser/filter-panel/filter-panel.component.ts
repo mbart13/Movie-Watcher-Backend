@@ -10,6 +10,7 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class FilterPanelComponent implements OnInit {
 
+  sortCategory: string = 'popularity.desc';
   genres$: Observable<Genre[]>;
   sortExpanded: boolean = false;
   filterExpanded: boolean = false;
@@ -28,4 +29,9 @@ export class FilterPanelComponent implements OnInit {
     this.filterExpanded = !this.filterExpanded;
   }
 
+  applyFilters() {
+    this.movieService.urlParams.sortCategory = this.sortCategory;
+    this.movieService.getMovies()
+    
+  }
 }

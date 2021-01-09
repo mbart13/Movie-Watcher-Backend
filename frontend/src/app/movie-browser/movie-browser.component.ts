@@ -1,4 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Movie } from '../models/movie';
 import { MovieService } from '../services/movie.service';
 
 @Component({
@@ -9,13 +11,15 @@ import { MovieService } from '../services/movie.service';
 export class MovieBrowserComponent implements OnInit {
 
   selectedButton: string = 'popular';
+  movies$: Observable<Movie[]>
 
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
     this.movieService.resetUrlParams()
-    this.movieService.urlParams.sortCategory = 'popularity.desc'
-    this.movieService.movies$ = this.movieService.getMovies()
+    this.movieService.urlParams.sortCategory = 'popularity.desc'    
+    this.movieService.getMovies()
+    this.movies$ = this.movieService.getMovies$()
   }
 
   onButtonClicked(category: string) {
@@ -25,22 +29,32 @@ export class MovieBrowserComponent implements OnInit {
     } else if (category === 'top rated' && this.selectedButton !== category) {
       this.getTopRatedMovies();
     } else if (category === 'now playing' && this.selectedButton !== category) {
-        this.selectedButton = 'now playing';
+      this.getNowPlayingMovies();
     } else if (category === 'upcoming' && this.selectedButton !== category) {
-        this.selectedButton = 'upcoming';
+      this.getUpcomingMovies();
     }
   }
 
   getPopularMovies() {
     this.movieService.urlParams.sortCategory = 'popularity.desc';
     this.selectedButton = 'popular';
-    this.movieService.movies$ = this.movieService.getMovies();
+    this.movieService.getMovies();
   }
 
   getTopRatedMovies() {
     this.movieService.urlParams.sortCategory = 'vote_average.desc';
     this.movieService.urlParams.voteCountGte = '3000';
     this.selectedButton = 'top rated';
-    this.movieService.movies$ = this.movieService.getMovies();
+    this.movieService.getMovies();
+  }
+
+  getNowPlayingMovies() {
+    //todo
+    this.selectedButton = 'now playing';
+  }
+
+  getUpcomingMovies() {
+    //todo
+    this.selectedButton = 'upcoming';
   }
 }

@@ -22,6 +22,8 @@ export class MovieCardComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
+    // console.log(this.genres);
+    
   }
 
   getGenreById(id: number) {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject  } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../models/genre';
 import { Movie } from '../models/movie';
@@ -23,7 +23,8 @@ export class MovieService {
     releaseDateLte: ''
   }
   
-  movies$: Observable<Movie[]>;
+  movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
+  // movies$: Observable<Movie[]>;
   genresUrl: string = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`
   movieDetailsUrl: string = `${environment.tmdb_base_url}/movie`
 
@@ -40,9 +41,15 @@ export class MovieService {
     }
   }
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<any>(`${environment.tmdb_base_url}/discover/movie?sort_by=${this.urlParams.sortCategory}&with_genres=${this.urlParams.withGenres}&vote_count.gte=${this.urlParams.voteCountGte}&api_key=${environment.api_key}&page=${this.urlParams.pageNumber}`)
-      .pipe(map(data => data.results));
+  getMovies(): void {
+    this.http.get<any>(`${environment.tmdb_base_url}/discover/movie?sort_by=${this.urlParams.sortCategory}&with_genres=${this.urlParams.withGenres}&vote_count.gte=${this.urlParams.voteCountGte}&api_key=${environment.api_key}&page=${this.urlParams.pageNumber}`)
+      .pipe(        
+        tap(data => this.movies$.next(data.results))
+      ).subscribe();
+  }
+
+  getMovies$(): Observable<Movie[]> {
+    return this.movies$.asObservable();
   }
 
   getGenres(): Observable<Genre[]> {

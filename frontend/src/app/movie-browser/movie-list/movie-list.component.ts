@@ -21,4 +21,9 @@ export class MovieListComponent implements OnInit {
       .subscribe(data => this.genres = data);
   }
 
+  loadMore() {
+    this.movieService.urlParams.pageNumber++;
+    this.movieService.getMovies()
+  }
+
 }
