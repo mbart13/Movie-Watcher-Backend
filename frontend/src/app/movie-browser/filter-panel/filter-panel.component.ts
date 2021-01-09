@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Genre } from 'src/app/models/genre';
 import { MovieService } from 'src/app/services/movie.service';
@@ -10,10 +10,12 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class FilterPanelComponent implements OnInit {
 
-  sortCategory: string = 'popularity.desc';
+  @Input()
+  sortCategory: string;
   genres$: Observable<Genre[]>;
   sortExpanded: boolean = false;
   filterExpanded: boolean = false;
+  selected: boolean = true;
 
   constructor(private movieService: MovieService) { }
 

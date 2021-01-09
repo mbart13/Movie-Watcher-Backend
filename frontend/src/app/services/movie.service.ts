@@ -16,15 +16,15 @@ export class MovieService {
 
   urlParams: UrlParams = {
     pageNumber: 1,
-    sortCategory: '',
+    sortCategory: 'popularity.desc',
     withGenres: '',
     voteCountGte: '',
     releaseDateGte: '',
-    releaseDateLte: ''
+    releaseDateLte: '',
+    withReleaseType: ''
   }
   
   movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
-  // movies$: Observable<Movie[]>;
   genresUrl: string = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`
   movieDetailsUrl: string = `${environment.tmdb_base_url}/movie`
 
@@ -33,19 +33,22 @@ export class MovieService {
   resetUrlParams() {
     this.urlParams = {
       pageNumber: 1,
-      sortCategory: '',
+      sortCategory: 'popularity.desc',
       withGenres: '',
       voteCountGte: '',
       releaseDateGte: '',
-      releaseDateLte: ''
+      releaseDateLte: '',
+      withReleaseType: ''
     }
   }
 
   getMovies(): void {
-    this.http.get<any>(`${environment.tmdb_base_url}/discover/movie?sort_by=${this.urlParams.sortCategory}&with_genres=${this.urlParams.withGenres}&vote_count.gte=${this.urlParams.voteCountGte}&api_key=${environment.api_key}&page=${this.urlParams.pageNumber}`)
-      .pipe(        
-        tap(data => this.movies$.next(data.results))
-      ).subscribe();
+    this.http.get<any>(`${environment.tmdb_base_url}/discover/movie?sort_by=${this.urlParams.sortCategory}&primary_release_date.gte=${
+      this.urlParams.releaseDateGte}&primary_release_date.lte=${this.urlParams.releaseDateLte}&with_release_type=${this.urlParams.withReleaseType}&with_genres=${
+      this.urlParams.withGenres}&vote_count.gte=${this.urlParams.voteCountGte}&api_key=${environment.api_key}&page=${this.urlParams.pageNumber}`)
+        .pipe(        
+          tap(data => this.movies$.next(data.results))
+        ).subscribe();
   }
 
   getMovies$(): Observable<Movie[]> {
@@ -54,7 +57,9 @@ export class MovieService {
 
   getGenres(): Observable<Genre[]> {
     return this.http.get<any>(this.genresUrl)
-      .pipe(map(result => result.genres));
+      .pipe(
+        map(result => result.genres)
+      );
   }
 
   getMovieDetails(id: number): Observable<MovieDetails> {

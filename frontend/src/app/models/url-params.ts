@@ -3,6 +3,7 @@ export interface UrlParams {
     sortCategory: string,
     withGenres: string,
     releaseDateGte: string,
-    releaseDateLte: string;
+    releaseDateLte: string,
+    withReleaseType: string,
     voteCountGte: string
 }

@@ -10,6 +10,7 @@ import { MovieService } from '../services/movie.service';
 })
 export class MovieBrowserComponent implements OnInit {
 
+  selectedCategory: string;
   selectedButton: string = 'popular';
   movies$: Observable<Movie[]>
 
@@ -17,7 +18,7 @@ export class MovieBrowserComponent implements OnInit {
 
   ngOnInit(): void {
     this.movieService.resetUrlParams()
-    this.movieService.urlParams.sortCategory = 'popularity.desc'    
+    this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.movieService.getMovies()
     this.movies$ = this.movieService.getMovies$()
   }
@@ -27,12 +28,13 @@ export class MovieBrowserComponent implements OnInit {
     if (category === 'popular' && this.selectedButton !== category) {
       this.getPopularMovies();
     } else if (category === 'top rated' && this.selectedButton !== category) {
-      this.getTopRatedMovies();
+        this.getTopRatedMovies();
     } else if (category === 'now playing' && this.selectedButton !== category) {
-      this.getNowPlayingMovies();
+        this.getNowPlayingMovies();
     } else if (category === 'upcoming' && this.selectedButton !== category) {
-      this.getUpcomingMovies();
+        this.getUpcomingMovies();
     }
+    this.selectedCategory = this.movieService.urlParams.sortCategory;
   }
 
   getPopularMovies() {
@@ -55,6 +57,10 @@ export class MovieBrowserComponent implements OnInit {
 
   getUpcomingMovies() {
     //todo
+    this.movieService.urlParams.releaseDateGte = '2021-01-13'
+    this.movieService.urlParams.releaseDateLte = '2021-02-03'
+    this.movieService.urlParams.withReleaseType = '3|2'
     this.selectedButton = 'upcoming';
+    this.movieService.getMovies();
   }
 }
