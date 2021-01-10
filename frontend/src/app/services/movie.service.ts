@@ -14,23 +14,14 @@ import { UrlParams } from '../models/url-params';
 })
 export class MovieService {
 
-  urlParams: UrlParams = {
-    pageNumber: 1,
-    sortCategory: 'popularity.desc',
-    withGenres: '',
-    voteCountGte: '',
-    releaseDateGte: '',
-    releaseDateLte: '',
-    withReleaseType: ''
-  }
-  
+  urlParams: UrlParams = { pageNumber: 1, sortCategory: 'popularity.desc' };
   movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
-  genresUrl: string = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`
-  movieDetailsUrl: string = `${environment.tmdb_base_url}/movie`
+  genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
+  movieDetailsUrl = `${environment.tmdb_base_url}/movie`;
 
   constructor(private http: HttpClient) { }
 
-  resetUrlParams() {
+  resetUrlParams(): void {
     this.urlParams = {
       pageNumber: 1,
       sortCategory: 'popularity.desc',
@@ -39,14 +30,14 @@ export class MovieService {
       releaseDateGte: '',
       releaseDateLte: '',
       withReleaseType: ''
-    }
+    };
   }
 
-  getMovies(): void {
-    this.http.get<any>(`${environment.tmdb_base_url}/discover/movie?sort_by=${this.urlParams.sortCategory}&primary_release_date.gte=${
+  getMovies(queryType: string): void {
+    this.http.get<any>(`${environment.tmdb_base_url}/${queryType}/movie?sort_by=${this.urlParams.sortCategory}&primary_release_date.gte=${
       this.urlParams.releaseDateGte}&primary_release_date.lte=${this.urlParams.releaseDateLte}&with_release_type=${this.urlParams.withReleaseType}&with_genres=${
       this.urlParams.withGenres}&vote_count.gte=${this.urlParams.voteCountGte}&api_key=${environment.api_key}&page=${this.urlParams.pageNumber}`)
-        .pipe(        
+        .pipe(
           tap(data => this.movies$.next(data.results))
         ).subscribe();
   }
@@ -63,10 +54,10 @@ export class MovieService {
   }
 
   getMovieDetails(id: number): Observable<MovieDetails> {
-    return this.http.get<MovieDetails>(`${this.movieDetailsUrl}/${id}?api_key=${environment.api_key}`)
+    return this.http.get<MovieDetails>(`${this.movieDetailsUrl}/${id}?api_key=${environment.api_key}`);
   }
 
   getMovieCredits(id: number): Observable<MovieCredits> {
-    return this.http.get<MovieCredits>(`${this.movieDetailsUrl}/${id}/credits?api_key=${environment.api_key}`)
+    return this.http.get<MovieCredits>(`${this.movieDetailsUrl}/${id}/credits?api_key=${environment.api_key}`);
   }
 }

@@ -1,5 +1,5 @@
 .movie-card {
-    width: 140px;
+    width: 200px;
     margin-bottom: 1.2em;
     text-align: center;
     color: var(--clr-white);
@@ -26,14 +26,18 @@
     font-size: .8em;
 }
 
-@media screen and (max-width: 1160px) {
-    .movie-card {
-        width: 160px;
-    }
+.filter-expanded {
+  width: 140px;
 }
 
-@media screen and (max-width: 1095px) {
-    .movie-card {
-        width: 200px;
-    }
-}
+/*@media screen and (max-width: 1160px) {*/
+/*    .movie-card {*/
+/*        width: 160px;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (max-width: 1095px) {*/
+/*    .movie-card {*/
+/*        width: 200px;*/
+/*    }*/
+/*}*/

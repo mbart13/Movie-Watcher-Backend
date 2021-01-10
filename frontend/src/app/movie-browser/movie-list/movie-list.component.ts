@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Genre } from 'src/app/models/genre';
 import { Movie } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
@@ -12,6 +11,7 @@ import { Observable } from 'rxjs';
 export class MovieListComponent implements OnInit {
 
   @Input() movies: Movie[];
+  @Input() filterHidden;
   genres: Genre[] = [];
 
   constructor(private movieService: MovieService) { }
@@ -21,9 +21,9 @@ export class MovieListComponent implements OnInit {
       .subscribe(data => this.genres = data);
   }
 
-  loadMore() {
+  loadMore(): void {
     this.movieService.urlParams.pageNumber++;
-    this.movieService.getMovies()
+
   }
 
 }

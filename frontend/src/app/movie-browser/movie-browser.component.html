@@ -1,26 +1,35 @@
 <div class="input-container">
-    <input class="search-bar" type="text" placeholder="Search for a movie">
-    <i class="fas fa-search"></i>
+  <label for="search-bar"></label>
+  <input class="search-bar" id="search-bar" type="text" placeholder="Search for a movie">
+  <i class="fas fa-search"></i>
 </div>
 <div class="filter-buttons">
-    <button class="btn" [class.btn-active]="selectedButton === 'popular'" 
+    <button  class="btn" [class.btn-active]="selectedButton === 'popular'"
         (click)="onButtonClicked('popular')">
         Popular
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'now playing'" 
+    <button class="btn" [class.btn-active]="selectedButton === 'now playing'"
         (click)="onButtonClicked('now playing')">
         Now Playing
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'top rated'" 
+    <button class="btn" [class.btn-active]="selectedButton === 'top rated'"
         (click)="onButtonClicked('top rated')">
         Top Rated
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'upcoming'" 
+    <button class="btn" [class.btn-active]="selectedButton === 'upcoming'"
         (click)="onButtonClicked('upcoming')">
         Upcoming
     </button>
+  <button  class="btn" [class.btn-active]="selectedButton === 'custom'"
+         (click)="onButtonClicked('custom')">
+        Custom
+  </button>
 </div>
 <div class="main-section">
-    <app-filter-panel [sortCategory]="selectedCategory" [genresIds]="selectedGenres"></app-filter-panel>
-    <app-movie-list [movies]="movies$ | async"></app-movie-list>
+    <app-filter-panel
+
+      [genresIds]="selectedGenres"
+      [class.hidden]="filterHidden">
+    </app-filter-panel>
+    <app-movie-list [movies]="movies$ | async" [filterHidden]="filterHidden"></app-movie-list>
 </div>

@@ -51,3 +51,7 @@ app-filter-panel {
 app-movie-list {
     text-align: center;
 }
+
+.hidden {
+  display: none;
+}

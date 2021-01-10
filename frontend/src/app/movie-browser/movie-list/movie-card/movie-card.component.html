@@ -1,4 +1,4 @@
-<div [routerLink]="['/movies/', movie.id]" class="movie-card">
+<div [routerLink]="['/movies/', movie.id]" class="movie-card" [class.filter-expanded]="!filterHidden">
     <img [src]="env + movie.poster_path" [alt]="movie.title">
     <div class="movie-info">
         <h3 class="title">{{ movie.title }}</h3>

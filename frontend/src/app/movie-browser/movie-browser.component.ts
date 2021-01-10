@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
 import { MovieService } from '../services/movie.service';
@@ -10,59 +10,66 @@ import { MovieService } from '../services/movie.service';
 })
 export class MovieBrowserComponent implements OnInit {
 
-  selectedCategory: string;
+  // selectedCategory: string;
   selectedGenres: string[] = [];
-  selectedButton: string = 'popular';
-  movies$: Observable<Movie[]>
+  selectedButton = 'popular';
+  filterHidden = true;
+  movies$: Observable<Movie[]>;
 
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.movieService.resetUrlParams()
-    this.selectedCategory = this.movieService.urlParams.sortCategory;
-    this.movieService.getMovies()
-    this.movies$ = this.movieService.getMovies$()
+    this.movieService.resetUrlParams();
+    // this.selectedCategory = this.movieService.urlParams.sortCategory;
+    this.movieService.getMovies('discover');
+    this.movies$ = this.movieService.getMovies$();
   }
 
-  onButtonClicked(category: string) {
+  onButtonClicked(category: string): void {
     this.movieService.resetUrlParams();
+    this.filterHidden = true;
     if (category === 'popular' && this.selectedButton !== category) {
+      this.selectedButton = 'popular';
       this.getPopularMovies();
     } else if (category === 'top rated' && this.selectedButton !== category) {
-        this.getTopRatedMovies();
+      this.selectedButton = 'top rated';
+      this.getTopRatedMovies();
     } else if (category === 'now playing' && this.selectedButton !== category) {
-        this.getNowPlayingMovies();
+      this.selectedButton = 'now playing';
+      this.getNowPlayingMovies();
     } else if (category === 'upcoming' && this.selectedButton !== category) {
-        this.getUpcomingMovies();
+      this.selectedButton = 'upcoming';
+      this.getUpcomingMovies();
+    } else if (category === 'custom' && this.selectedButton !== category) {
+      this.selectedButton = 'custom';
+      this.filterHidden = false;
+      this.getPopularMovies();
     }
-    this.selectedCategory = this.movieService.urlParams.sortCategory;
+    // this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.selectedGenres = [];
+
   }
 
-  getPopularMovies() {
+  getPopularMovies(): void  {
     this.movieService.urlParams.sortCategory = 'popularity.desc';
-    this.selectedButton = 'popular';
-    this.movieService.getMovies();
+    this.movieService.getMovies('discover');
   }
 
-  getTopRatedMovies() {
+  getTopRatedMovies(): void  {
     this.movieService.urlParams.sortCategory = 'vote_average.desc';
     this.movieService.urlParams.voteCountGte = '3000';
-    this.selectedButton = 'top rated';
-    this.movieService.getMovies();
+    this.movieService.getMovies('discover');
   }
 
-  getNowPlayingMovies() {
-    //todo
-    this.selectedButton = 'now playing';
+  getNowPlayingMovies(): void  {
+    // todo
   }
 
-  getUpcomingMovies() {
-    //todo
-    this.movieService.urlParams.releaseDateGte = '2021-01-13'
-    this.movieService.urlParams.releaseDateLte = '2021-02-03'
-    this.movieService.urlParams.withReleaseType = '3|2'
-    this.selectedButton = 'upcoming';
-    this.movieService.getMovies();
+  getUpcomingMovies(): void {
+    // todo
+    this.movieService.urlParams.releaseDateGte = '2021-01-13';
+    this.movieService.urlParams.releaseDateLte = '2021-02-03';
+    this.movieService.urlParams.withReleaseType = '3|2';
+    this.movieService.getMovies('discover');
   }
 }

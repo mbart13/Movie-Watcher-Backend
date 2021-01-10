@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Genre } from 'src/app/models/genre';
 import { Movie } from 'src/app/models/movie';
-import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,15 +15,18 @@ export class MovieCardComponent implements OnInit {
   @Input()
   genres: Genre[];
 
+  @Input() filterHidden;
+
   @Input()
   movie: Movie;
 
-  constructor(public movieService: MovieService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  getGenreById(id: string) {
+  getGenreById(id: number): string {
+    console.log(id);
     return this.genres.find(genre => genre.id === id).name;
   }
 

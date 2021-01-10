@@ -1,4 +1,5 @@
-<div class="panel sort-panel" [class.expand]="sortExpanded" (click)="toggleSort()">
+<div class="panel sort-panel"
+     [class.expand]="sortExpanded" (click)="toggleSort()">
     <div class="panel-header">
         <h4>Sort</h4>
         <i class="fas fa-chevron-down"></i>
@@ -7,6 +8,7 @@
     <div class="sort-filter-options" (click)="$event.stopPropagation()">
         <h5 class="filter-name">Sort results by</h5>
         <div class="select-options-wrapper">
+            <label for="sort-results"></label>
             <select name="sort-results" id="sort-results" [(ngModel)]="sortCategory">
                 <option value="popularity.desc">Popularity Descending</option>
                 <option value="popularity.asc">Popularity Ascending</option>
@@ -30,7 +32,7 @@
     <div class="sort-filter-options" (click)="$event.stopPropagation()">
         <h5 class="filter-name">Genres</h5>
         <div class="genres">
-            <button #genre class="btn genre" *ngFor="let genre of (genres$ | async)" 
+            <button #genre class="btn genre" *ngFor="let genre of (genres$ | async)"
                 [id]="genre.id" (click)="onButtonClicked(genre.id)"
                 [class.btn-active]="genresIds.includes(genre.id)" >
                 {{ genre.name }}
