@@ -8,6 +8,7 @@ import { Movie } from '../models/movie';
 import { MovieCredits } from '../models/movie-credits';
 import { MovieDetails } from '../models/movie-details';
 import { UrlParams } from '../models/url-params';
+import {Dates} from '../models/dates';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ export class MovieService {
   urlParams: UrlParams = { pageNumber: 1, sortCategory: 'popularity.desc' };
   movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
+  nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}&page=1`;
+  upcomingMoviesUrl = `${environment.tmdb_base_url}/movie/upcoming?api_key=${environment.api_key}&page=1`;
   movieDetailsUrl = `${environment.tmdb_base_url}/movie`;
 
   constructor(private http: HttpClient) { }
@@ -44,6 +47,20 @@ export class MovieService {
 
   getMovies$(): Observable<Movie[]> {
     return this.movies$.asObservable();
+  }
+
+  getNowPlayingDates(): Observable<Dates> {
+    return this.http.get<any>(this.nowPlayingMoviesUrl)
+      .pipe(
+        map(response => response.dates)
+      );
+  }
+
+  getUpcomingDates(): Observable<Dates> {
+    return this.http.get<any>(this.upcomingMoviesUrl)
+      .pipe(
+        map(response => response.dates)
+      );
   }
 
   getGenres(): Observable<Genre[]> {

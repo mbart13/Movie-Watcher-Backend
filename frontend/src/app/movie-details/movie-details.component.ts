@@ -38,7 +38,7 @@ export class MovieDetailsComponent implements OnInit {
     );
   }
 
-  findCrewMember(crew: Person[], role: string) {
+  findCrewMembers(crew: Person[], role: string): Person[] {
     return crew.filter(crewMember => crewMember.job.toLowerCase() === role);
   }
 

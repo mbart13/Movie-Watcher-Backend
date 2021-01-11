@@ -10,9 +10,11 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieListComponent implements OnInit {
 
-  @Input() movies: Movie[];
-  @Input() filterHidden;
-  genres: Genre[] = [];
+  @Input()
+  movies: Movie[];
+  @Input()
+  filterHidden;
+  genres: Genre[];
 
   constructor(private movieService: MovieService) { }
 

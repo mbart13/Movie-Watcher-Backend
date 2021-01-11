@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
 import { MovieService } from '../services/movie.service';
+import {Dates} from '../models/dates';
 
 @Component({
   selector: 'app-movie-browser',
@@ -15,6 +16,8 @@ export class MovieBrowserComponent implements OnInit {
   selectedButton = 'popular';
   filterHidden = true;
   movies$: Observable<Movie[]>;
+  nowPlayingDates: Dates;
+  upcomingDates: Dates;
 
   constructor(public movieService: MovieService) { }
 
@@ -23,6 +26,10 @@ export class MovieBrowserComponent implements OnInit {
     // this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.movieService.getMovies('discover');
     this.movies$ = this.movieService.getMovies$();
+    this.movieService.getNowPlayingDates()
+      .subscribe(data => this.nowPlayingDates = data);
+    this.movieService.getUpcomingDates()
+      .subscribe(data => this.upcomingDates = data);
   }
 
   onButtonClicked(category: string): void {
@@ -62,13 +69,16 @@ export class MovieBrowserComponent implements OnInit {
   }
 
   getNowPlayingMovies(): void  {
-    // todo
+    this.movieService.urlParams.releaseDateGte = this.nowPlayingDates.minimum;
+    this.movieService.urlParams.releaseDateLte = this.nowPlayingDates.maximum;
+    this.movieService.urlParams.withReleaseType = '3|2';
+    this.movieService.getMovies('discover');
   }
 
   getUpcomingMovies(): void {
     // todo
-    this.movieService.urlParams.releaseDateGte = '2021-01-13';
-    this.movieService.urlParams.releaseDateLte = '2021-02-03';
+    this.movieService.urlParams.releaseDateGte = this.upcomingDates.minimum;
+    this.movieService.urlParams.releaseDateLte = this.upcomingDates.maximum;
     this.movieService.urlParams.withReleaseType = '3|2';
     this.movieService.getMovies('discover');
   }

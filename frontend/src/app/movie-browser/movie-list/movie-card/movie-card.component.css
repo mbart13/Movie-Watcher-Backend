@@ -3,6 +3,7 @@
     margin-bottom: 1.2em;
     text-align: center;
     color: var(--clr-white);
+    outline: none;
 }
 
 .movie-card:hover {
