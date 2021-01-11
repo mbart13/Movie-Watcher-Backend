@@ -1,7 +1,10 @@
 <div class="movie-details-container" *ngIf="data | async as data">
     <div class="poster">
-        <img [src]="env + data.movieDetails.poster_path" [alt]="data.movieDetails.title">
+        <img *ngIf="data.movieDetails.poster_path; else noImage" [src]="env + data.movieDetails.poster_path" [alt]="data.movieDetails.title">
     </div>
+    <ng-template #noImage>
+      <img src="./assets/no-image.png" alt="no image">
+    </ng-template>
     <div class="movie-info">
         <div class="basic-details">
             <h1>{{data.movieDetails.title}} <span class="release-date">{{ ' (' + data.movieDetails.release_date.slice(0, 4) + ')' }}</span></h1>

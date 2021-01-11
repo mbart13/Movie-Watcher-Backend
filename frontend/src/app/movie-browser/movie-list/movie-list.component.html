@@ -1,7 +1,13 @@
-<div class="movie-list-container" *ngIf="genres">
-    <app-movie-card *ngFor="let movie of movies"
-                    [genres]="genres" [movie]="movie"
-                    [filterHidden]="filterHidden">
-    </app-movie-card>
-    <button class="btn btn-active" (click)="loadMore()">Load More</button>
+<div class="movie-list-container" *ngIf="genres.length">
+
+      <app-movie-card *ngFor="let movie of movies"
+                      [genres]="genres" [movie]="movie">
+      </app-movie-card>
+      <ng-container *ngIf="movies.length; else noMovies">
+        <button *ngIf="movies" class="btn btn-active" (click)="loadMore()">Load More</button>
+      </ng-container>
+
+      <ng-template #noMovies>
+        <p class="no-movies">No movies were found</p>
+      </ng-template>
 </div>

@@ -12,8 +12,8 @@ export class MovieListComponent implements OnInit {
 
   @Input()
   movies: Movie[];
-  @Input()
-  filterHidden;
+  // @Input()
+  // filterHidden;
   genres: Genre[];
 
   constructor(private movieService: MovieService) { }

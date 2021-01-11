@@ -1,5 +1,5 @@
 .movie-card {
-    width: 200px;
+    width: 140px;
     margin-bottom: 1.2em;
     text-align: center;
     color: var(--clr-white);
@@ -25,10 +25,6 @@
 
 .genres {
     font-size: .8em;
-}
-
-.filter-expanded {
-  width: 140px;
 }
 
 /*@media screen and (max-width: 1160px) {*/

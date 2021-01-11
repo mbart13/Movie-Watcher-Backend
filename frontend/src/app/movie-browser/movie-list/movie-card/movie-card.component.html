@@ -1,5 +1,8 @@
-<div [routerLink]="['/movies/', movie.id]" class="movie-card" [class.filter-expanded]="!filterHidden">
-    <img *ngIf="movie.poster_path" [src]="env + movie.poster_path" [alt]="movie.title">
+<div [routerLink]="['/movies/', movie.id]" class="movie-card">
+    <img *ngIf="movie.poster_path; else noImage" [src]="env + movie.poster_path" [alt]="movie.title">
+    <ng-template #noImage>
+      <img src="./assets/no-image.png" alt="no image">
+    </ng-template>
     <div class="movie-info">
         <h3 class="title">{{ movie.title }}</h3>
         <p class="release-date" *ngIf="movie.release_date">{{ '(' + movie.release_date.slice(0, 4) + ')' }}</p>

@@ -20,15 +20,11 @@
         (click)="onButtonClicked('upcoming')">
         Upcoming
     </button>
-  <button  class="btn" [class.btn-active]="selectedButton === 'custom'"
-         (click)="onButtonClicked('custom')">
-        Custom
-  </button>
 </div>
 <div class="main-section">
     <app-filter-panel
       [genresIds]="selectedGenres"
-      [class.hidden]="filterHidden">
+      [sortCategory]="selectedCategory">
     </app-filter-panel>
-    <app-movie-list [movies]="movies$ | async" [filterHidden]="filterHidden"></app-movie-list>
+    <app-movie-list [movies]="movies$ | async" ></app-movie-list>
 </div>

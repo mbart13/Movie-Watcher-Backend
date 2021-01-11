@@ -11,10 +11,10 @@ import {Dates} from '../models/dates';
 })
 export class MovieBrowserComponent implements OnInit {
 
-  // selectedCategory: string;
+  selectedCategory: string;
   selectedGenres: string[] = [];
   selectedButton = 'popular';
-  filterHidden = true;
+  filtersHidden = false;
   movies$: Observable<Movie[]>;
   nowPlayingDates: Dates;
   upcomingDates: Dates;
@@ -23,7 +23,7 @@ export class MovieBrowserComponent implements OnInit {
 
   ngOnInit(): void {
     this.movieService.resetUrlParams();
-    // this.selectedCategory = this.movieService.urlParams.sortCategory;
+    this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.movieService.getMovies('discover');
     this.movies$ = this.movieService.getMovies$();
     this.movieService.getNowPlayingDates()
@@ -34,7 +34,7 @@ export class MovieBrowserComponent implements OnInit {
 
   onButtonClicked(category: string): void {
     this.movieService.resetUrlParams();
-    this.filterHidden = true;
+    this.filtersHidden = true;
     if (category === 'popular' && this.selectedButton !== category) {
       this.selectedButton = 'popular';
       this.getPopularMovies();
@@ -47,12 +47,8 @@ export class MovieBrowserComponent implements OnInit {
     } else if (category === 'upcoming' && this.selectedButton !== category) {
       this.selectedButton = 'upcoming';
       this.getUpcomingMovies();
-    } else if (category === 'custom' && this.selectedButton !== category) {
-      this.selectedButton = 'custom';
-      this.filterHidden = false;
-      this.getPopularMovies();
     }
-    // this.selectedCategory = this.movieService.urlParams.sortCategory;
+    this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.selectedGenres = [];
 
   }
@@ -66,6 +62,7 @@ export class MovieBrowserComponent implements OnInit {
     this.movieService.urlParams.sortCategory = 'vote_average.desc';
     this.movieService.urlParams.voteCountGte = '3000';
     this.movieService.getMovies('discover');
+    this.selectedCategory = this.movieService.urlParams.sortCategory;
   }
 
   getNowPlayingMovies(): void  {

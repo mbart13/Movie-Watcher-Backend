@@ -10,6 +10,7 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class FilterPanelComponent implements OnInit {
 
+  @Input()
   sortCategory = 'popularity.desc';
   selectedGenre: string;
   @Input()
