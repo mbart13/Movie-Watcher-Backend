@@ -76,12 +76,15 @@ a:hover, select:hover, button:hover {
 
 img {
     width: 100%;
-    background: white;
     border-radius: var(--border-radius);
 }
 
-@media screen and (max-width: 1000px) {
-    .btn {
-        font-size: .9rem;
-    }
+img .no-image {
+  background: white;
 }
+
+/*@media screen and (max-width: 1000px) {*/
+/*    .btn {*/
+/*        font-size: .9rem;*/
+/*    }*/
+/*}*/

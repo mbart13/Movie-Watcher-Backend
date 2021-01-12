@@ -5,5 +5,5 @@ export interface UrlParams {
     releaseDateGte?: string;
     releaseDateLte?: string;
     withReleaseType?: string;
-    voteCountGte?: string;
+    voteCountGte?: number;
 }

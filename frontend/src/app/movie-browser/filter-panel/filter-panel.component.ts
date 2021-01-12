@@ -17,12 +17,13 @@ export class FilterPanelComponent implements OnInit, OnChanges {
   selectedGenre: string;
   @Input()
   genresIds: string[];
+  @Input()
+  voteCount: number;
   genres$: Observable<Genre[]>;
   sortExpanded = false;
   filterExpanded = false;
   fromDate = new FormControl();
   toDate = new FormControl();
-  minimumVotes = 3000;
 
   constructor(private movieService: MovieService, private datePipe: DatePipe) { }
 
@@ -33,6 +34,7 @@ export class FilterPanelComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
     this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
+    this.voteCount = this.movieService.urlParams.voteCountGte;
   }
 
   toggleSort(): void {
@@ -54,8 +56,11 @@ export class FilterPanelComponent implements OnInit, OnChanges {
   applyFilters(): void {
     this.movieService.urlParams.sortCategory = this.sortCategory;
     this.movieService.urlParams.withGenres = this.genresIds.join(',');
-    this.movieService.urlParams.releaseDateGte = this.datePipe.transform(this.fromDate.value, 'yyyy-MM-dd');
-    this.movieService.urlParams.releaseDateLte = this.datePipe.transform(this.toDate.value, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateGte = this.fromDate.value === '' ? ''
+        : this.datePipe.transform(this.fromDate.value, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateLte = this.toDate.value === '' ? ''
+        : this.datePipe.transform(this.toDate.value, 'yyyy-MM-dd');
+    this.movieService.urlParams.voteCountGte = this.voteCount;
     this.movieService.getMovies('discover');
   }
 

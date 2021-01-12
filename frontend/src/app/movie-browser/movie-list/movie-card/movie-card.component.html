@@ -1,7 +1,7 @@
 <div [routerLink]="['/movies/', movie.id]" class="movie-card">
     <img *ngIf="movie.poster_path; else noImage" [src]="env + movie.poster_path" [alt]="movie.title">
     <ng-template #noImage>
-      <img src="./assets/no-image.png" alt="no image">
+      <img class="no-image" src="./assets/no-image.png" alt="no image">
     </ng-template>
     <div class="movie-info">
         <h3 class="title">{{ movie.title }}</h3>

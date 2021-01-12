@@ -29,7 +29,7 @@ export class MovieService {
       pageNumber: 1,
       sortCategory: 'popularity.desc',
       withGenres: '',
-      voteCountGte: '',
+      voteCountGte: 0,
       releaseDateGte: '',
       releaseDateLte: '',
       withReleaseType: ''

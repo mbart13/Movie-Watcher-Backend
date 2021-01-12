@@ -50,7 +50,7 @@ hr {
 
 .filter-name {
     font-size: 1em;
-    margin-bottom: .8em;
+    margin: .8em 0;
 }
 
 .select-options-wrapper {

@@ -13,6 +13,7 @@ export class MovieBrowserComponent implements OnInit {
 
   selectedCategory: string;
   selectedGenres: string[] = [];
+  voteCount: number;
   selectedButton = 'popular';
   filtersHidden = false;
   movies$: Observable<Movie[]>;
@@ -59,7 +60,7 @@ export class MovieBrowserComponent implements OnInit {
 
   getTopRatedMovies(): void  {
     this.movieService.urlParams.sortCategory = 'vote_average.desc';
-    this.movieService.urlParams.voteCountGte = '3000';
+    this.movieService.urlParams.voteCountGte = 3000;
     this.movieService.getMovies('discover');
     this.selectedCategory = this.movieService.urlParams.sortCategory;
   }

@@ -25,6 +25,7 @@
     <app-filter-panel
       [genresIds]="selectedGenres"
       [sortCategory]="selectedCategory">
+      [voteCount]="voteCount"
     </app-filter-panel>
     <app-movie-list [movies]="movies$ | async" ></app-movie-list>
 </div>

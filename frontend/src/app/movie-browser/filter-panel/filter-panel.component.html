@@ -40,10 +40,8 @@
             </button>
           </div>
         </div>
-
         <div class="filter-wrapper">
           <h5 class="filter-name">Release Date</h5>
-
           <mat-form-field appearance="fill">
             <mat-label>From:</mat-label>
             <label>
@@ -61,11 +59,11 @@
             <mat-datepicker #maxDate ></mat-datepicker>
           </mat-form-field>
         </div>
-      <div class="filter-wrapper slider">
-          <h5 class="filter-name">Minimum Vote Count</h5>
-            <p> {{ minimumVotes }}</p>
-          <mat-slider min="0" max="10000" step="1000" [(ngModel)]="minimumVotes"></mat-slider>
-      </div>
+        <div class="filter-wrapper slider">
+            <h5 class="filter-name">Minimum Votes</h5>
+              <p> {{ voteCount }}</p>
+            <mat-slider min="0" max="10000" step="1000" [(ngModel)]="voteCount"></mat-slider>
+        </div>
 
     </div>
 </div>

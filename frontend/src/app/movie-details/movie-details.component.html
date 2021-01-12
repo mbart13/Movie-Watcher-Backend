@@ -3,7 +3,7 @@
         <img *ngIf="data.movieDetails.poster_path; else noImage" [src]="env + data.movieDetails.poster_path" [alt]="data.movieDetails.title">
     </div>
     <ng-template #noImage>
-      <img src="./assets/no-image.png" alt="no image">
+      <img class="no-movies" src="./assets/no-image.png" alt="no image">
     </ng-template>
     <div class="movie-info">
         <div class="basic-details">
