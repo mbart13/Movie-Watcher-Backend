@@ -1,4 +1,4 @@
-<div class="movie-list-container" *ngIf="genres.length">
+<div class="movie-list-container" *ngIf="genres">
 
       <app-movie-card *ngFor="let movie of movies"
                       [genres]="genres" [movie]="movie">

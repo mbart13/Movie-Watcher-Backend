@@ -30,14 +30,43 @@
         <i class="fas fa-chevron-right"></i>
     </div>
     <div class="sort-filter-options" (click)="$event.stopPropagation()">
-        <h5 class="filter-name">Genres</h5>
-        <div class="genres">
+        <div class="filter-wrapper">
+          <h5 class="filter-name">Genres</h5>
+          <div class="genres">
             <button #genre class="btn genre" *ngFor="let genre of (genres$ | async)"
-                [id]="genre.id" (click)="onButtonClicked(genre.id)"
-                [class.btn-active]="genresIds.includes(genre.id)" >
-                {{ genre.name }}
+                    [id]="genre.id" (click)="onButtonClicked(genre.id)"
+                    [class.btn-active]="genresIds.includes(genre.id)" >
+              {{ genre.name }}
             </button>
+          </div>
         </div>
+
+        <div class="filter-wrapper">
+          <h5 class="filter-name">Release Date</h5>
+
+          <mat-form-field appearance="fill">
+            <mat-label>From:</mat-label>
+            <label>
+              <input matInput [matDatepicker]="minDate" [formControl]="fromDate">
+            </label>
+            <mat-datepicker-toggle matSuffix [for]="minDate"></mat-datepicker-toggle>
+            <mat-datepicker #minDate ></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>To:</mat-label>
+            <label>
+              <input matInput [matDatepicker]="maxDate" [formControl]="toDate">
+            </label>
+            <mat-datepicker-toggle matSuffix [for]="maxDate"></mat-datepicker-toggle>
+            <mat-datepicker #maxDate ></mat-datepicker>
+          </mat-form-field>
+        </div>
+      <div class="filter-wrapper slider">
+          <h5 class="filter-name">Minimum Vote Count</h5>
+            <p> {{ minimumVotes }}</p>
+          <mat-slider min="0" max="10000" step="1000" [(ngModel)]="minimumVotes"></mat-slider>
+      </div>
+
     </div>
 </div>
 <button class="btn btn-active btn-apply" (click)="applyFilters()">

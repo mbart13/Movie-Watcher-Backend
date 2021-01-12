@@ -29,8 +29,6 @@ hr {
     width: 100%;
     position: relative;
     border-top: 1px solid var(--clr-grey);
-    padding-top: .5em;
-    position: relative;
     display: none;
 }
 
@@ -60,8 +58,13 @@ hr {
     padding-bottom: .8em;
 }
 
+.filter-wrapper {
+  border-bottom: 1px solid var(--clr-grey);
+  margin: .5em 0;
+}
+
 select {
-    width: 100%;    
+    width: 100%;
     background: var(--clr-bg-secondary);
     color: var(--clr-grey);
     padding: .6em;
@@ -80,6 +83,7 @@ select {
 
 .genres {
     text-align: center;
+    padding-bottom: .5em;
 }
 
 .genre {
@@ -87,3 +91,22 @@ select {
     font-size: .9em;
 }
 
+mat-label, mat-datepicker-toggle, mat-slider {
+  color: var(--clr-grey)
+}
+
+p {
+  color: var(--clr-grey);
+}
+
+mat-slider {
+  width: 100%;
+}
+
+::ng-deep  .mat-accent .mat-slider-track-fill {
+  background: var(--clr-red) !important;
+}
+
+::ng-deep  .mat-accent .mat-slider-thumb {
+  background: var(--clr-red) !important;
+}

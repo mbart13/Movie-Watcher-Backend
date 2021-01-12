@@ -3,7 +3,7 @@
 :root {
     --clr-bg-primary: #121012;
     --clr-bg-secondary: #1B1B1F;
-    --clr-red: #E21F3F;
+    --clr-red: #e21f3f;
     --clr-grey: #ADACBB;
     --clr-white: #fff;
     --ff-primary: "Roboto", sans-serif;
@@ -58,6 +58,11 @@ ul li {
 select, input {
     border: none;
     outline: none;
+}
+
+input {
+  background: var(--clr-bg-primary);
+  color: var(--clr-grey)
 }
 
 select {

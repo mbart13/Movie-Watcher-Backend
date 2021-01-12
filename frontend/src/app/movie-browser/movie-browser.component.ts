@@ -34,7 +34,6 @@ export class MovieBrowserComponent implements OnInit {
 
   onButtonClicked(category: string): void {
     this.movieService.resetUrlParams();
-    this.filtersHidden = true;
     if (category === 'popular' && this.selectedButton !== category) {
       this.selectedButton = 'popular';
       this.getPopularMovies();
