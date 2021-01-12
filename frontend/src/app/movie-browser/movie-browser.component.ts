@@ -13,7 +13,6 @@ export class MovieBrowserComponent implements OnInit {
 
   selectedCategory: string;
   selectedGenres: string[] = [];
-  voteCount: number;
   selectedButton = 'popular';
   movies$: Observable<Movie[]>;
   nowPlayingDates: Dates;
@@ -22,18 +21,16 @@ export class MovieBrowserComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
-    console.log(this.movieService.urlParams);
     this.selectedCategory = this.movieService.urlParams.sortCategory;
-    this.movieService.getMovies('discover');
     this.movies$ = this.movieService.getMovies$();
-    this.movieService.getNowPlayingDates()
+    this.movieService.getNowPlayingDates$()
       .subscribe(data => this.nowPlayingDates = data);
-    this.movieService.getUpcomingDates()
+    this.movieService.getUpcomingDates$()
       .subscribe(data => this.upcomingDates = data);
+    this.getPopularMovies();
   }
 
   onButtonClicked(category: string): void {
-    this.movieService.resetUrlParams();
     if (category === 'popular' && this.selectedButton !== category) {
       this.selectedButton = 'popular';
       this.getPopularMovies();
@@ -53,32 +50,35 @@ export class MovieBrowserComponent implements OnInit {
   }
 
   getPopularMovies(): void  {
-    console.log(this.movieService.urlParams);
-    this.movieService.urlParams.sortCategory = 'popularity.desc';
+    this.movieService.resetUrlParams();
     this.movieService.getMovies('discover');
+    console.log(this.movieService.urlParams);
   }
 
   getTopRatedMovies(): void  {
-    console.log(this.movieService.urlParams);
+    this.movieService.resetUrlParams();
     this.movieService.urlParams.sortCategory = 'vote_average.desc';
     this.movieService.urlParams.voteCountGte = 3000;
     this.movieService.getMovies('discover');
     this.selectedCategory = this.movieService.urlParams.sortCategory;
+    console.log(this.movieService.urlParams);
   }
 
   getNowPlayingMovies(): void  {
-    console.log(this.movieService.urlParams);
+    this.movieService.resetUrlParams();
     this.movieService.urlParams.releaseDateGte = this.nowPlayingDates.minimum;
     this.movieService.urlParams.releaseDateLte = this.nowPlayingDates.maximum;
     this.movieService.urlParams.withReleaseType = '3|2';
     this.movieService.getMovies('discover');
+    console.log(this.movieService.urlParams);
   }
 
   getUpcomingMovies(): void {
-    console.log(this.movieService.urlParams);
+    this.movieService.resetUrlParams();
     this.movieService.urlParams.releaseDateGte = this.upcomingDates.minimum;
     this.movieService.urlParams.releaseDateLte = this.upcomingDates.maximum;
     this.movieService.urlParams.withReleaseType = '3|2';
     this.movieService.getMovies('discover');
+    console.log(this.movieService.urlParams);
   }
 }

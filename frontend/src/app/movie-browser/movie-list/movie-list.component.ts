@@ -12,14 +12,12 @@ export class MovieListComponent implements OnInit {
 
   @Input()
   movies: Movie[];
-  // @Input()
-  // filterHidden;
   genres: Genre[];
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.movieService.getGenres()
+    this.movieService.getGenres$()
       .subscribe(data => this.genres = data);
   }
 
