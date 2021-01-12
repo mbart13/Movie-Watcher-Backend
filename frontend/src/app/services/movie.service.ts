@@ -15,7 +15,15 @@ import {Dates} from '../models/dates';
 })
 export class MovieService {
 
-  urlParams: UrlParams = { pageNumber: 1, sortCategory: 'popularity.desc' };
+  urlParams: UrlParams = {
+    pageNumber: 1,
+    sortCategory: 'popularity.desc',
+    withGenres: '',
+    voteCountGte: 0,
+    releaseDateGte: '',
+    releaseDateLte: '',
+    withReleaseType: ''
+  };
   movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
   nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}&page=1`;

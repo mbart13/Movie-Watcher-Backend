@@ -56,10 +56,10 @@ export class FilterPanelComponent implements OnInit, OnChanges {
   applyFilters(): void {
     this.movieService.urlParams.sortCategory = this.sortCategory;
     this.movieService.urlParams.withGenres = this.genresIds.join(',');
-    this.movieService.urlParams.releaseDateGte = this.fromDate.value === '' ? ''
-        : this.datePipe.transform(this.fromDate.value, 'yyyy-MM-dd');
-    this.movieService.urlParams.releaseDateLte = this.toDate.value === '' ? ''
-        : this.datePipe.transform(this.toDate.value, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateGte = this.fromDate.value === '' ? '' :
+        this.datePipe.transform(this.fromDate.value, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateLte = this.toDate.value === '' ? '' :
+        this.datePipe.transform(this.toDate.value, 'yyyy-MM-dd');
     this.movieService.urlParams.voteCountGte = this.voteCount;
     this.movieService.getMovies('discover');
   }
