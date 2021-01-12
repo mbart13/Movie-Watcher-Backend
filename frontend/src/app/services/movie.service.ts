@@ -7,7 +7,6 @@ import { Genre } from '../models/genre';
 import { Movie } from '../models/movie';
 import { MovieCredits } from '../models/movie-credits';
 import { MovieDetails } from '../models/movie-details';
-import { UrlParams } from '../models/url-params';
 import { Dates } from '../models/dates';
 
 @Injectable({
@@ -19,7 +18,7 @@ export class MovieService {
     'sort_by', 'page', 'primary_release_date.gte', 'primary_release_date.lte', 'with_release_type', 'vote_count.gte', 'with_genres'
   ];
 
-  urlParams: UrlParams = {
+  urlParams = {
     sortCategory: 'popularity.desc',
     pageNumber: 1,
     releaseDateGte: '',
@@ -31,14 +30,14 @@ export class MovieService {
 
   movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
-  nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}&page=1`;
-  upcomingMoviesUrl = `${environment.tmdb_base_url}/movie/upcoming?api_key=${environment.api_key}&page=1`;
+  nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}`;
+  upcomingMoviesUrl = `${environment.tmdb_base_url}/movie/upcoming?api_key=${environment.api_key}`;
   movieDetailsUrl = `${environment.tmdb_base_url}/movie`;
 
   constructor(private http: HttpClient) { }
 
   getMovies(queryType: string): void {
-      this.http.get<any>(`${environment.tmdb_base_url}/${queryType}/movie?${this.buildUrlParams()}`)
+    this.http.get<any>(`${environment.tmdb_base_url}/${queryType}/movie?${this.buildUrlParams()}`)
           .pipe(
             tap(data => this.movies$.next(data.results))
           ).subscribe();

@@ -21,38 +21,34 @@ export class MovieBrowserComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
+    console.log(this.movieService.urlParams);
     this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.movies$ = this.movieService.getMovies$();
     this.movieService.getNowPlayingDates$()
       .subscribe(data => this.nowPlayingDates = data);
     this.movieService.getUpcomingDates$()
       .subscribe(data => this.upcomingDates = data);
-    this.getPopularMovies();
+    this.movieService.getMovies('discover');
   }
 
   onButtonClicked(category: string): void {
     if (category === 'popular' && this.selectedButton !== category) {
-      this.selectedButton = 'popular';
       this.getPopularMovies();
     } else if (category === 'top rated' && this.selectedButton !== category) {
-      this.selectedButton = 'top rated';
       this.getTopRatedMovies();
     } else if (category === 'now playing' && this.selectedButton !== category) {
-      this.selectedButton = 'now playing';
       this.getNowPlayingMovies();
     } else if (category === 'upcoming' && this.selectedButton !== category) {
-      this.selectedButton = 'upcoming';
       this.getUpcomingMovies();
     }
+    this.selectedButton = category;
     this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.selectedGenres = [];
-
   }
 
   getPopularMovies(): void  {
     this.movieService.resetUrlParams();
     this.movieService.getMovies('discover');
-    console.log(this.movieService.urlParams);
   }
 
   getTopRatedMovies(): void  {
@@ -61,7 +57,6 @@ export class MovieBrowserComponent implements OnInit {
     this.movieService.urlParams.voteCountGte = 3000;
     this.movieService.getMovies('discover');
     this.selectedCategory = this.movieService.urlParams.sortCategory;
-    console.log(this.movieService.urlParams);
   }
 
   getNowPlayingMovies(): void  {
@@ -70,7 +65,6 @@ export class MovieBrowserComponent implements OnInit {
     this.movieService.urlParams.releaseDateLte = this.nowPlayingDates.maximum;
     this.movieService.urlParams.withReleaseType = '3|2';
     this.movieService.getMovies('discover');
-    console.log(this.movieService.urlParams);
   }
 
   getUpcomingMovies(): void {
@@ -79,6 +73,5 @@ export class MovieBrowserComponent implements OnInit {
     this.movieService.urlParams.releaseDateLte = this.upcomingDates.maximum;
     this.movieService.urlParams.withReleaseType = '3|2';
     this.movieService.getMovies('discover');
-    console.log(this.movieService.urlParams);
   }
 }

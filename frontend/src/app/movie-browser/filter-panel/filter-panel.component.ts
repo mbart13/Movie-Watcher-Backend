@@ -54,7 +54,6 @@ export class FilterPanelComponent implements OnInit, OnChanges {
   }
 
   applyFilters(): void {
-    console.log(this.movieService.urlParams);
     this.movieService.urlParams.sortCategory = this.sortCategory;
     this.movieService.urlParams.withGenres = this.genresIds.join(',');
     this.movieService.urlParams.releaseDateGte = this.fromDate.value === '' ? '' :
