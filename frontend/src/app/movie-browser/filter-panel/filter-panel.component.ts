@@ -2,8 +2,8 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Genre } from 'src/app/models/genre';
 import { MovieService } from 'src/app/services/movie.service';
-import {FormControl} from '@angular/forms';
-import {DatePipe} from '@angular/common';
+import { FormControl } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-filter-panel',
@@ -12,12 +12,10 @@ import {DatePipe} from '@angular/common';
 })
 export class FilterPanelComponent implements OnInit, OnChanges {
 
-  @Input()
   sortCategory = 'popularity.desc';
   selectedGenre: string;
   @Input()
   genresIds: string[];
-  @Input()
   voteCount: number;
   genres$: Observable<Genre[]>;
   sortExpanded = false;
@@ -35,6 +33,7 @@ export class FilterPanelComponent implements OnInit, OnChanges {
     this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
     this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
     this.voteCount = this.movieService.urlParams.voteCountGte;
+    this.sortCategory = this.movieService.urlParams.sortCategory;
   }
 
   toggleSort(): void {

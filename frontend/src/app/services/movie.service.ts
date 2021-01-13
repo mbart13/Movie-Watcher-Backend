@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject  } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import {map, publishReplay, refCount, shareReplay, tap} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../models/genre';
 import { Movie } from '../models/movie';
 import { MovieCredits } from '../models/movie-credits';
 import { MovieDetails } from '../models/movie-details';
 import { Dates } from '../models/dates';
+import { UrlConst } from '../models/url.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +20,17 @@ export class MovieService {
   ];
 
   urlParams = {
-    sortCategory: 'popularity.desc',
-    pageNumber: 1,
+    sortCategory: UrlConst.POPULARITY_DESC,
+    pageNumber: UrlConst.PAGE_NUMBER,
     releaseDateGte: '',
     releaseDateLte: '',
     withReleaseType: '',
-    voteCountGte: 0,
+    voteCountGte: UrlConst.DEFAULT_VOTE_COUNT,
     withGenres: ''
   };
 
   movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
+  genres$: Observable<Genre[]>;
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
   nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}`;
   upcomingMoviesUrl = `${environment.tmdb_base_url}/movie/upcoming?api_key=${environment.api_key}`;
@@ -85,10 +87,15 @@ export class MovieService {
   }
 
   getGenres$(): Observable<Genre[]> {
-    return this.http.get<any>(this.genresUrl)
-      .pipe(
-        map(result => result.genres)
-      );
+    if (!this.genres$) {
+      this.genres$ = this.http.get<any>(this.genresUrl)
+        .pipe(
+          map(result => result.genres),
+          publishReplay(1),
+          refCount()
+        );
+    }
+    return this.genres$;
   }
 
   getMovieDetails$(id: number): Observable<MovieDetails> {

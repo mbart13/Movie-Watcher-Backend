@@ -15,8 +15,6 @@ export class MovieCardComponent implements OnInit {
   @Input()
   genres: Genre[];
 
-  // @Input() filterHidden;
-
   @Input()
   movie: Movie;
 
@@ -26,7 +24,9 @@ export class MovieCardComponent implements OnInit {
   }
 
   getGenreById(id: number): string {
-    return this.genres.find(genre => genre.id === id).name;
+    if (this.genres) {
+      return this.genres.find(genre => genre.id === id).name;
+    }
   }
 
 }

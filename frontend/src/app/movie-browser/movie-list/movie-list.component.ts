@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Genre } from 'src/app/models/genre';
 import { Movie } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
@@ -12,13 +13,12 @@ export class MovieListComponent implements OnInit {
 
   @Input()
   movies: Movie[];
-  genres: Genre[];
+  genres$: Observable<Genre[]>;
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.movieService.getGenres$()
-      .subscribe(data => this.genres = data);
+    this.genres$ = this.movieService.getGenres$();
   }
 
   loadMore(): void {

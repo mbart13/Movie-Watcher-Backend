@@ -14,17 +14,20 @@
     outline: none;
 }
 
+.movie-info {
+  margin-top: .3em;
+}
+
 .title {
     font-size: 1em;
 }
 
-.release-date {
-    margin: .3em;
-    font-size: .7em;
+.release-date, .genres {
+  font-size: .8em;
 }
 
-.genres {
-    font-size: .8em;
+.release-date {
+    margin: .3em;
 }
 
 /*@media screen and (max-width: 1160px) {*/

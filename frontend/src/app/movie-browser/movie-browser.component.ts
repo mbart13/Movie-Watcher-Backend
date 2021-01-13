@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
 import { MovieService } from '../services/movie.service';
 import {Dates} from '../models/dates';
+import {UrlConst} from '../models/url.constants';
 
 @Component({
   selector: 'app-movie-browser',
@@ -11,7 +12,6 @@ import {Dates} from '../models/dates';
 })
 export class MovieBrowserComponent implements OnInit {
 
-  selectedCategory: string;
   selectedGenres: string[] = [];
   selectedButton = 'popular';
   movies$: Observable<Movie[]>;
@@ -21,19 +21,20 @@ export class MovieBrowserComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
-    console.log(this.movieService.urlParams);
-    this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.movies$ = this.movieService.getMovies$();
     this.movieService.getNowPlayingDates$()
       .subscribe(data => this.nowPlayingDates = data);
     this.movieService.getUpcomingDates$()
       .subscribe(data => this.upcomingDates = data);
-    this.movieService.getMovies('discover');
+    this.movieService.getMovies(UrlConst.DISCOVER);
   }
 
   onButtonClicked(category: string): void {
+    if (this.selectedButton !== category) {
+      this.movieService.resetUrlParams();
+    }
     if (category === 'popular' && this.selectedButton !== category) {
-      this.getPopularMovies();
+      this.movieService.getMovies(UrlConst.DISCOVER);
     } else if (category === 'top rated' && this.selectedButton !== category) {
       this.getTopRatedMovies();
     } else if (category === 'now playing' && this.selectedButton !== category) {
@@ -42,36 +43,26 @@ export class MovieBrowserComponent implements OnInit {
       this.getUpcomingMovies();
     }
     this.selectedButton = category;
-    this.selectedCategory = this.movieService.urlParams.sortCategory;
     this.selectedGenres = [];
   }
 
-  getPopularMovies(): void  {
-    this.movieService.resetUrlParams();
-    this.movieService.getMovies('discover');
-  }
-
   getTopRatedMovies(): void  {
-    this.movieService.resetUrlParams();
-    this.movieService.urlParams.sortCategory = 'vote_average.desc';
-    this.movieService.urlParams.voteCountGte = 3000;
-    this.movieService.getMovies('discover');
-    this.selectedCategory = this.movieService.urlParams.sortCategory;
+    this.movieService.urlParams.sortCategory = UrlConst.VOTE_AVG_DESC;
+    this.movieService.urlParams.voteCountGte = UrlConst.MINIMUM_VOTE_COUNT;
+    this.movieService.getMovies(UrlConst.DISCOVER);
   }
 
   getNowPlayingMovies(): void  {
-    this.movieService.resetUrlParams();
     this.movieService.urlParams.releaseDateGte = this.nowPlayingDates.minimum;
     this.movieService.urlParams.releaseDateLte = this.nowPlayingDates.maximum;
-    this.movieService.urlParams.withReleaseType = '3|2';
-    this.movieService.getMovies('discover');
+    this.movieService.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
+    this.movieService.getMovies(UrlConst.DISCOVER);
   }
 
   getUpcomingMovies(): void {
-    this.movieService.resetUrlParams();
     this.movieService.urlParams.releaseDateGte = this.upcomingDates.minimum;
     this.movieService.urlParams.releaseDateLte = this.upcomingDates.maximum;
-    this.movieService.urlParams.withReleaseType = '3|2';
-    this.movieService.getMovies('discover');
+    this.movieService.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
+    this.movieService.getMovies(UrlConst.DISCOVER);
   }
 }
