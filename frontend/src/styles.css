@@ -41,9 +41,14 @@ body {
     padding: .4em 1em;
 }
 
-.btn-active, .btn:hover {
+.btn-active {
     color: var(--clr-white);
-    background: var(--clr-red);
+    background: var(--clr-red) ;
+}
+
+.btn:hover {
+  color: var(--clr-white);
+  background: var(--clr-red);
 }
 
 a {

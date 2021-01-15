@@ -34,8 +34,9 @@
           <h5 class="filter-name">Genres</h5>
           <div class="genres">
             <button #genre class="btn genre" *ngFor="let genre of (genres$ | async)"
-                    [id]="genre.id" (click)="onButtonClicked(genre.id)"
-                    [class.btn-active]="genresIds.includes(genre.id)" >
+                    [id]="genre.id" (click)="onButtonClicked(genre.id, $event)"
+                    (mouseout)="onMouseOut($event)"
+                    [class.btn-active]="genres.includes(genre.id)">
               {{ genre.name }}
             </button>
           </div>

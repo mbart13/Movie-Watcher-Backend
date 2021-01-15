@@ -91,8 +91,7 @@ export class MovieService {
       this.genres$ = this.http.get<any>(this.genresUrl)
         .pipe(
           map(result => result.genres),
-          publishReplay(1),
-          refCount()
+          shareReplay()
         );
     }
     return this.genres$;

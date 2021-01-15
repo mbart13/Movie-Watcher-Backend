@@ -76,6 +76,11 @@ select {
     top: 12%;
 }
 
+.btn.no-hover:hover {
+  color: var(--clr-grey);
+  background: var(--clr-bg-secondary);
+}
+
 .btn-apply {
     width: 100%;
     font-size: 1.2em;

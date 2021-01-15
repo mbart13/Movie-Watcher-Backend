@@ -4,6 +4,7 @@ import { Genre } from 'src/app/models/genre';
 import { MovieService } from 'src/app/services/movie.service';
 import { FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { UrlConst } from '../../models/url.constants';
 
 @Component({
   selector: 'app-filter-panel',
@@ -12,10 +13,10 @@ import { DatePipe } from '@angular/common';
 })
 export class FilterPanelComponent implements OnInit, OnChanges {
 
-  sortCategory = 'popularity.desc';
+  sortCategory = UrlConst.POPULARITY_DESC;
   selectedGenre: string;
   @Input()
-  genresIds: string[];
+  genres: string[];
   voteCount: number;
   genres$: Observable<Genre[]>;
   sortExpanded = false;
@@ -44,17 +45,26 @@ export class FilterPanelComponent implements OnInit, OnChanges {
     this.filterExpanded = !this.filterExpanded;
   }
 
-  onButtonClicked(genreId: string): void {
-    if (this.genresIds.includes(genreId)) {
-      this.genresIds = this.genresIds.filter(id => genreId !== id);
+  onButtonClicked(genreId: string, event): void {
+    if (this.genres.includes(genreId)) {
+      this.genres = this.genres.filter(id => genreId !== id);
     } else {
-      this.genresIds.push(genreId);
+      this.genres.push(genreId);
     }
+    if (event.target.classList.contains('btn-active')) {
+      event.target.classList.add('no-hover');
+    } else {
+      event.target.classList.remove('no-hover');
+    }
+  }
+
+  onMouseOut(event): void {
+    event.target.classList.remove('no-hover');
   }
 
   applyFilters(): void {
     this.movieService.urlParams.sortCategory = this.sortCategory;
-    this.movieService.urlParams.withGenres = this.genresIds.join(',');
+    this.movieService.urlParams.withGenres = this.genres.join(',');
     this.movieService.urlParams.releaseDateGte = this.fromDate.value === '' ? '' :
         this.datePipe.transform(this.fromDate.value, 'yyyy-MM-dd');
     this.movieService.urlParams.releaseDateLte = this.toDate.value === '' ? '' :
