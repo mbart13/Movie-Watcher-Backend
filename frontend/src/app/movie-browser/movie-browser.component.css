@@ -42,9 +42,9 @@
 }
 
 app-filter-panel {
-    width: 30%;
-    min-width: 300px;
+    width: 300px;
     margin-right: 1.5em;
+    flex: 0 0 auto;
 }
 
 app-movie-list {

@@ -23,7 +23,10 @@
 </div>
 <div class="main-section">
     <app-filter-panel
-      [genres]="selectedGenres">
+      [sortCategory]="selectedCategory"
+      [fromDate]="fromDate"
+      [toDate]="toDate"
+      [voteCount]="voteCount">
     </app-filter-panel>
     <app-movie-list [movies]="movies$ | async" ></app-movie-list>
 </div>

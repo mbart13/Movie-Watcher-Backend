@@ -46,7 +46,7 @@
           <mat-form-field appearance="fill">
             <mat-label>From:</mat-label>
             <label>
-              <input matInput [matDatepicker]="minDate" [formControl]="fromDate">
+              <input matInput [matDatepicker]="minDate" [(ngModel)]="fromDate">
             </label>
             <mat-datepicker-toggle matSuffix [for]="minDate"></mat-datepicker-toggle>
             <mat-datepicker #minDate ></mat-datepicker>
@@ -54,7 +54,7 @@
           <mat-form-field appearance="fill">
             <mat-label>To:</mat-label>
             <label>
-              <input matInput [matDatepicker]="maxDate" [formControl]="toDate">
+              <input matInput [matDatepicker]="maxDate" [(ngModel)]="toDate">
             </label>
             <mat-datepicker-toggle matSuffix [for]="maxDate"></mat-datepicker-toggle>
             <mat-datepicker #maxDate ></mat-datepicker>

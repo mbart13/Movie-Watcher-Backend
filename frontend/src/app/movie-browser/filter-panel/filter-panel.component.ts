@@ -1,41 +1,59 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, DoCheck } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Genre } from 'src/app/models/genre';
 import { MovieService } from 'src/app/services/movie.service';
-import { FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { UrlConst } from '../../models/url.constants';
 
 @Component({
   selector: 'app-filter-panel',
   templateUrl: './filter-panel.component.html',
   styleUrls: ['./filter-panel.component.css']
 })
-export class FilterPanelComponent implements OnInit, OnChanges {
+export class FilterPanelComponent implements OnInit {
 
-  sortCategory = UrlConst.POPULARITY_DESC;
-  selectedGenre: string;
   @Input()
-  genres: string[];
-  voteCount: number;
+  sortCategory: string;
+  selectedGenre: string;
+  genres: string[] = [];
   genres$: Observable<Genre[]>;
-  sortExpanded = false;
-  filterExpanded = false;
-  fromDate = new FormControl();
-  toDate = new FormControl();
+  sortExpanded: boolean;
+  filterExpanded: boolean;
+  @Input()
+  fromDate: string;
+  @Input()
+  toDate: string;
+  @Input()
+  voteCount: number;
 
   constructor(private movieService: MovieService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.genres$ = this.movieService.getGenres$();
+
+    // this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
+    // this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
+    // this.voteCount = this.movieService.urlParams.voteCountGte;
+    // this.sortCategory = this.movieService.urlParams.sortCategory;
+    console.log('inside ngOnInit in filter-panel-component');
+    console.log(this.sortExpanded);
+    console.log(this.movieService.urlParams);
   }
 
-  ngOnChanges(): void {
-    this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
-    this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
-    this.voteCount = this.movieService.urlParams.voteCountGte;
-    this.sortCategory = this.movieService.urlParams.sortCategory;
-  }
+  // ngDoCheck(): void {
+  //     this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
+  //     this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
+  //     this.voteCount = this.movieService.urlParams.voteCountGte;
+  //     this.sortCategory = this.movieService.urlParams.sortCategory;
+  //     console.log('inside do check');
+  // }
+
+  // ngOnChanges(): void {
+  //   this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
+  //   this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
+  //   this.voteCount = this.movieService.urlParams.voteCountGte;
+  //   this.sortCategory = this.movieService.urlParams.sortCategory;
+  //   console.log('inside on changes');
+  // }
 
   toggleSort(): void {
     this.sortExpanded = !this.sortExpanded;
@@ -63,14 +81,21 @@ export class FilterPanelComponent implements OnInit, OnChanges {
   }
 
   applyFilters(): void {
+    console.log('in apply filters');
+    console.log(this.fromDate);
+    console.log(this.toDate);
+    console.log(this.datePipe.transform(this.fromDate, 'yyyy-MM-dd'));
+    console.log(this.datePipe.transform(this.toDate, 'yyyy-MM-dd'));
+    console.log(this.voteCount);
     this.movieService.urlParams.sortCategory = this.sortCategory;
     this.movieService.urlParams.withGenres = this.genres.join(',');
-    this.movieService.urlParams.releaseDateGte = this.fromDate.value === '' ? '' :
-        this.datePipe.transform(this.fromDate.value, 'yyyy-MM-dd');
-    this.movieService.urlParams.releaseDateLte = this.toDate.value === '' ? '' :
-        this.datePipe.transform(this.toDate.value, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateGte = this.fromDate === '' ? '' :
+        this.datePipe.transform(this.fromDate, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateLte = this.toDate === '' ? '' :
+        this.datePipe.transform(this.toDate, 'yyyy-MM-dd');
     this.movieService.urlParams.voteCountGte = this.voteCount;
     this.movieService.getMovies('discover');
+    console.log(this.movieService.urlParams);
   }
 
 }

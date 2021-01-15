@@ -4,10 +4,10 @@
                       [genres]="genres" [movie]="movie">
       </app-movie-card>
       <ng-container *ngIf="movies.length; else noMovies">
-        <button class="btn btn-active" (click)="loadMore()">Load More</button>
+        <button *ngIf="movies.length === 20" class="btn btn-active" (click)="loadMore()">Load More</button>
       </ng-container>
 
       <ng-template #noMovies>
-        <p class="no-movies">No movies were found</p>
+        <p class="no-movies">No movies matching these search criteria</p>
       </ng-template>
 </div>

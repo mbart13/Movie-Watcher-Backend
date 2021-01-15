@@ -41,14 +41,9 @@ body {
     padding: .4em 1em;
 }
 
-.btn-active {
+.btn-active, .btn:hover  {
     color: var(--clr-white);
     background: var(--clr-red) ;
-}
-
-.btn:hover {
-  color: var(--clr-white);
-  background: var(--clr-red);
 }
 
 a {
@@ -84,7 +79,7 @@ img {
     border-radius: var(--border-radius);
 }
 
-img .no-image {
+img.no-image {
   background: white;
 }
 

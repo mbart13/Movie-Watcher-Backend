@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject  } from 'rxjs';
-import {map, publishReplay, refCount, shareReplay, tap} from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../models/genre';
 import { Movie } from '../models/movie';
@@ -50,13 +50,12 @@ export class MovieService {
   }
 
   resetUrlParams(): void {
-    this.urlParams.sortCategory = 'popularity.desc';
     this.urlParams.pageNumber = 1;
+    this.urlParams.sortCategory = UrlConst.POPULARITY_DESC;
     this.urlParams.releaseDateGte = '';
     this.urlParams.releaseDateLte = '';
     this.urlParams.withReleaseType = '';
     this.urlParams.voteCountGte = 0;
-    this.urlParams.withGenres =  '';
   }
 
   buildUrlParams(): string {

@@ -12,15 +12,28 @@ import {UrlConst} from '../models/url.constants';
 })
 export class MovieBrowserComponent implements OnInit {
 
-  selectedGenres: string[] = [];
+  selectedCategory: string = UrlConst.POPULARITY_DESC;
+  fromDate: string;
+  toDate: string;
+  voteCount: number;
   selectedButton = 'popular';
   movies$: Observable<Movie[]>;
   nowPlayingDates: Dates;
   upcomingDates: Dates;
+  releaseType: string;
 
-  constructor(public movieService: MovieService) { }
+  constructor(public movieService: MovieService) {
+    this.releaseType = this.movieService.urlParams.withReleaseType;
+    this.fromDate = this.movieService.urlParams.releaseDateGte;
+    this.toDate = this.movieService.urlParams.releaseDateLte;
+    this.voteCount = this.movieService.urlParams.voteCountGte;
+    this.selectedCategory = this.movieService.urlParams.sortCategory;
+  }
 
   ngOnInit(): void {
+    console.log('inside moviebrowser ngoninit');
+    console.log(this.movieService.urlParams);
+
     this.movies$ = this.movieService.getMovies$();
     this.movieService.getNowPlayingDates$()
       .subscribe(data => this.nowPlayingDates = data);
@@ -35,6 +48,8 @@ export class MovieBrowserComponent implements OnInit {
     }
     if (category === 'popular' && this.selectedButton !== category) {
       this.movieService.getMovies(UrlConst.DISCOVER);
+      console.log('inside get popular movies');
+      console.log(this.movieService.urlParams);
     } else if (category === 'top rated' && this.selectedButton !== category) {
       this.getTopRatedMovies();
     } else if (category === 'now playing' && this.selectedButton !== category) {
@@ -43,13 +58,18 @@ export class MovieBrowserComponent implements OnInit {
       this.getUpcomingMovies();
     }
     this.selectedButton = category;
-    this.selectedGenres = [];
+    this.selectedCategory = this.movieService.urlParams.sortCategory;
+    this.fromDate = this.movieService.urlParams.releaseDateGte;
+    this.toDate = this.movieService.urlParams.releaseDateLte;
+    this.voteCount = this.movieService.urlParams.voteCountGte;
   }
 
   getTopRatedMovies(): void  {
     this.movieService.urlParams.sortCategory = UrlConst.VOTE_AVG_DESC;
     this.movieService.urlParams.voteCountGte = UrlConst.MINIMUM_VOTE_COUNT;
     this.movieService.getMovies(UrlConst.DISCOVER);
+    console.log('inside get top rated movies');
+    console.log(this.movieService.urlParams);
   }
 
   getNowPlayingMovies(): void  {
@@ -57,6 +77,8 @@ export class MovieBrowserComponent implements OnInit {
     this.movieService.urlParams.releaseDateLte = this.nowPlayingDates.maximum;
     this.movieService.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
     this.movieService.getMovies(UrlConst.DISCOVER);
+    console.log('inside get top now playing movies');
+    console.log(this.movieService.urlParams);
   }
 
   getUpcomingMovies(): void {
@@ -64,5 +86,7 @@ export class MovieBrowserComponent implements OnInit {
     this.movieService.urlParams.releaseDateLte = this.upcomingDates.maximum;
     this.movieService.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
     this.movieService.getMovies(UrlConst.DISCOVER);
+    console.log('inside get top upcoming movies');
+    console.log(this.movieService.urlParams);
   }
 }
