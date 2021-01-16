@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, DoCheck } from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Genre } from 'src/app/models/genre';
 import { MovieService } from 'src/app/services/movie.service';
@@ -9,12 +9,12 @@ import { DatePipe } from '@angular/common';
   templateUrl: './filter-panel.component.html',
   styleUrls: ['./filter-panel.component.css']
 })
-export class FilterPanelComponent implements OnInit {
+export class FilterPanelComponent implements OnInit   {
 
   @Input()
   sortCategory: string;
-  selectedGenre: string;
-  genres: string[] = [];
+  // @Input()
+  genres: string[];
   genres$: Observable<Genre[]>;
   sortExpanded: boolean;
   filterExpanded: boolean;
@@ -29,30 +29,15 @@ export class FilterPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.genres$ = this.movieService.getGenres$();
-
-    // this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
-    // this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
-    // this.voteCount = this.movieService.urlParams.voteCountGte;
-    // this.sortCategory = this.movieService.urlParams.sortCategory;
-    console.log('inside ngOnInit in filter-panel-component');
-    console.log(this.sortExpanded);
-    console.log(this.movieService.urlParams);
+    if (this.movieService.urlParams.withGenres !== '') {
+      this.genres = this.movieService.urlParams.withGenres.split(',');
+    } else {
+      this.genres = [];
+    }
   }
 
-  // ngDoCheck(): void {
-  //     this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
-  //     this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
-  //     this.voteCount = this.movieService.urlParams.voteCountGte;
-  //     this.sortCategory = this.movieService.urlParams.sortCategory;
-  //     console.log('inside do check');
-  // }
-
   // ngOnChanges(): void {
-  //   this.fromDate = new FormControl(this.movieService.urlParams.releaseDateGte);
-  //   this.toDate = new FormControl(this.movieService.urlParams.releaseDateLte);
   //   this.voteCount = this.movieService.urlParams.voteCountGte;
-  //   this.sortCategory = this.movieService.urlParams.sortCategory;
-  //   console.log('inside on changes');
   // }
 
   toggleSort(): void {
@@ -81,12 +66,6 @@ export class FilterPanelComponent implements OnInit {
   }
 
   applyFilters(): void {
-    console.log('in apply filters');
-    console.log(this.fromDate);
-    console.log(this.toDate);
-    console.log(this.datePipe.transform(this.fromDate, 'yyyy-MM-dd'));
-    console.log(this.datePipe.transform(this.toDate, 'yyyy-MM-dd'));
-    console.log(this.voteCount);
     this.movieService.urlParams.sortCategory = this.sortCategory;
     this.movieService.urlParams.withGenres = this.genres.join(',');
     this.movieService.urlParams.releaseDateGte = this.fromDate === '' ? '' :
@@ -97,5 +76,4 @@ export class FilterPanelComponent implements OnInit {
     this.movieService.getMovies('discover');
     console.log(this.movieService.urlParams);
   }
-
 }

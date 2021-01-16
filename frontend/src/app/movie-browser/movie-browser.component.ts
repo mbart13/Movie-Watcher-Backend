@@ -15,6 +15,7 @@ export class MovieBrowserComponent implements OnInit {
   selectedCategory: string = UrlConst.POPULARITY_DESC;
   fromDate: string;
   toDate: string;
+  // selectedGenres: string[];
   voteCount: number;
   selectedButton = 'popular';
   movies$: Observable<Movie[]>;
@@ -31,9 +32,6 @@ export class MovieBrowserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('inside moviebrowser ngoninit');
-    console.log(this.movieService.urlParams);
-
     this.movies$ = this.movieService.getMovies$();
     this.movieService.getNowPlayingDates$()
       .subscribe(data => this.nowPlayingDates = data);

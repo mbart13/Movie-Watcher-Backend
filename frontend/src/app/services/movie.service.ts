@@ -29,7 +29,7 @@ export class MovieService {
     withGenres: ''
   };
 
-  movies$: BehaviorSubject<Movie[]> = new BehaviorSubject([]);
+  movies$ = new BehaviorSubject<Movie[]>([]);
   genres$: Observable<Genre[]>;
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
   nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}`;
