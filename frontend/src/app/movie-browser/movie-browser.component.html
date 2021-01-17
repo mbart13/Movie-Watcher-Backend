@@ -4,20 +4,20 @@
   <i class="fas fa-search"></i>
 </div>
 <div class="filter-buttons">
-    <button  class="btn" [class.btn-active]="selectedButton === 'popular'"
-        (click)="onButtonClicked('popular')">
+    <button  class="btn" [class.btn-selected]="selectedButton === eCategory.Popular"
+        (click)="onButtonClicked(eCategory.Popular)">
         Popular
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'now playing'"
-        (click)="onButtonClicked('now playing')">
+    <button class="btn" [class.btn-selected]="selectedButton === eCategory.NowPlaying"
+        (click)="onButtonClicked(eCategory.NowPlaying)">
         Now Playing
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'top rated'"
-        (click)="onButtonClicked('top rated')">
+    <button class="btn" [class.btn-selected]="selectedButton === eCategory.TopRated"
+        (click)="onButtonClicked(eCategory.TopRated)">
         Top Rated
     </button>
-    <button class="btn" [class.btn-active]="selectedButton === 'upcoming'"
-        (click)="onButtonClicked('upcoming')">
+    <button class="btn" [class.btn-selected]="selectedButton === eCategory.Upcoming"
+        (click)="onButtonClicked(eCategory.Upcoming)">
         Upcoming
     </button>
 </div>
@@ -27,7 +27,9 @@
       [fromDate]="fromDate"
       [toDate]="toDate"
       [voteCount]="voteCount"
-      >
+
+      [sortExpanded]="sortExpanded"
+      [filterExpanded]="filterExpanded">
     </app-filter-panel>
     <app-movie-list [movies]="movies$ | async" ></app-movie-list>
 </div>

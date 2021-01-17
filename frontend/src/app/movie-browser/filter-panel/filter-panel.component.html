@@ -36,7 +36,7 @@
             <button class="btn genre" *ngFor="let genre of (genres$ | async)"
                     [id]="genre.id" (click)="onButtonClicked(genre.id.toString(), $event)"
                     (mouseout)="onMouseOut($event)"
-                    [class.btn-active]="genres.includes(genre.id.toString())">
+                    [class.btn-selected]="genres.includes(genre.id.toString())">
               {{ genre.name }}
             </button>
 
@@ -63,12 +63,10 @@
         </div>
         <div class="filter-wrapper slider">
             <h5 class="filter-name">Minimum Votes</h5>
-              <p> {{ voteCount }}</p>
-            <mat-slider min="0" max="10000" step="1000" [(ngModel)]="voteCount"></mat-slider>
+              <span> {{ voteCount }}</span>
+            <mat-slider [min]="MINIMUM_VOTES" [max]="MAXIMUM_VOTES" [step]="STEP" [(ngModel)]="voteCount"></mat-slider>
         </div>
-
     </div>
 </div>
-<button class="btn btn-active btn-apply" (click)="applyFilters()">
-    Apply
-</button>
+<button class="btn btn-action btn-clear" (click)="reset()">Clear</button>
+<button class="btn btn-action btn-apply" (click)="applyFilters()">Apply</button>

@@ -4,6 +4,7 @@
     --clr-bg-primary: #121012;
     --clr-bg-secondary: #1B1B1F;
     --clr-red: #e21f3f;
+    --clr-blue: #216ea5;
     --clr-grey: #ADACBB;
     --clr-white: #fff;
     --ff-primary: "Roboto", sans-serif;
@@ -41,9 +42,20 @@ body {
     padding: .4em 1em;
 }
 
-.btn-active, .btn:hover  {
+.btn-selected, .btn-action {
     color: var(--clr-white);
-    background: var(--clr-red) ;
+    background: var(--clr-red);
+}
+
+.btn:hover {
+  color: var(--clr-white);
+  background: var(--clr-red) ;
+}
+
+.btn-action:hover {
+  color: var(--clr-red);
+  background-color: var(--clr-white);
+  font-weight: bold;
 }
 
 a {

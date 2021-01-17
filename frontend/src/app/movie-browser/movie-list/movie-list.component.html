@@ -4,7 +4,7 @@
                       [genres]="genres" [movie]="movie">
       </app-movie-card>
       <ng-container *ngIf="movies.length; else noMovies">
-        <button *ngIf="movies.length === 20" class="btn btn-active" (click)="loadMore()">Load More</button>
+        <button *ngIf="movies.length === 20" class="btn btn-selected" (click)="loadMore()">Load More</button>
       </ng-container>
 
       <ng-template #noMovies>

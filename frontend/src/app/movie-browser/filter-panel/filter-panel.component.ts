@@ -1,8 +1,9 @@
-import {AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Genre } from 'src/app/models/genre';
-import { MovieService } from 'src/app/services/movie.service';
+import { MovieService } from 'src/app/shared/movie.service';
 import { DatePipe } from '@angular/common';
+import {FilterService} from '../../shared/filter.service';
 
 @Component({
   selector: 'app-filter-panel',
@@ -11,13 +12,19 @@ import { DatePipe } from '@angular/common';
 })
 export class FilterPanelComponent implements OnInit   {
 
+  MINIMUM_VOTES = 0;
+  MAXIMUM_VOTES = 10000;
+  STEP = 1000;
   @Input()
   sortCategory: string;
-  // @Input()
+  @Input()
+  selectedButton: string;
   genres: string[];
   genres$: Observable<Genre[]>;
-  sortExpanded: boolean;
-  filterExpanded: boolean;
+  @Input()
+  sortExpanded;
+  @Input()
+  filterExpanded;
   @Input()
   fromDate: string;
   @Input()
@@ -25,7 +32,9 @@ export class FilterPanelComponent implements OnInit   {
   @Input()
   voteCount: number;
 
-  constructor(private movieService: MovieService, private datePipe: DatePipe) { }
+  constructor(private movieService: MovieService,
+              private datePipe: DatePipe,
+              public filterService: FilterService) { }
 
   ngOnInit(): void {
     this.genres$ = this.movieService.getGenres$();
@@ -34,18 +43,28 @@ export class FilterPanelComponent implements OnInit   {
     } else {
       this.genres = [];
     }
+    console.log('ngoninit');
+    console.log(this.sortExpanded);
+    console.log('sortExpanded', this.sortExpanded);
+    console.log('filterService', this.filterService.sortingExpanded);
   }
 
-  // ngOnChanges(): void {
+  // ngOnChanges(changes: SimpleChanges): void {
   //   this.voteCount = this.movieService.urlParams.voteCountGte;
+  //   console.log(changes);
   // }
 
   toggleSort(): void {
     this.sortExpanded = !this.sortExpanded;
+    this.filterService.sortingExpanded = this.sortExpanded;
+
+
+    console.log(this.sortExpanded);
   }
 
   toggleFilters(): void {
     this.filterExpanded = !this.filterExpanded;
+    this.filterService.filtersExpanded = this.filterExpanded;
   }
 
   onButtonClicked(genreId: string, event): void {
@@ -54,7 +73,7 @@ export class FilterPanelComponent implements OnInit   {
     } else {
       this.genres.push(genreId);
     }
-    if (event.target.classList.contains('btn-active')) {
+    if (event.target.classList.contains('btn-selected')) {
       event.target.classList.add('no-hover');
     } else {
       event.target.classList.remove('no-hover');
@@ -65,15 +84,29 @@ export class FilterPanelComponent implements OnInit   {
     event.target.classList.remove('no-hover');
   }
 
+  reset(): void {
+    if (this.selectedButton === 'popular') {
+      // this.movieService.resetUrlParams();
+      this.voteCount = 0;
+      this.genres = [];
+    } else if (this.selectedButton === 'now playing') {
+      console.log();
+    }
+
+    this.movieService.urlParams.withGenres = '';
+    console.log(this.movieService.urlParams);
+    console.log(this.selectedButton);
+    console.log(this.voteCount);
+  }
+
   applyFilters(): void {
     this.movieService.urlParams.sortCategory = this.sortCategory;
     this.movieService.urlParams.withGenres = this.genres.join(',');
-    this.movieService.urlParams.releaseDateGte = this.fromDate === '' ? '' :
-        this.datePipe.transform(this.fromDate, 'yyyy-MM-dd');
-    this.movieService.urlParams.releaseDateLte = this.toDate === '' ? '' :
-        this.datePipe.transform(this.toDate, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateGte = this.fromDate === '' ? '' : this.datePipe.transform(this.fromDate, 'yyyy-MM-dd');
+    this.movieService.urlParams.releaseDateLte = this.toDate === '' ? '' : this.datePipe.transform(this.toDate, 'yyyy-MM-dd');
     this.movieService.urlParams.voteCountGte = this.voteCount;
     this.movieService.getMovies('discover');
     console.log(this.movieService.urlParams);
   }
+
 }

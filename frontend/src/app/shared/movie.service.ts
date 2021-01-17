@@ -31,6 +31,8 @@ export class MovieService {
 
   movies$ = new BehaviorSubject<Movie[]>([]);
   genres$: Observable<Genre[]>;
+  nowPlayingDates$: Observable<Dates>;
+  upcomingDates$: Observable<Dates>;
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
   nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}`;
   upcomingMoviesUrl = `${environment.tmdb_base_url}/movie/upcoming?api_key=${environment.api_key}`;
@@ -72,17 +74,51 @@ export class MovieService {
   }
 
   getNowPlayingDates$(): Observable<Dates> {
-    return this.http.get<any>(this.nowPlayingMoviesUrl)
-      .pipe(
-        map(response => response.dates)
-      );
+    if (!this.nowPlayingDates$) {
+      this.nowPlayingDates$ = this.http.get<any>(this.nowPlayingMoviesUrl)
+        .pipe(
+          map(response => response.dates),
+          shareReplay()
+        );
+    }
+    return this.nowPlayingDates$;
   }
 
   getUpcomingDates$(): Observable<Dates> {
-    return this.http.get<any>(this.upcomingMoviesUrl)
-      .pipe(
-        map(response => response.dates)
-      );
+    if (!this.upcomingDates$) {
+      this.upcomingDates$ = this.http.get<any>(this.upcomingMoviesUrl)
+        .pipe(
+          map(response => response.dates),
+          shareReplay()
+        );
+    }
+    return this.upcomingDates$;
+  }
+
+  getTopRatedMovies(): void {
+    this.urlParams.sortCategory = UrlConst.VOTE_AVG_DESC;
+    this.urlParams.voteCountGte = UrlConst.MINIMUM_VOTE_COUNT;
+    this.getMovies(UrlConst.DISCOVER);
+    console.log('inside get top rated movies');
+    console.log(this.urlParams);
+  }
+
+  getNowPlayingMovies(fromDate: string, toDate: string): void  {
+    this.urlParams.releaseDateGte = fromDate;
+    this.urlParams.releaseDateLte = toDate;
+    this.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
+    this.getMovies(UrlConst.DISCOVER);
+    console.log('inside get top now playing movies');
+    console.log(this.urlParams);
+  }
+
+  getUpcomingMovies(fromDate: string, toDate: string): void {
+    this.urlParams.releaseDateGte = fromDate;
+    this.urlParams.releaseDateLte = toDate;
+    this.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
+    this.getMovies(UrlConst.DISCOVER);
+    console.log('inside get top upcoming movies');
+    console.log(this.urlParams);
   }
 
   getGenres$(): Observable<Genre[]> {

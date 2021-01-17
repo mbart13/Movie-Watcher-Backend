@@ -78,11 +78,16 @@ select {
   background: var(--clr-bg-secondary);
 }
 
+.btn-clear, .btn-apply {
+  /*margin: .3em auto 1em auto;*/
+  margin-bottom: .7em;
+  font-size: 1.1em;
+  width: 100%;
+}
+
 .btn-apply {
-    width: 100%;
-    font-size: 1.2em;
-    position: sticky;
-    bottom: 1%;
+  position: sticky;
+  bottom: 1%;
 }
 
 .genres {
@@ -99,7 +104,7 @@ mat-label, mat-datepicker-toggle, mat-slider {
   color: var(--clr-grey)
 }
 
-p {
+.filter-name span {
   color: var(--clr-grey);
 }
 

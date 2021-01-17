@@ -1,6 +1,7 @@
 <div class="movie-details-container" *ngIf="data | async as data">
     <div class="poster">
-        <img *ngIf="data.movieDetails.poster_path; else noImage" [src]="env + data.movieDetails.poster_path" [alt]="data.movieDetails.title">
+        <img *ngIf="data.movieDetails.poster_path; else noImage"
+             [src]="env + data.movieDetails.poster_path" [alt]="data.movieDetails.title">
     </div>
     <ng-template #noImage>
       <img class="no-movies" src="./assets/no-image.png" alt="no image">
@@ -43,7 +44,7 @@
             </div>
         </div>
         <div class="genres">
-            <span class="btn btn-active" *ngFor="let genre of data.movieDetails.genres">
+            <span class="btn btn-selected" *ngFor="let genre of data.movieDetails.genres">
                 {{genre.name}}
             </span>
         </div>
