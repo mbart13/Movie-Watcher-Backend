@@ -43,23 +43,11 @@ export class FilterPanelComponent implements OnInit   {
     } else {
       this.genres = [];
     }
-    console.log('ngoninit');
-    console.log(this.sortExpanded);
-    console.log('sortExpanded', this.sortExpanded);
-    console.log('filterService', this.filterService.sortingExpanded);
   }
-
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   this.voteCount = this.movieService.urlParams.voteCountGte;
-  //   console.log(changes);
-  // }
 
   toggleSort(): void {
     this.sortExpanded = !this.sortExpanded;
     this.filterService.sortingExpanded = this.sortExpanded;
-
-
-    console.log(this.sortExpanded);
   }
 
   toggleFilters(): void {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
 import { MovieService } from '../shared/movie.service';
 import {Dates} from '../models/dates';
-import {UrlConst} from '../models/url.constants';
+import {UrlParameters} from '../models/url-parameters';
 import {FilterService} from '../shared/filter.service';
 import {Category} from '../models/category';
 
@@ -14,7 +14,7 @@ import {Category} from '../models/category';
 })
 export class MovieBrowserComponent implements OnInit {
 
-  selectedCategory: string = UrlConst.POPULARITY_DESC;
+  selectedCategory: string = UrlParameters.POPULARITY_DESC;
   fromDate: string;
   toDate: string;
   voteCount: number;
@@ -42,7 +42,7 @@ export class MovieBrowserComponent implements OnInit {
     this.movies$ = this.movieService.getMovies$();
     this.movieService.getNowPlayingDates$().subscribe(data => this.nowPlayingDates = data);
     this.movieService.getUpcomingDates$().subscribe(data => this.upcomingDates = data);
-    this.movieService.getMovies(UrlConst.DISCOVER);
+    this.movieService.getMovies(UrlParameters.DISCOVER);
   }
 
   onButtonClicked(category: string): void {
@@ -50,7 +50,7 @@ export class MovieBrowserComponent implements OnInit {
       this.movieService.resetUrlParams();
     }
     if (category === this.eCategory.Popular && this.selectedButton !== category) {
-      this.movieService.getMovies(UrlConst.DISCOVER);
+      this.movieService.getMovies(UrlParameters.DISCOVER);
       console.log('inside get popular movies');
       console.log(this.movieService.urlParams);
     } else if (category === this.eCategory.TopRated && this.selectedButton !== category) {

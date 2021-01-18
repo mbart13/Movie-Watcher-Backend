@@ -8,7 +8,7 @@ import { Movie } from '../models/movie';
 import { MovieCredits } from '../models/movie-credits';
 import { MovieDetails } from '../models/movie-details';
 import { Dates } from '../models/dates';
-import { UrlConst } from '../models/url.constants';
+import { UrlParameters } from '../models/url-parameters';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,12 @@ export class MovieService {
   ];
 
   urlParams = {
-    sortCategory: UrlConst.POPULARITY_DESC,
-    pageNumber: UrlConst.PAGE_NUMBER,
+    sortCategory: UrlParameters.POPULARITY_DESC,
+    pageNumber: UrlParameters.PAGE_NUMBER,
     releaseDateGte: '',
     releaseDateLte: '',
     withReleaseType: '',
-    voteCountGte: UrlConst.DEFAULT_VOTE_COUNT,
+    voteCountGte: UrlParameters.DEFAULT_VOTE_COUNT,
     withGenres: ''
   };
 
@@ -53,7 +53,7 @@ export class MovieService {
 
   resetUrlParams(): void {
     this.urlParams.pageNumber = 1;
-    this.urlParams.sortCategory = UrlConst.POPULARITY_DESC;
+    this.urlParams.sortCategory = UrlParameters.POPULARITY_DESC;
     this.urlParams.releaseDateGte = '';
     this.urlParams.releaseDateLte = '';
     this.urlParams.withReleaseType = '';
@@ -96,9 +96,9 @@ export class MovieService {
   }
 
   getTopRatedMovies(): void {
-    this.urlParams.sortCategory = UrlConst.VOTE_AVG_DESC;
-    this.urlParams.voteCountGte = UrlConst.MINIMUM_VOTE_COUNT;
-    this.getMovies(UrlConst.DISCOVER);
+    this.urlParams.sortCategory = UrlParameters.VOTE_AVG_DESC;
+    this.urlParams.voteCountGte = UrlParameters.MINIMUM_VOTE_COUNT;
+    this.getMovies(UrlParameters.DISCOVER);
     console.log('inside get top rated movies');
     console.log(this.urlParams);
   }
@@ -106,8 +106,8 @@ export class MovieService {
   getNowPlayingMovies(fromDate: string, toDate: string): void  {
     this.urlParams.releaseDateGte = fromDate;
     this.urlParams.releaseDateLte = toDate;
-    this.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
-    this.getMovies(UrlConst.DISCOVER);
+    this.urlParams.withReleaseType = UrlParameters.THEATRICAL_RELEASE;
+    this.getMovies(UrlParameters.DISCOVER);
     console.log('inside get top now playing movies');
     console.log(this.urlParams);
   }
@@ -115,8 +115,8 @@ export class MovieService {
   getUpcomingMovies(fromDate: string, toDate: string): void {
     this.urlParams.releaseDateGte = fromDate;
     this.urlParams.releaseDateLte = toDate;
-    this.urlParams.withReleaseType = UrlConst.THEATRICAL_RELEASE;
-    this.getMovies(UrlConst.DISCOVER);
+    this.urlParams.withReleaseType = UrlParameters.THEATRICAL_RELEASE;
+    this.getMovies(UrlParameters.DISCOVER);
     console.log('inside get top upcoming movies');
     console.log(this.urlParams);
   }
