@@ -1,0 +1,38 @@
+.navbar, .nav-menu  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    letter-spacing: .3rem;
+    font-size: 1.7em;
+}
+
+#red-logo {
+    color: var(--clr-red)
+}
+
+#white-logo {
+    color: var(--clr-white)
+}
+
+.menu {
+    margin-left: 1.2rem;
+    display: flex;
+    font-size: 1.2rem;
+    color: var(--clr-white)
+}
+
+.menu-item {
+    margin: .8rem;
+}
+
+.menu-item:hover {
+    cursor: pointer;
+}
+
+.fas {
+    font-size: 1.2rem;
+    color: var(--clr-white);
+}

@@ -1,0 +1,11 @@
+.movie-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.btn {
+    width: 100%;
+    font-size: 1.2em;
+}

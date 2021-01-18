@@ -1,0 +1,35 @@
+<div class="input-container">
+  <label for="search-bar"></label>
+  <input class="search-bar" id="search-bar" type="text" placeholder="Search for a movie">
+  <i class="fas fa-search"></i>
+</div>
+<div class="filter-buttons">
+    <button  class="btn" [class.btn-selected]="selectedButton === eCategory.Popular"
+        (click)="onButtonClicked(eCategory.Popular)">
+        Popular
+    </button>
+    <button class="btn" [class.btn-selected]="selectedButton === eCategory.NowPlaying"
+        (click)="onButtonClicked(eCategory.NowPlaying)">
+        Now Playing
+    </button>
+    <button class="btn" [class.btn-selected]="selectedButton === eCategory.TopRated"
+        (click)="onButtonClicked(eCategory.TopRated)">
+        Top Rated
+    </button>
+    <button class="btn" [class.btn-selected]="selectedButton === eCategory.Upcoming"
+        (click)="onButtonClicked(eCategory.Upcoming)">
+        Upcoming
+    </button>
+</div>
+<div class="main-section">
+    <app-filter-panel
+      [sortCategory]="selectedCategory"
+      [fromDate]="fromDate"
+      [toDate]="toDate"
+      [voteCount]="voteCount"
+
+      [sortExpanded]="sortExpanded"
+      [filterExpanded]="filterExpanded">
+    </app-filter-panel>
+    <app-movie-list [movies]="movies$ | async" ></app-movie-list>
+</div>

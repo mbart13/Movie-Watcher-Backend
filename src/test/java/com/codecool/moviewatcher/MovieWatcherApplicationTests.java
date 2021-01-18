@@ -1,10 +1,10 @@
-package com.codecool.movieaddict;
+package com.codecool.moviewatcher;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MovieAddictApplicationTests {
+class MovieWatcherApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,0 +1,43 @@
+.movie-card {
+    width: 140px;
+    margin-bottom: 1.2em;
+    text-align: center;
+    color: var(--clr-white);
+    outline: none;
+}
+
+.movie-card:hover {
+    cursor: pointer;
+}
+
+.movie-card:active {
+    outline: none;
+}
+
+.movie-info {
+  margin-top: .3em;
+}
+
+.title {
+    font-size: 1em;
+}
+
+.release-date, .genres {
+  font-size: .8em;
+}
+
+.release-date {
+    margin: .3em;
+}
+
+/*@media screen and (max-width: 1160px) {*/
+/*    .movie-card {*/
+/*        width: 160px;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (max-width: 1095px) {*/
+/*    .movie-card {*/
+/*        width: 200px;*/
+/*    }*/
+/*}*/

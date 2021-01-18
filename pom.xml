@@ -12,7 +12,7 @@
     <artifactId>movie-watcher</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>movie-watcher</name>
-    <description></description>
+    <description>Movie App Project</description>
 
     <properties>
         <java.version>11</java.version>
