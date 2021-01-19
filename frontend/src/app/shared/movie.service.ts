@@ -29,11 +29,14 @@ export class MovieService {
     withGenres: ''
   };
 
+  movies: Movie[] = [];
   movies$ = new BehaviorSubject<Movie[]>([]);
   genres$: Observable<Genre[]>;
   nowPlayingDates$: Observable<Dates>;
   upcomingDates$: Observable<Dates>;
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
+  moviesDiscoverUrl = `${environment.tmdb_base_url}/discover/movie?`;
+  moviesSearchUrl = `${environment.tmdb_base_url}/search/movie?api_key=${environment.api_key}`;
   nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}`;
   upcomingMoviesUrl = `${environment.tmdb_base_url}/movie/upcoming?api_key=${environment.api_key}`;
   movieDetailsUrl = `${environment.tmdb_base_url}/movie`;
@@ -41,14 +44,24 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   getMovies(queryType: string): void {
-    this.http.get<any>(`${environment.tmdb_base_url}/${queryType}/movie?${this.buildUrlParams()}`)
+    this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
           .pipe(
             tap(data => this.movies$.next(data.results))
           ).subscribe();
   }
+  handleMovies(): void {
+
+  }
 
   getMovies$(): Observable<Movie[]> {
     return this.movies$.asObservable();
+  }
+
+  searchMovies(searchTerm: string): void {
+    this.http.get<any>(`${this.moviesSearchUrl}&query=${searchTerm}`)
+      .pipe(
+        tap(data => this.movies$.next(data.results))
+      ).subscribe();
   }
 
   resetUrlParams(): void {
@@ -138,5 +151,9 @@ export class MovieService {
 
   getMovieCredits$(id: number): Observable<MovieCredits> {
     return this.http.get<MovieCredits>(`${this.movieDetailsUrl}/${id}/credits?api_key=${environment.api_key}`);
+  }
+
+  getNextPage() {
+
   }
 }

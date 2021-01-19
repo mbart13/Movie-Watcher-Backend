@@ -1,8 +1,4 @@
-<div class="input-container">
-  <label for="search-bar"></label>
-  <input class="search-bar" id="search-bar" type="text" placeholder="Search for a movie">
-  <i class="fas fa-search"></i>
-</div>
+<app-movie-search></app-movie-search>
 <div class="filter-buttons">
     <button  class="btn" [class.btn-selected]="selectedButton === eCategory.Popular"
         (click)="onButtonClicked(eCategory.Popular)">
@@ -27,7 +23,6 @@
       [fromDate]="fromDate"
       [toDate]="toDate"
       [voteCount]="voteCount"
-
       [sortExpanded]="sortExpanded"
       [filterExpanded]="filterExpanded">
     </app-filter-panel>

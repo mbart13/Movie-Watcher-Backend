@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
 import { MovieService } from '../shared/movie.service';
-import {Dates} from '../models/dates';
-import {UrlParameters} from '../models/url-parameters';
-import {FilterService} from '../shared/filter.service';
-import {Category} from '../models/category';
+import { Dates } from '../models/dates';
+import { UrlParameters } from '../models/url-parameters';
+import { FilterService } from '../shared/filter.service';
+import { Category } from '../models/category';
 
 @Component({
   selector: 'app-movie-browser',

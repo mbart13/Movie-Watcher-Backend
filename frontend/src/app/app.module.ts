@@ -19,6 +19,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatSliderModule} from '@angular/material/slider';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe} from '@angular/common';
+import { MovieSearchComponent } from './movie-browser/movie-search/movie-search.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {DatePipe} from '@angular/common';
     MovieListComponent,
     MovieCardComponent,
     MovieDetailsComponent,
-    RoundPipe
+    RoundPipe,
+    MovieSearchComponent
   ],
   imports: [
     BrowserModule,
