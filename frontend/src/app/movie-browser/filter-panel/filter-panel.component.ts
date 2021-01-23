@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Genre } from 'src/app/models/genre';
 import { MovieService } from 'src/app/shared/movie.service';
 import { DatePipe } from '@angular/common';
-import {FilterService} from '../../shared/filter.service';
+import {FilterStateService} from '../../shared/filter-state.service';
 
 @Component({
   selector: 'app-filter-panel',
@@ -34,7 +34,7 @@ export class FilterPanelComponent implements OnInit   {
 
   constructor(private movieService: MovieService,
               private datePipe: DatePipe,
-              public filterService: FilterService) { }
+              public filterService: FilterStateService) { }
 
   ngOnInit(): void {
     this.genres$ = this.movieService.getGenres$();
@@ -93,7 +93,7 @@ export class FilterPanelComponent implements OnInit   {
     this.movieService.urlParams.releaseDateGte = this.fromDate === '' ? '' : this.datePipe.transform(this.fromDate, 'yyyy-MM-dd');
     this.movieService.urlParams.releaseDateLte = this.toDate === '' ? '' : this.datePipe.transform(this.toDate, 'yyyy-MM-dd');
     this.movieService.urlParams.voteCountGte = this.voteCount;
-    this.movieService.getMovies('discover');
+    this.movieService.getMovies();
     console.log(this.movieService.urlParams);
   }
 

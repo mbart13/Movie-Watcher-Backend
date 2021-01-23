@@ -23,7 +23,7 @@ export class MovieListComponent implements OnInit {
 
   loadMore(): void {
     this.movieService.urlParams.pageNumber++;
-    this.movieService.getNextPage();
+    // this.movieService.getNextPage();
   }
 
 }

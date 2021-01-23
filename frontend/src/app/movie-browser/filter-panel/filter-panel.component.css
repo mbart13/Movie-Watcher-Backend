@@ -45,6 +45,10 @@ hr {
     display: block;
 }
 
+.panel-header h4 {
+  font-size: 1.2rem;
+}
+
 .filter-name {
     font-size: 1em;
     margin: .8em 0;
@@ -79,9 +83,7 @@ select {
 }
 
 .btn-clear, .btn-apply {
-  /*margin: .3em auto 1em auto;*/
   margin-bottom: .7em;
-  font-size: 1.1em;
   width: 100%;
 }
 
@@ -118,4 +120,10 @@ mat-slider {
 
 ::ng-deep  .mat-accent .mat-slider-thumb {
   background: var(--clr-red) !important;
+}
+
+@media screen and (max-width: 875px) {
+  .panel-header h4 {
+    font-size: 1rem;
+  }
 }

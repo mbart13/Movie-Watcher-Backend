@@ -6,12 +6,20 @@
     outline: none;
 }
 
+.movie-card img {
+  transition: var(--transition);
+}
+
 .movie-card:hover {
     cursor: pointer;
 }
 
 .movie-card:active {
     outline: none;
+}
+
+.movie-card:hover img {
+  transform: scale(1.05);
 }
 
 .movie-info {

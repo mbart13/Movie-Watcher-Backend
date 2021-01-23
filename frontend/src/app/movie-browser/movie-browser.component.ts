@@ -4,7 +4,7 @@ import { Movie } from '../models/movie';
 import { MovieService } from '../shared/movie.service';
 import { Dates } from '../models/dates';
 import { UrlParameters } from '../models/url-parameters';
-import { FilterService } from '../shared/filter.service';
+import { FilterStateService } from '../shared/filter-state.service';
 import { Category } from '../models/category';
 
 @Component({
@@ -27,7 +27,7 @@ export class MovieBrowserComponent implements OnInit {
   filterExpanded: boolean;
   eCategory = Category;
 
-  constructor(public movieService: MovieService, private filterService: FilterService) {
+  constructor(public movieService: MovieService, private filterService: FilterStateService) {
     this.releaseType = this.movieService.urlParams.withReleaseType;
     this.fromDate = this.movieService.urlParams.releaseDateGte;
     this.toDate = this.movieService.urlParams.releaseDateLte;
@@ -42,7 +42,7 @@ export class MovieBrowserComponent implements OnInit {
     this.movies$ = this.movieService.getMovies$();
     this.movieService.getNowPlayingDates$().subscribe(data => this.nowPlayingDates = data);
     this.movieService.getUpcomingDates$().subscribe(data => this.upcomingDates = data);
-    this.movieService.getMovies(UrlParameters.DISCOVER);
+    this.movieService.getMovies();
   }
 
   onButtonClicked(category: string): void {
@@ -50,7 +50,7 @@ export class MovieBrowserComponent implements OnInit {
       this.movieService.resetUrlParams();
     }
     if (category === this.eCategory.Popular && this.selectedButton !== category) {
-      this.movieService.getMovies(UrlParameters.DISCOVER);
+      this.movieService.getMovies();
       console.log('inside get popular movies');
       console.log(this.movieService.urlParams);
     } else if (category === this.eCategory.TopRated && this.selectedButton !== category) {

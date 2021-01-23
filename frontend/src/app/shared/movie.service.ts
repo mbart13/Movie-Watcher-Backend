@@ -43,7 +43,7 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getMovies(queryType: string): void {
+  getMovies(): void {
     this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
           .pipe(
             tap(data => this.movies$.next(data.results))
@@ -111,7 +111,7 @@ export class MovieService {
   getTopRatedMovies(): void {
     this.urlParams.sortCategory = UrlParameters.VOTE_AVG_DESC;
     this.urlParams.voteCountGte = UrlParameters.MINIMUM_VOTE_COUNT;
-    this.getMovies(UrlParameters.DISCOVER);
+    this.getMovies();
     console.log('inside get top rated movies');
     console.log(this.urlParams);
   }
@@ -120,7 +120,7 @@ export class MovieService {
     this.urlParams.releaseDateGte = fromDate;
     this.urlParams.releaseDateLte = toDate;
     this.urlParams.withReleaseType = UrlParameters.THEATRICAL_RELEASE;
-    this.getMovies(UrlParameters.DISCOVER);
+    this.getMovies();
     console.log('inside get top now playing movies');
     console.log(this.urlParams);
   }
@@ -129,7 +129,7 @@ export class MovieService {
     this.urlParams.releaseDateGte = fromDate;
     this.urlParams.releaseDateLte = toDate;
     this.urlParams.withReleaseType = UrlParameters.THEATRICAL_RELEASE;
-    this.getMovies(UrlParameters.DISCOVER);
+    this.getMovies();
     console.log('inside get top upcoming movies');
     console.log(this.urlParams);
   }
@@ -153,7 +153,4 @@ export class MovieService {
     return this.http.get<MovieCredits>(`${this.movieDetailsUrl}/${id}/credits?api_key=${environment.api_key}`);
   }
 
-  getNextPage() {
-
-  }
 }

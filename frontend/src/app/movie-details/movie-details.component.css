@@ -20,10 +20,6 @@
     grid-area: poster;
 }
 
-.poster img {
-    width: 300px;
-}
-
 .movie-info {
     grid-area: movie-info;
 }
@@ -39,7 +35,17 @@
 
 .tagline {
     font-style: italic;
-    color: var(--clr-grey)
+    font-size: 1.4rem;
+    color: var(--clr-grey);
+    padding: .9em 0;
+}
+
+.overview p {
+  padding: .9em 0;
+}
+
+.section-title {
+  font-size: 1.2rem;
 }
 
 .overview h3 {
@@ -63,15 +69,19 @@
     margin-right: .5em;
 }
 
-
 @media screen and (max-width: 790px) {
     .movie-details-container {
-        grid-template-areas: 
-        "movie-info"
-        "poster";
+        grid-template-areas:
+          "movie-info"
+          "poster";
         grid-template-columns: 1fr;
-        grid-template-rows: 300px 1fr;
+        grid-template-rows: 450px 1fr;
         justify-items: center;
+    }
+
+    .poster {
+      width: 450px !important;
+      text-align: center;
     }
 }
 

@@ -10,6 +10,7 @@
     --ff-primary: "Roboto", sans-serif;
     --max-width: 1170px;
     --border-radius: 12px;
+    --transition: all 0.3s linear;
 }
 
 *, ::after, ::before {
@@ -40,6 +41,7 @@ body {
     font-family: inherit;
     font-size: inherit;
     padding: .4em 1em;
+    transition: var(--transition);
 }
 
 .btn-selected, .btn-action {
@@ -56,6 +58,27 @@ body {
   color: var(--clr-red);
   background-color: var(--clr-white);
   font-weight: bold;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+
+h1, h2, h3, h4 {
+  line-height: 1;
 }
 
 a {
@@ -95,8 +118,50 @@ img.no-image {
   background: white;
 }
 
-/*@media screen and (max-width: 1000px) {*/
-/*    .btn {*/
-/*        font-size: .9rem;*/
-/*    }*/
-/*}*/
+@media screen and (max-width: 875px) {
+    .btn {
+        font-size: .875rem;
+    }
+
+    .input {
+      font-size: 1rem;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    h4 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: .9rem;
+    }
+
+}
+
+.fade-in {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn  {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

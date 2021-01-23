@@ -11,7 +11,7 @@
   border-radius: 20px;
   color: #727180;
   width: 100%;
-  font-size: 1.4em;
+  font-size: 1.2em;
   padding: .6em .8em;
   margin: 1.2em auto;
 }
@@ -21,4 +21,10 @@
   right: 1.5em;
   color: #727180;
   font-size: 1.2em;
+}
+
+@media screen and (max-width: 875px) {
+  .search-bar {
+    font-size: .9em;
+  }
 }

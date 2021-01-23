@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, distinctUntilKeyChanged, tap} from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MovieService } from '../../shared/movie.service';
 
@@ -22,13 +22,18 @@ export class MovieSearchComponent implements OnInit {
       // ignore new term if same as previous term
       distinctUntilChanged(),
 
+
       // switch to new search observable each time the term changes
       tap(searchTerm => this.movieService.searchMovies(searchTerm))
     ).subscribe();
   }
 
   search(term: string): void {
-    this.searchTerm.next(term);
+    if (term.length > 1) {
+      this.searchTerm.next(term);
+    } else if (term.length === 0) {
+      setTimeout(() => this.movieService.getMovies(), 1000);
+    }
   }
 
 }

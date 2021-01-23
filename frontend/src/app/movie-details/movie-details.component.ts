@@ -16,7 +16,7 @@ import { mergeMap, map } from 'rxjs/operators';
 export class MovieDetailsComponent implements OnInit {
 
   data: Observable<{ movieDetails: MovieDetails, movieCredits: MovieCredits }>;
-  env: string = environment.tmdb_imagesUrl_w300;
+  env: string = environment.tmdb_imagesUrl_w500;
 
   constructor(private movieService: MovieService, private route: ActivatedRoute) { }
 

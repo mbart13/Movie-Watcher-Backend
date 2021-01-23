@@ -8,7 +8,7 @@
     </ng-template>
     <div class="movie-info">
         <div class="basic-details">
-            <h1>{{data.movieDetails.title}} <span class="release-date">{{ ' (' + data.movieDetails.release_date.slice(0, 4) + ')' }}</span></h1>
+            <h2>{{data.movieDetails.title}} <span class="release-date">{{ ' (' + data.movieDetails.release_date.slice(0, 4) + ')' }}</span></h2>
             <span>{{'Original Language: ' + data.movieDetails.original_language.toUpperCase()}}</span>
             <span *ngIf="data.movieDetails.runtime"> &bull;
                 {{(data.movieDetails.runtime / 60 | round ) + 'h ' +
@@ -17,19 +17,19 @@
         </div>
         <h3 class="tagline" *ngIf="data.movieDetails.tagline">{{ data.movieDetails.tagline }} </h3>
         <div class="overview">
-            <h3>Overview</h3>
+            <h4 class="section-title">Overview</h4>
             <p>{{ data.movieDetails.overview }}</p>
         </div>
         <div class="credits">
             <div class="crew-member" *ngIf="findCrewMembers(data.movieCredits.crew, 'director').length">
-                <h4>Directed by</h4>
+                <h4 class="section-title">Directed by</h4>
                 <span class="name" *ngFor="let person of findCrewMembers(data.movieCredits.crew, 'director');
                     last as isLast">
                     {{person.name}}
                 <span *ngIf="!isLast">, </span></span>
             </div>
             <div class="crew-member" *ngIf="findCrewMembers(data.movieCredits.crew, 'writer').length">
-                <h4>Written by</h4>
+                <h4 class="section-title">Written by</h4>
                 <span class="name" *ngFor="let person of findCrewMembers(data.movieCredits.crew, 'writer');
                     last as isLast">
                     {{person.name}}
