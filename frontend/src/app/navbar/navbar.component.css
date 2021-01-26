@@ -36,3 +36,9 @@
     font-size: 1.2rem;
     color: var(--clr-white);
 }
+
+@media screen and (max-width: 630px) {
+  .menu {
+    display: none;
+  }
+}

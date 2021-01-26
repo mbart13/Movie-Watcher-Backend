@@ -2,7 +2,7 @@
 
 :root {
     --clr-bg-primary: #121012;
-    --clr-bg-secondary: #1B1B1F;
+    --clr-bg-secondary: #1b1b1f;
     --clr-red: #e21f3f;
     --clr-blue: #216ea5;
     --clr-grey: #ADACBB;
@@ -151,8 +151,8 @@ img.no-image {
 .fade-in {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

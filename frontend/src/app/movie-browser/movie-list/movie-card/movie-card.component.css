@@ -1,9 +1,28 @@
 .movie-card {
     width: 140px;
+    margin-right: 1.2em;
     margin-bottom: 1.2em;
     text-align: center;
     color: var(--clr-white);
     outline: none;
+}
+
+.image-container {
+  width: 100%;
+  position: relative
+}
+
+.rating {
+  position: absolute;
+  bottom: .5em;
+  right: .3em;
+  color: var(--clr-white);
+  border: 2px solid #1b9e1b;
+  border-radius: 50%;
+  padding: .5em;
+  font-size: .9rem;
+  font-weight: bold;
+  background: rgba(0,0,0,.7);
 }
 
 .movie-card img {
@@ -38,14 +57,36 @@
     margin: .3em;
 }
 
-/*@media screen and (max-width: 1160px) {*/
-/*    .movie-card {*/
-/*        width: 160px;*/
-/*    }*/
-/*}*/
+@media screen and (max-width: 1170px) {
+    .movie-card {
+        width: 160px;
+    }
+}
 
-/*@media screen and (max-width: 1095px) {*/
-/*    .movie-card {*/
-/*        width: 200px;*/
-/*    }*/
-/*}*/
+@media screen and (max-width: 1095px) {
+    .movie-card {
+        width: 200px;
+    }
+}
+
+
+@media screen and (max-width: 940px) {
+  .movie-card {
+    width: 260px;
+  }
+}
+
+@media screen and (max-width: 798px) {
+  .movie-card {
+    margin-right: 0;
+    width: 280px;
+  }
+}
+@media screen and (max-width: 630px) {
+  .movie-card {
+    margin: 0 auto 1.2em;
+
+  }
+}
+
+

@@ -20,6 +20,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe} from '@angular/common';
 import { MovieSearchComponent } from './movie-browser/movie-search/movie-search.component';
+import { MovieInfoComponent } from './movie-details/movie-info/movie-info.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MovieSearchComponent } from './movie-browser/movie-search/movie-search.
     MovieCardComponent,
     MovieDetailsComponent,
     RoundPipe,
-    MovieSearchComponent
+    MovieSearchComponent,
+    MovieInfoComponent
   ],
   imports: [
     BrowserModule,

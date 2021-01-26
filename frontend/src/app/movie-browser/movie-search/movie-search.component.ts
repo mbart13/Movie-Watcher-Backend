@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {debounceTime, distinctUntilChanged, distinctUntilKeyChanged, tap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, distinctUntilKeyChanged, switchMap, tap} from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MovieService } from '../../shared/movie.service';
 
@@ -24,7 +24,7 @@ export class MovieSearchComponent implements OnInit {
 
 
       // switch to new search observable each time the term changes
-      tap(searchTerm => this.movieService.searchMovies(searchTerm))
+      switchMap(async (searchTerm) => this.movieService.searchMovies(searchTerm))
     ).subscribe();
   }
 

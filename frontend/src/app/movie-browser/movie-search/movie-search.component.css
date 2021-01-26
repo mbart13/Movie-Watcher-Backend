@@ -4,6 +4,7 @@
   position: relative;
   width: 80%;
   margin: 0 auto;
+  padding: 1.4em 0;
 }
 
 .search-bar {
@@ -12,8 +13,8 @@
   color: #727180;
   width: 100%;
   font-size: 1.2em;
-  padding: .6em .8em;
-  margin: 1.2em auto;
+  padding: .8em 1em;
+  /*margin: 1.2em auto;*/
 }
 
 .fa-search {
@@ -25,6 +26,13 @@
 
 @media screen and (max-width: 875px) {
   .search-bar {
-    font-size: .9em;
+    font-size: 1.1em;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .input-container {
+    width: 350px;
+  }
+}
+

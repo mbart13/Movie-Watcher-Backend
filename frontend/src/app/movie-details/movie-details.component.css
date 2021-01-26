@@ -1,87 +1,19 @@
 .movie-details-container {
-    color: var(--clr-white);
-    margin-top: 2em;
-    display: grid;
-    grid-gap: 1.5em;
-    grid-template-columns: 300px 1fr;
-    grid-template-areas: "poster movie-info";
-}
-
-.movie-info {
-    background: var(--clr-bg-secondary);
-    padding: 1.2em;
-    border-radius: var(--border-radius);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.poster {
-    grid-area: poster;
-}
-
-.movie-info {
-    grid-area: movie-info;
-}
-
-.basic-details span {
-    font-size: .9em;
-}
-
-.release-date {
-    font-size: .6em;
-    font-weight: normal;
-}
-
-.tagline {
-    font-style: italic;
-    font-size: 1.4rem;
-    color: var(--clr-grey);
-    padding: .9em 0;
-}
-
-.overview p {
-  padding: .9em 0;
-}
-
-.section-title {
-  font-size: 1.2rem;
-}
-
-.overview h3 {
-    margin-bottom: .5em;
-}
-
-.crew-member {
-    margin-bottom: .8em;
-}
-
-.name {
-    font-size: .9em;
-}
-
-.genres {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.genres .btn {
-    margin-right: .5em;
+  color: var(--clr-white);
+  margin-top: 2em;
+  display: grid;
+  grid-gap: 1.5em;
+  grid-template-columns: 300px 1fr;
+  grid-template-areas: "poster movie-info";
 }
 
 @media screen and (max-width: 790px) {
-    .movie-details-container {
-        grid-template-areas:
+  .movie-details-container {
+    grid-template-areas:
           "movie-info"
           "poster";
-        grid-template-columns: 1fr;
-        grid-template-rows: 450px 1fr;
-        justify-items: center;
-    }
-
-    .poster {
-      width: 450px !important;
-      text-align: center;
-    }
+    grid-template-columns: 1fr;
+    grid-template-rows: 450px 1fr;
+    justify-items: center;
+  }
 }
-

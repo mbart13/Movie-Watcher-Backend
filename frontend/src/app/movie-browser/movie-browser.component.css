@@ -2,6 +2,7 @@
 
 .filter-buttons {
     text-align: center;
+    padding: 0 0 1.4em;
 }
 
 .btn {
@@ -15,7 +16,7 @@
 
 .main-section {
     display: flex;
-    margin-top: 2em;
+    /*margin-top: 2em;*/
 }
 
 app-filter-panel {
@@ -31,3 +32,21 @@ app-movie-list {
 .hidden {
   display: none;
 }
+
+@media screen and (max-width: 1030px) {
+  app-filter-panel {
+    width: 350px;
+    margin: 0 auto 1.4em;
+  }
+
+  .main-section {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1003px) {
+  app-movie-list {
+    margin: auto;
+  }
+}
+

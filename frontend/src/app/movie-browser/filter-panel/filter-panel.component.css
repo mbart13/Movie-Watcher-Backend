@@ -77,6 +77,10 @@ select {
     top: 12%;
 }
 
+.btn {
+  font-size: 1.1em;
+}
+
 .btn.no-hover:hover {
   color: var(--clr-grey);
   background: var(--clr-bg-secondary);
@@ -126,4 +130,21 @@ mat-slider {
   .panel-header h4 {
     font-size: 1rem;
   }
+
+  /*.btn {*/
+  /*  font-size: 1rem;*/
+  /*}*/
 }
+
+@media screen and (max-width: 1000px) {
+  .movie-card {
+    width: 290px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .btn.genre {
+    font-size: .8em;
+  }
+}
+

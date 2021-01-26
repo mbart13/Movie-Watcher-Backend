@@ -1,5 +1,9 @@
-<div [routerLink]="['/movies/', movie.id]" class="movie-card fade-in">
-    <img *ngIf="movie.poster_path; else noImage" [src]="env + movie.poster_path" [alt]="movie.title">
+<div [routerLink]="['/movies/', movie.id]" class="movie-card">
+    <div class="image-container">
+      <img *ngIf="movie.poster_path; else noImage" [src]="env + movie.poster_path" [alt]="movie.title">
+      <span *ngIf="movie.vote_average" class="rating">{{movie.vote_average | number:'1.1'}}</span>
+    </div>
+
     <ng-template #noImage>
       <img class="no-image" src="./assets/no-image.png" alt="no image">
     </ng-template>
