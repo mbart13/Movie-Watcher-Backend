@@ -50,9 +50,7 @@ export class MovieBrowserComponent implements OnInit {
       this.movieService.resetUrlParams();
     }
     if (category === this.eCategory.Popular && this.selectedButton !== category) {
-      this.movieService.getMovies();
-      console.log('inside get popular movies');
-      console.log(this.movieService.urlParams);
+      this.movieService.getPopularMovies();
     } else if (category === this.eCategory.TopRated && this.selectedButton !== category) {
       this.movieService.getTopRatedMovies();
     } else if (category === this.eCategory.NowPlaying && this.selectedButton !== category) {

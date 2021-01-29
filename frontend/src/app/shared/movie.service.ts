@@ -43,14 +43,19 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
+  // getMovies(): void {
+  //   this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
+  //         .pipe(
+  //           tap(data => this.movies$.next(data.results))
+  //         ).subscribe();
+
+  // }
+
   getMovies(): void {
     this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
-          .pipe(
-            tap(data => this.movies$.next(data.results))
-          ).subscribe();
-  }
-  handleMovies(): void {
-
+      .subscribe(data => {
+        this.movies$.next([...this.movies$.getValue(), ...data.results]);
+      });
   }
 
   getMovies$(): Observable<Movie[]> {
@@ -108,7 +113,15 @@ export class MovieService {
     return this.upcomingDates$;
   }
 
+  getPopularMovies(): void {
+    this.movies$.next([]);
+    this.getMovies();
+    console.log('inside get popular movies');
+    console.log(this.urlParams);
+  }
+
   getTopRatedMovies(): void {
+    this.movies$.next([]);
     this.urlParams.sortCategory = UrlParameters.VOTE_AVG_DESC;
     this.urlParams.voteCountGte = UrlParameters.MINIMUM_VOTE_COUNT;
     this.getMovies();
@@ -117,6 +130,7 @@ export class MovieService {
   }
 
   getNowPlayingMovies(fromDate: string, toDate: string): void  {
+    this.movies$.next([]);
     this.urlParams.releaseDateGte = fromDate;
     this.urlParams.releaseDateLte = toDate;
     this.urlParams.withReleaseType = UrlParameters.THEATRICAL_RELEASE;
@@ -126,6 +140,7 @@ export class MovieService {
   }
 
   getUpcomingMovies(fromDate: string, toDate: string): void {
+    this.movies$.next([]);
     this.urlParams.releaseDateGte = fromDate;
     this.urlParams.releaseDateLte = toDate;
     this.urlParams.withReleaseType = UrlParameters.THEATRICAL_RELEASE;
@@ -152,5 +167,6 @@ export class MovieService {
   getMovieCredits$(id: number): Observable<MovieCredits> {
     return this.http.get<MovieCredits>(`${this.movieDetailsUrl}/${id}/credits?api_key=${environment.api_key}`);
   }
+
 
 }

@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { Genre } from 'src/app/models/genre';
 import { MovieService } from 'src/app/shared/movie.service';
 import { DatePipe } from '@angular/common';
@@ -88,6 +88,8 @@ export class FilterPanelComponent implements OnInit   {
   }
 
   applyFilters(): void {
+    this.movieService.movies$.next([]);
+    this.movieService.resetUrlParams();
     this.movieService.urlParams.sortCategory = this.sortCategory;
     this.movieService.urlParams.withGenres = this.genres.join(',');
     this.movieService.urlParams.releaseDateGte = this.fromDate === '' || this.fromDate === null

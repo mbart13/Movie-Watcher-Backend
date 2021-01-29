@@ -5,7 +5,7 @@
     --clr-bg-secondary: #1b1b1f;
     --clr-red: #e21f3f;
     --clr-blue: #216ea5;
-    --clr-grey: #cbc7c7;
+    --clr-grey: #cfcece;
     --clr-white: #fff;
     --ff-primary: "Roboto", sans-serif;
     --max-width: 1170px;
@@ -66,6 +66,17 @@ body {
   background-color: #f3f0f0;
   cursor: pointer;
 }
+
+.btn-disabled {
+  background: #888383;
+}
+
+.btn-disabled:hover {
+  cursor: default;
+  background: #888383;
+  color: var(--clr-white);
+}
+
 
 h1 {
   font-size: 4rem;

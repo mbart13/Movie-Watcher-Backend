@@ -4,10 +4,17 @@
                       [genres]="genres" [movie]="movie">
       </app-movie-card>
       <ng-container *ngIf="movies.length; else noMovies">
-        <button *ngIf="movies.length === 20" class="btn btn-selected" (click)="loadMore()">Load More</button>
+        <button *ngIf="movies.length >= 20"
+
+                class="btn btn-action" (click)="loadMore()">{{ noMoreMovies ? 'No More Data' : 'Load More'}}
+
+        </button>
       </ng-container>
 
       <ng-template #noMovies>
         <p class="no-movies">No movies matching these search criteria</p>
       </ng-template>
 </div>
+
+<!--[disabled]="noMoreMovies"-->
+<!--[class.btn-disabled]="noMoreMovies"-->
