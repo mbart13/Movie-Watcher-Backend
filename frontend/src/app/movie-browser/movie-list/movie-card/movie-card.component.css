@@ -17,12 +17,27 @@
   bottom: .5em;
   right: .3em;
   color: var(--clr-white);
-  border: 2px solid #1b9e1b;
   border-radius: 50%;
   padding: .5em;
   font-size: .9rem;
   font-weight: bold;
   background: rgba(0,0,0,.7);
+}
+
+.green {
+  border: 2px solid #1b9e1b;
+}
+
+.orange {
+  border: 2px solid #be8111;
+}
+
+.red {
+  border: 2px solid #ca0d0d;
+}
+
+.grey {
+  border: 2px solid var(--clr-grey);
 }
 
 .movie-card img {
@@ -57,7 +72,7 @@
     margin: .3em;
 }
 
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1186px) {
     .movie-card {
         width: 160px;
     }

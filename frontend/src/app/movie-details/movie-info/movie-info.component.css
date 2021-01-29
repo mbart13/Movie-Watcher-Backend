@@ -17,11 +17,11 @@
 }
 
 .basic-details span {
-  font-size: .9em;
+  font-size: .9rem;
 }
 
-.release-date {
-  font-size: .6em;
+.basic-details .release-date {
+  font-size: .8em;
   font-weight: normal;
 }
 

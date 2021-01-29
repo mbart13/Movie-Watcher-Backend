@@ -29,4 +29,16 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+  colorBorder(rating: number): string {
+    let color: string;
+    if (rating >= 8) {
+      color = 'green';
+    } else if (rating >= 5) {
+      color = 'orange';
+    } else {
+      color = 'red';
+    }
+    return color;
+  }
+
 }

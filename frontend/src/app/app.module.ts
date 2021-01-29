@@ -21,6 +21,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatePipe} from '@angular/common';
 import { MovieSearchComponent } from './movie-browser/movie-search/movie-search.component';
 import { MovieInfoComponent } from './movie-details/movie-info/movie-info.component';
+import { MovieCastComponent } from './movie-details/movie-cast/movie-cast.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { MovieInfoComponent } from './movie-details/movie-info/movie-info.compon
     MovieDetailsComponent,
     RoundPipe,
     MovieSearchComponent,
-    MovieInfoComponent
+    MovieInfoComponent,
+    MovieCastComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

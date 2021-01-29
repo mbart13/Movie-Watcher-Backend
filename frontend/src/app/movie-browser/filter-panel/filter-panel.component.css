@@ -60,8 +60,11 @@ hr {
 }
 
 .filter-wrapper {
-  border-bottom: 1px solid var(--clr-grey);
   margin: .5em 0;
+}
+
+.filter-wrapper:not(:last-child) {
+  border-bottom: 1px solid var(--clr-grey);
 }
 
 select {
@@ -126,6 +129,26 @@ mat-slider {
   background: var(--clr-red) !important;
 }
 
+::ng-deep .mat-form-field-ripple {
+  background-color: rgba(205, 15, 49,0.3);
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #3f51b5;
+}
+
+::ng-deep .mat-input-element {
+  caret-color: var(--clr-grey);
+}
+
+::ng-deep mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 0 0 0 !important;
+}
+
 @media screen and (max-width: 875px) {
   .panel-header h4 {
     font-size: 1rem;
@@ -136,11 +159,11 @@ mat-slider {
   /*}*/
 }
 
-@media screen and (max-width: 1000px) {
-  .movie-card {
-    width: 290px;
-  }
-}
+/*@media screen and (max-width: 1000px) {*/
+/*  .movie-card {*/
+/*    width: 290px;*/
+/*  }*/
+/*}*/
 
 @media screen and (max-width: 530px) {
   .btn.genre {

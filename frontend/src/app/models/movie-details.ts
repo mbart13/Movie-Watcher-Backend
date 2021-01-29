@@ -3,6 +3,7 @@ import { Genre } from './genre';
 export interface MovieDetails {
     id: number;
     original_language: string;
+    original_title: string;
     genres: Genre[];
     overview: string;
     poster_path: string;

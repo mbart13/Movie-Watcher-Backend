@@ -1,8 +1,23 @@
-.navbar, .nav-menu  {
+.navbar  {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 1.4em;
 }
+
+/*.nav-menu {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+/*}*/
+
+/*.nav-menu {*/
+/*  align-items: center;*/
+/*}*/
+
+/*.navbar {*/
+/*  margin-bottom: 1.4em;*/
+/*}*/
 
 .logo {
     letter-spacing: .3rem;
@@ -20,22 +35,34 @@
 .menu {
     margin-left: 1.2rem;
     display: flex;
-    font-size: 1.2rem;
-    color: var(--clr-white)
+    align-items: center;
+    font-size: 1rem;
+    color: var(--clr-grey)
 }
 
 .menu-item {
-    margin: .8rem;
+  outline: none;
+  transition: var(--transition);
 }
 
 .menu-item:hover {
-    cursor: pointer;
+  color: var(--clr-white);
+  cursor: pointer;
+
 }
 
-.fas {
-    font-size: 1.2rem;
-    color: var(--clr-white);
+.menu-item:not(:last-child) {
+    margin-right: 1.5rem;
 }
+
+.btn-action {
+  padding: .3em 1.2em;
+}
+
+/*.fas {*/
+/*    font-size: 1.2rem;*/
+/*    color: var(--clr-grey);*/
+/*}*/
 
 @media screen and (max-width: 630px) {
   .menu {

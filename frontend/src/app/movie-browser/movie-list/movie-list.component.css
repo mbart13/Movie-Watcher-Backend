@@ -1,8 +1,7 @@
 .movie-list-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
 }
 
 .btn {
