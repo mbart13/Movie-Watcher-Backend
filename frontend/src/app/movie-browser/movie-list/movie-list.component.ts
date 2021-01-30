@@ -14,14 +14,12 @@ export class MovieListComponent implements OnInit, OnChanges {
   @Input()
   movies: Movie[];
   genres$: Observable<Genre[]>;
-  // previousLength: number;
   noMoreMovies: boolean;
 
-  constructor(private movieService: MovieService) { }
+  constructor(public movieService: MovieService) { }
 
   ngOnChanges(): void {
-
-    // console.log(this.previousLength);
+    this.noMoreMovies = this.movieService.pageNumber === this.movieService.totalPages;
   }
 
   ngOnInit(): void {
@@ -29,14 +27,8 @@ export class MovieListComponent implements OnInit, OnChanges {
   }
 
   loadMore(): void {
-    // if (this.previousLength === this.movieService.movies$.value.length) {
-    //   this.noMoreMovies = true;
-    // }
-    // console.log(this.movieService.movies$.value.length);
     this.movieService.urlParams.pageNumber++;
     this.movieService.getMovies();
-    // this.previousLength = this.movies.length;
-    // console.log(this.previousLength);
   }
 
 }

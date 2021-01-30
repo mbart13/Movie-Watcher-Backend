@@ -34,6 +34,8 @@ export class MovieService {
   genres$: Observable<Genre[]>;
   nowPlayingDates$: Observable<Dates>;
   upcomingDates$: Observable<Dates>;
+  pageNumber: number;
+  totalPages: number;
   genresUrl = `${environment.tmdb_base_url}/genre/movie/list?api_key=${environment.api_key}`;
   moviesDiscoverUrl = `${environment.tmdb_base_url}/discover/movie?`;
   moviesSearchUrl = `${environment.tmdb_base_url}/search/movie?api_key=${environment.api_key}`;
@@ -54,6 +56,9 @@ export class MovieService {
   getMovies(): void {
     this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
       .subscribe(data => {
+        console.log(data);
+        this.pageNumber = data.page;
+        this.totalPages = data.total_pages;
         this.movies$.next([...this.movies$.getValue(), ...data.results]);
       });
   }
