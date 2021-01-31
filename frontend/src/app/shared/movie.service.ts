@@ -43,10 +43,12 @@ export class MovieService {
   movieDetailsUrl = `${environment.tmdb_base_url}/movie`;
   searchMode: boolean;
   isLoading = false;
+  searchTerm: string;
 
   constructor(private http: HttpClient) { }
 
   getMovies(): void {
+    this.searchMode = false;
     this.isLoading = true;
     this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
       .pipe(
@@ -57,8 +59,9 @@ export class MovieService {
   }
 
   searchMovies(searchTerm: string): void {
+    this.searchMode = true;
     this.isLoading = true;
-    this.http.get<any>(`${this.moviesSearchUrl}&query=${searchTerm}`)
+    this.http.get<any>(`${this.moviesSearchUrl}&query=${searchTerm}&page=${this.urlParams.pageNumber}`)
       .pipe(
         tap(data => {
           this.handleData(data);
@@ -69,7 +72,11 @@ export class MovieService {
   handleData(data: any): void {
     this.pageNumber = data.page;
     this.totalPages = data.total_pages;
-    this.movies$.next([...this.movies$.getValue(), ...data.results]);
+    if (this.pageNumber === 1) {
+      this.movies$.next(data.results);
+    } else {
+      this.movies$.next([...this.movies$.getValue(), ...data.results]);
+    }
     this.isLoading = false;
   }
 

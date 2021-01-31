@@ -10,11 +10,15 @@
 .search-bar {
   background: var(--clr-bg-secondary);
   border-radius: 20px;
-  color: #727180;
+  color: var(--clr-grey);
   width: 100%;
   font-size: 1.2em;
   padding: .8em 1em;
   /*margin: 1.2em auto;*/
+}
+
+.search-bar::placeholder {
+  color: rgba(255,255,255,0.3);
 }
 
 .fa-search {

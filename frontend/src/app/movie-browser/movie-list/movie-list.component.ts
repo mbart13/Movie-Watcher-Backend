@@ -28,7 +28,11 @@ export class MovieListComponent implements OnInit, OnChanges {
 
   loadMore(): void {
     this.movieService.urlParams.pageNumber++;
-    this.movieService.getMovies();
+    if (this.movieService.searchMode) {
+      this.movieService.searchMovies(this.movieService.searchTerm);
+    } else {
+      this.movieService.getMovies();
+    }
   }
 
 }

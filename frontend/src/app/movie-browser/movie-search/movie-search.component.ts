@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {debounceTime, distinctUntilChanged, distinctUntilKeyChanged, switchMap, tap} from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import { MovieService } from '../../shared/movie.service';
 
 @Component({
@@ -27,7 +27,6 @@ export class MovieSearchComponent implements OnInit {
       switchMap(async (searchTerm) => {
           this.movieService.movies$.next([]);
           this.movieService.searchMovies(searchTerm);
-          this.movieService.searchMode = true;
         }
       )
     ).subscribe();
@@ -35,6 +34,8 @@ export class MovieSearchComponent implements OnInit {
 
   search(term: string): void {
     if (term.length > 1) {
+      this.movieService.searchTerm = term;
+      this.movieService.urlParams.pageNumber = 1;
       this.searchTerm.next(term);
     } else if (term.length === 0) {
       this.movieService.movies$.next([]);
