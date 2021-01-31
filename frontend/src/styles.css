@@ -5,7 +5,7 @@
     --clr-bg-secondary: #1b1b1f;
     --clr-red: #e21f3f;
     --clr-blue: #216ea5;
-    --clr-grey: #cfcece;
+    --clr-grey: #ADACBB;
     --clr-white: #fff;
     --ff-primary: "Roboto", sans-serif;
     --max-width: 1170px;
@@ -64,6 +64,7 @@ body {
 .btn-action:hover {
   color: var(--clr-red);
   background-color: #f3f0f0;
+  font-weight: bold;
   cursor: pointer;
 }
 

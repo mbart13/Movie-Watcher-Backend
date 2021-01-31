@@ -1,4 +1,6 @@
-
+app-movie-list {
+  flex-grow: 1;
+}
 
 .filter-buttons {
     text-align: center;

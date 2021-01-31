@@ -1,4 +1,4 @@
-<div [routerLink]="['/movies/', movie.id]" class="movie-card">
+<div [routerLink]="['/movies/', movie.id]" class="movie-card fade-in">
     <div class="image-container">
       <img *ngIf="movie.poster_path; else noImage" [src]="env + movie.poster_path" [alt]="movie.title">
       <span *ngIf="movie.vote_average; else noRating"

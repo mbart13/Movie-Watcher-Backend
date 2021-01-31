@@ -9,6 +9,14 @@
     font-size: 1.2em;
 }
 
+.justify {
+  justify-content: center;
+}
+
+.no-movies {
+  font-size: 1rem;
+}
+
 @media screen and (max-width: 1030px) {
   .movie-list-container  {
     width: 70vw;

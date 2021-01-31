@@ -24,7 +24,12 @@ export class MovieSearchComponent implements OnInit {
 
 
       // switch to new search observable each time the term changes
-      switchMap(async (searchTerm) => this.movieService.searchMovies(searchTerm))
+      switchMap(async (searchTerm) => {
+          this.movieService.movies$.next([]);
+          this.movieService.searchMovies(searchTerm);
+          this.movieService.searchMode = true;
+        }
+      )
     ).subscribe();
   }
 
@@ -32,6 +37,7 @@ export class MovieSearchComponent implements OnInit {
     if (term.length > 1) {
       this.searchTerm.next(term);
     } else if (term.length === 0) {
+      this.movieService.movies$.next([]);
       setTimeout(() => this.movieService.getMovies(), 1000);
     }
   }

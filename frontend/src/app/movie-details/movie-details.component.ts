@@ -16,7 +16,7 @@ export class MovieDetailsComponent implements OnInit {
   data: Observable<{ movieDetails: MovieDetails, movieCredits: MovieCredits }>;
 
 
-  constructor(private movieService: MovieService, private route: ActivatedRoute) { }
+  constructor(public movieService: MovieService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getMovieDetails();

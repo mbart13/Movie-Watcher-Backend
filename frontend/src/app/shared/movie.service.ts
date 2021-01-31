@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject  } from 'rxjs';
+import {Observable, BehaviorSubject, pipe} from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../models/genre';
@@ -29,7 +29,6 @@ export class MovieService {
     withGenres: ''
   };
 
-  movies: Movie[] = [];
   movies$ = new BehaviorSubject<Movie[]>([]);
   genres$: Observable<Genre[]>;
   nowPlayingDates$: Observable<Dates>;
@@ -42,36 +41,40 @@ export class MovieService {
   nowPlayingMoviesUrl = `${environment.tmdb_base_url}/movie/now_playing?api_key=${environment.api_key}`;
   upcomingMoviesUrl = `${environment.tmdb_base_url}/movie/upcoming?api_key=${environment.api_key}`;
   movieDetailsUrl = `${environment.tmdb_base_url}/movie`;
+  searchMode: boolean;
+  isLoading = false;
 
   constructor(private http: HttpClient) { }
 
-  // getMovies(): void {
-  //   this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
-  //         .pipe(
-  //           tap(data => this.movies$.next(data.results))
-  //         ).subscribe();
-
-  // }
-
   getMovies(): void {
+    this.isLoading = true;
     this.http.get<any>(`${this.moviesDiscoverUrl}${this.buildUrlParams()}`)
-      .subscribe(data => {
-        console.log(data);
-        this.pageNumber = data.page;
-        this.totalPages = data.total_pages;
-        this.movies$.next([...this.movies$.getValue(), ...data.results]);
-      });
+      .pipe(
+        tap(data => {
+          this.handleData(data);
+        })
+      ).subscribe();
+  }
+
+  searchMovies(searchTerm: string): void {
+    this.isLoading = true;
+    this.http.get<any>(`${this.moviesSearchUrl}&query=${searchTerm}`)
+      .pipe(
+        tap(data => {
+          this.handleData(data);
+        })
+      ).subscribe();
+  }
+
+  handleData(data: any): void {
+    this.pageNumber = data.page;
+    this.totalPages = data.total_pages;
+    this.movies$.next([...this.movies$.getValue(), ...data.results]);
+    this.isLoading = false;
   }
 
   getMovies$(): Observable<Movie[]> {
     return this.movies$.asObservable();
-  }
-
-  searchMovies(searchTerm: string): void {
-    this.http.get<any>(`${this.moviesSearchUrl}&query=${searchTerm}`)
-      .pipe(
-        tap(data => this.movies$.next(data.results))
-      ).subscribe();
   }
 
   resetUrlParams(): void {

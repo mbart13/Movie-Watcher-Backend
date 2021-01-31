@@ -24,6 +24,7 @@ import { MovieInfoComponent } from './movie-details/movie-info/movie-info.compon
 import { MovieCastComponent } from './movie-details/movie-cast/movie-cast.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RegisterComponent } from './auth/register/register.component';
     MovieInfoComponent,
     MovieCastComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
