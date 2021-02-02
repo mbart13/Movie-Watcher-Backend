@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.*;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @AllArgsConstructor
 @RestController
@@ -25,7 +24,7 @@ public class AuthController {
     private final JwtUtils jwtUtils;
     private final UserService userService;
 
-    @PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/login")
     @ResponseStatus(OK)
     public JwtResponse login(@RequestBody CredentialsDto credentialsDto) {
         Authentication authentication = userService.login(credentialsDto);

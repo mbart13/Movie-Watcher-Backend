@@ -1,4 +1,4 @@
-package com.codecool.moviewatcher.filters;
+package com.codecool.moviewatcher.jwt;
 
 import com.codecool.moviewatcher.jwt.JwtConfig;
 import com.codecool.moviewatcher.jwt.JwtUtils;

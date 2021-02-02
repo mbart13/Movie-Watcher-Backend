@@ -1,6 +1,6 @@
 package com.codecool.moviewatcher.security;
 
-import com.codecool.moviewatcher.filters.JwtTokenVerifier;
+import com.codecool.moviewatcher.jwt.JwtTokenVerifier;
 import com.codecool.moviewatcher.jwt.JwtConfig;
 import com.codecool.moviewatcher.jwt.JwtUtils;
 import lombok.AllArgsConstructor;

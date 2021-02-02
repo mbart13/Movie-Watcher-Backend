@@ -15,6 +15,16 @@ export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private loggedUser: string;
 
+  register(user: { username: string, password: string }): Observable<boolean> {
+    return this.http.post<any>(`${environment.backend_base_url}/register`, user)
+      .pipe(
+        mapTo(true),
+        catchError(error => {
+          alert(error.error);
+          return of(false);
+        }));
+  }
+
   login(user: { email: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${environment.backend_base_url}/login`, user)
       .pipe(
@@ -26,13 +36,34 @@ export class AuthService {
         }));
   }
 
-  private doLoginUser(username: string, token: string): void {
-    this.loggedUser = username;
+  logout(): Observable<boolean> {
+    return this.http.post<any>(`${environment.backend_base_url}/logout`, {})
+      .pipe(
+        tap(() => this.doLogoutUser()),
+        mapTo(true),
+        catchError(error => {
+          this.doLogoutUser();
+          alert(error.error);
+          return of(false);
+      }));
+  }
+
+  private doLoginUser(email: string, token: string): void {
+    this.loggedUser = email;
     this.storeToken(token);
+  }
+
+  private doLogoutUser(): void {
+    this.loggedUser = null;
+    this.removeToken();
   }
 
   getJwtToken(): string {
     return localStorage.getItem(this.JWT_TOKEN);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getJwtToken();
   }
 
   private storeToken(token: string): void {
