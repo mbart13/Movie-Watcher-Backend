@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {debounceTime, distinctUntilChanged, distinctUntilKeyChanged, switchMap, tap} from 'rxjs/operators';
 import {BehaviorSubject, Subject} from 'rxjs';
-import { MovieService } from '../../shared/movie.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movie-search',

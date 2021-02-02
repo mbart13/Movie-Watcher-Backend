@@ -22,9 +22,8 @@ import {DatePipe} from '@angular/common';
 import { MovieSearchComponent } from './movie-browser/movie-search/movie-search.component';
 import { MovieInfoComponent } from './movie-details/movie-info/movie-info.component';
 import { MovieCastComponent } from './movie-details/movie-cast/movie-cast.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { LoadingSpinnerComponent } from './services/loading-spinner/loading-spinner.component';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -39,8 +38,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     MovieSearchComponent,
     MovieInfoComponent,
     MovieCastComponent,
-    LoginComponent,
-    RegisterComponent,
+
     LoadingSpinnerComponent
   ],
   imports: [
@@ -54,7 +52,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     MatNativeDateModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatSliderModule
+    MatSliderModule,
+    AuthModule
   ],
   providers: [ DatePipe ],
   bootstrap: [AppComponent]

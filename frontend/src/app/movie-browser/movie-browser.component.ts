@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie';
-import { MovieService } from '../shared/movie.service';
+import { MovieService } from '../services/movie.service';
 import { Dates } from '../models/dates';
 import { UrlParameters } from '../models/url-parameters';
-import { FilterStateService } from '../shared/filter-state.service';
+import { FilterStateService } from '../services/filter-state.service';
 import { Category } from '../models/category';
 
 @Component({

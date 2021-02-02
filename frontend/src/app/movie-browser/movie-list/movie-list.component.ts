@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { Genre } from 'src/app/models/genre';
 import { Movie } from 'src/app/models/movie';
-import { MovieService } from 'src/app/shared/movie.service';
+import { MovieService } from 'src/app/services/movie.service';
 import {Observable} from 'rxjs';
 
 @Component({

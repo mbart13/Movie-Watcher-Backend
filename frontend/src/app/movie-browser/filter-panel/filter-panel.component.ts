@@ -1,9 +1,9 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import { Genre } from 'src/app/models/genre';
-import { MovieService } from 'src/app/shared/movie.service';
+import { MovieService } from 'src/app/services/movie.service';
 import { DatePipe } from '@angular/common';
-import {FilterStateService} from '../../shared/filter-state.service';
+import {FilterStateService} from '../../services/filter-state.service';
 
 @Component({
   selector: 'app-filter-panel',

@@ -8,10 +8,10 @@
 <div class="movie-info">
   <div class="basic-details">
     <h2>{{data.movieDetails.title}} <span class="release-date">{{ ' (' + data.movieDetails.release_date.slice(0, 4) + ')' }}</span></h2>
-    <span *ngIf="data.movieDetails.original_title"><span>Original Title: </span><span [ngStyle]="{fontStyle: 'italic'}">{{data.movieDetails.original_title + ' &bull; '}}</span></span>
-    <span *ngIf="data.movieDetails.original_language">{{'Original Language: ' + data.movieDetails.original_language.toUpperCase()  + ' &bull; '}}</span>
+    <span *ngIf="data.movieDetails.original_title"><span>Original Title: </span><span [ngStyle]="{fontStyle: 'italic'}">{{data.movieDetails.original_title }}</span></span>
+    <span *ngIf="data.movieDetails.original_language">{{ ' &bull; ' + 'Original Language: ' + data.movieDetails.original_language.toUpperCase() }}</span>
     <span *ngIf="data.movieDetails.runtime">
-      {{(data.movieDetails.runtime / 60 | round ) + 'h ' +
+      {{' &bull; ' + (data.movieDetails.runtime / 60 | round ) + 'h ' +
       (data.movieDetails.runtime % 60 === 0  ? '00' : data.movieDetails.runtime % 60) + 'm'}}
             </span>
   </div>
@@ -20,7 +20,7 @@
     <h4 class="section-title">Overview</h4>
     <p>{{ data.movieDetails.overview }}</p>
   </div>
-  <div class="credits">
+  <div class="credits" *ngIf="data.movieCredits.crew.length">
     <div class="crew-member">
       <h4>Directed by</h4>
       <span class="name" *ngFor="let person of findCrewMembers(data.movieCredits.crew, 'director');

@@ -3,9 +3,9 @@
   background: var(--clr-bg-secondary);
   padding: 1.2em;
   border-radius: var(--border-radius);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: space-around;*/
 }
 
 .poster {
