@@ -11,6 +11,8 @@ import { AuthService } from './services/auth.service';
 import { TokenInterceptor } from './token.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -29,6 +31,8 @@ import { LoginComponent } from './login/login.component';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
 
   ]
 })

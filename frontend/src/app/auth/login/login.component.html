@@ -1,17 +1,16 @@
 <div class="login-register">
   <div class="form-container">
     <h2>Sign In</h2>
-    <form >
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-form-field class="form-field">
         <mat-label>Email</mat-label>
-        <input type="email" autocomplete="off" matInput
-               placeholder="email">
+        <input type="email" autocomplete="off" matInput placeholder="email" formControlName="email" >
       </mat-form-field>
       <mat-form-field class="form-field">
         <mat-label>Password</mat-label>
-        <input type="password" autocomplete="off" matInput>
+        <input type="password" autocomplete="off" matInput formControlName="password" >
       </mat-form-field>
-      <button class="btn btn-action">Login</button>
+      <button class="btn btn-action" [disabled]="!loginForm.valid">Login</button>
       <p class="cta">Don't have an account yet? <span routerLink="/register">Sign up</span></p>
     </form>
   </div>

@@ -1,15 +1,17 @@
 package com.codecool.moviewatcher.security;
 
-import com.codecool.moviewatcher.filters.JsonObjectAuthenticationFilter;
 import com.codecool.moviewatcher.filters.JwtTokenVerifier;
 import com.codecool.moviewatcher.jwt.JwtConfig;
 import com.codecool.moviewatcher.jwt.JwtUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @AllArgsConstructor
 @EnableWebSecurity
@@ -26,13 +28,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new JsonObjectAuthenticationFilter(authenticationManager(), jwtUtils))
-                .addFilterAfter(new JwtTokenVerifier(jwtUtils, jwtConfig), JsonObjectAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/login", "/register", "/h2-console/**").permitAll()
                 .anyRequest()
                 .authenticated();
 
+        http.addFilterBefore(new JwtTokenVerifier(jwtUtils, jwtConfig), UsernamePasswordAuthenticationFilter.class);
         http.headers().frameOptions().disable();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

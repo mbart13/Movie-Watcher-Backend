@@ -38,7 +38,6 @@ import {AuthModule} from './auth/auth.module';
     MovieSearchComponent,
     MovieInfoComponent,
     MovieCastComponent,
-
     LoadingSpinnerComponent
   ],
   imports: [
