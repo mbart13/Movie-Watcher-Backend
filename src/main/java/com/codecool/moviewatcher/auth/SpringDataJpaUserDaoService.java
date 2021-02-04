@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class JpaApplicationUserDaoService implements ApplicationUserDao {
+public class SpringDataJpaApplicationUserDaoService implements ApplicationUserDao {
 
     private final UserRepository userRepository;
 

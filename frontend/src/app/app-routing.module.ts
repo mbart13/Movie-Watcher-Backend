@@ -6,11 +6,26 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/movies', pathMatch: 'full' },
-  { path: 'movies', component: MovieBrowserComponent },
-  { path: 'movies/:id', component: MovieDetailsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  {
+    path: '',
+    redirectTo: '/movies',
+    pathMatch: 'full'
+  },
+  {
+    path: 'movies',
+    component: MovieBrowserComponent
+  },
+  {
+    path: 'movies/:id',
+    component: MovieDetailsComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent }
 ];
 
 @NgModule({

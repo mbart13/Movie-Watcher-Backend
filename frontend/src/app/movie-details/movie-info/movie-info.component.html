@@ -7,13 +7,25 @@
 </ng-template>
 <div class="movie-info">
   <div class="basic-details">
-    <h2>{{data.movieDetails.title}} <span class="release-date">{{ ' (' + data.movieDetails.release_date.slice(0, 4) + ')' }}</span></h2>
-    <span *ngIf="data.movieDetails.original_title"><span>Original Title: </span><span [ngStyle]="{fontStyle: 'italic'}">{{data.movieDetails.original_title }}</span></span>
-    <span *ngIf="data.movieDetails.original_language">{{ ' &bull; ' + 'Original Language: ' + data.movieDetails.original_language.toUpperCase() }}</span>
+    <h2 class="title">{{data.movieDetails.title}}
+      <span class="release-date">
+      {{ ' (' + data.movieDetails.release_date.slice(0, 4) + ')' }}
+      </span>
+    </h2>
+    <app-movie-rating [rating]="data.movieDetails.vote_average" [size]="'large'"></app-movie-rating>
+    <span *ngIf="data.movieDetails.original_title">
+      <span>Original Title: </span>
+      <span [ngStyle]="{fontStyle: 'italic'}">
+        {{data.movieDetails.original_title }}
+      </span>
+    </span>
+    <span *ngIf="data.movieDetails.original_language">
+      {{ ' &bull; ' + 'Original Language: ' + data.movieDetails.original_language.toUpperCase() }}
+    </span>
     <span *ngIf="data.movieDetails.runtime">
       {{' &bull; ' + (data.movieDetails.runtime / 60 | round ) + 'h ' +
       (data.movieDetails.runtime % 60 === 0  ? '00' : data.movieDetails.runtime % 60) + 'm'}}
-            </span>
+    </span>
   </div>
   <h3 class="tagline" *ngIf="data.movieDetails.tagline">{{ data.movieDetails.tagline }} </h3>
   <div class="overview">
@@ -40,8 +52,8 @@
     </ng-template>
   </div>
   <div class="genres">
-            <span class="btn btn-selected" *ngFor="let genre of data.movieDetails.genres">
-                {{genre.name}}
-            </span>
+        <span class="btn btn-selected" *ngFor="let genre of data.movieDetails.genres">
+            {{genre.name}}
+        </span>
   </div>
 </div>

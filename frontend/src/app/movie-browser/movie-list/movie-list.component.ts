@@ -33,6 +33,7 @@ export class MovieListComponent implements OnInit, OnChanges {
     } else {
       this.movieService.getMovies();
     }
+    console.log(this.movieService.urlParams);
   }
 
 }

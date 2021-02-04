@@ -1,9 +1,10 @@
 <nav class="navbar">
-        <h1 class="logo"><span id="white-logo">Movie</span><span id="red-logo">Watcher</span></h1>
-        <ul class="menu">
-          <li routerLink="/movies" class="menu-item"><i class="fas fa-film"></i> Movies</li>
-          <li routerLink="/watchlist" class="menu-item"><i class="far fa-bookmark"></i> Watchlist</li>
-          <li routerLink="/favorites" class="menu-item"><i class="far fa-heart"></i> Favorites</li>
-          <li routerLink="/login" class="btn btn-action"> Login</li>
-        </ul>
+  <h1 routerLink="/movies" class="logo"><span id="white-logo">Movie</span><span id="red-logo">Watcher</span></h1>
+  <ul class="menu">
+    <li routerLink="/movies" class="menu-item"><i class="fas fa-film"></i> Movies</li>
+    <li *ngIf="isAuthenticated" routerLink="/watchlist" class="menu-item"><i class="far fa-bookmark"></i> Watchlist</li>
+    <li *ngIf="isAuthenticated" routerLink="/favorites" class="menu-item"><i class="far fa-heart"></i> Favorites</li>
+    <li *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-action"> Login</li>
+    <li *ngIf="isAuthenticated" class="btn btn-action" (click)="onLogout()"> Logout</li>
+  </ul>
 </nav>

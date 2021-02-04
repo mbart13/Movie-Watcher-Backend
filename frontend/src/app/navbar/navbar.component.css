@@ -22,6 +22,12 @@
 .logo {
     letter-spacing: .3rem;
     font-size: 1.7em;
+    outline: none;
+    transition: var(--transition);
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 #red-logo {

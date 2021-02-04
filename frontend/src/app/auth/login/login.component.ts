@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit {
   }
 
 
-  get form(): {[key: string]: AbstractControl } {
+  get form(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
   }
 
   login(): void {
+    if (!this.loginForm.valid) {
+      return;
+    }
     this.authService.login(
       {
         email: this.form.email.value,
@@ -39,7 +42,5 @@ export class LoginComponent implements OnInit {
         }
       });
   }
-
-
 
 }
