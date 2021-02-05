@@ -1,7 +1,8 @@
 package com.codecool.moviewatcher.controller;
 
-import com.codecool.moviewatcher.auth.ApplicationUser;
+import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.dto.CredentialsDto;
+import com.codecool.moviewatcher.exceptions.ValidationException;
 import com.codecool.moviewatcher.jwt.JwtResponse;
 import com.codecool.moviewatcher.jwt.JwtUtils;
 import com.codecool.moviewatcher.service.UserService;
@@ -24,7 +25,7 @@ public class AuthController {
     private final JwtUtils jwtUtils;
     private final UserService userService;
 
-    @PostMapping(value = "/login")
+    @PostMapping("/login")
     @ResponseStatus(OK)
     public JwtResponse login(@RequestBody CredentialsDto credentialsDto) {
         Authentication authentication = userService.login(credentialsDto);
@@ -39,6 +40,11 @@ public class AuthController {
         userService.registerUser(credentialsDto);
     }
 
+    @PostMapping("/sign-out")
+    @ResponseStatus(NO_CONTENT)
+    public void logout() {
+        SecurityContextHolder.getContext().setAuthentication(null);
+    }
 
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseBody
@@ -46,9 +52,15 @@ public class AuthController {
         return new ResponseEntity<>(badCredentialsException.getMessage(), UNAUTHORIZED);
     }
 
+    @ExceptionHandler(ValidationException.class)
+    @ResponseBody
+    public ResponseEntity<String> handleValidationException(ValidationException validationException) {
+        return new ResponseEntity<>(validationException.getMessage(), BAD_REQUEST);
+    }
+
     private JwtResponse toJwtResponse(Authentication authentication) {
         String jwtToken = jwtUtils.generateJwtToken(authentication);
-        ApplicationUser user = (ApplicationUser) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
         return new JwtResponse(user.getId(), user.getUsername(), jwtToken);
     }

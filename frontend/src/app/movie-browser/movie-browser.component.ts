@@ -4,7 +4,7 @@ import { Movie } from '../models/movie';
 import { MovieService } from '../services/movie.service';
 import { Dates } from '../models/dates';
 import { UrlParameters } from '../models/url-parameters';
-import { FilterStateService } from '../services/filter-state.service';
+import { FiltersStateService } from '../services/filters-state.service';
 import { Category } from '../models/category';
 
 @Component({
@@ -27,7 +27,7 @@ export class MovieBrowserComponent implements OnInit {
   filterExpanded: boolean;
   eCategory = Category;
 
-  constructor(public movieService: MovieService, private filterService: FilterStateService) {
+  constructor(public movieService: MovieService, private filterService: FiltersStateService) {
     this.releaseType = this.movieService.urlParams.withReleaseType;
     this.fromDate = this.movieService.urlParams.releaseDateGte;
     this.toDate = this.movieService.urlParams.releaseDateLte;

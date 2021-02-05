@@ -1,28 +1,24 @@
-.navbar  {
+.navbar {
+  position: fixed;
+  background-color: var(--clr-bg-primary);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.navbar .container  {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 1.4em;
+    padding: 1rem;
 }
-
-/*.nav-menu {*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: space-between;*/
-/*}*/
-
-/*.nav-menu {*/
-/*  align-items: center;*/
-/*}*/
-
-/*.navbar {*/
-/*  margin-bottom: 1.4em;*/
-/*}*/
 
 .logo {
     letter-spacing: .3rem;
     font-size: 1.7em;
     outline: none;
+    font-weight: bold;
     transition: var(--transition);
 }
 
@@ -39,7 +35,7 @@
 }
 
 .menu {
-    margin-left: 1.2rem;
+    margin-left: 1.1rem;
     display: flex;
     align-items: center;
     font-size: 1rem;
@@ -64,11 +60,6 @@
 .btn-action {
   padding: .3em 1.2em;
 }
-
-/*.fas {*/
-/*    font-size: 1.2rem;*/
-/*    color: var(--clr-grey);*/
-/*}*/
 
 @media screen and (max-width: 630px) {
   .menu {

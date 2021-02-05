@@ -23,10 +23,10 @@ app-movie-list {
 
 app-filter-panel {
     width: 300px;
-    margin-right: 1.5em;
     flex: 0 0 auto;
 }
 
+/* for spinner */
 app-movie-list {
     text-align: center;
 }
@@ -35,20 +35,20 @@ app-movie-list {
   display: none;
 }
 
-@media screen and (max-width: 1030px) {
-  app-filter-panel {
-    width: 350px;
-    margin: 0 auto 1.4em;
-  }
+/*@media screen and (max-width: 1030px) {*/
+/*  app-filter-panel {*/
+/*    width: 350px;*/
+/*    margin: 0 auto 1.4em;*/
+/*  }*/
 
-  .main-section {
-    flex-direction: column;
-  }
-}
+/*  .main-section {*/
+/*    flex-direction: column;*/
+/*  }*/
+/*}*/
 
-@media screen and (max-width: 1003px) {
-  app-movie-list {
-    margin: auto;
-  }
-}
+/*@media screen and (max-width: 1003px) {*/
+/*  app-movie-list {*/
+/*    margin: auto;*/
+/*  }*/
+/*}*/
 

@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApplicationUserService implements UserDetailsService {
 
-    private final ApplicationUserDao applicationUserDao;
+    private final UserDaoService userDaoService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return applicationUserDao.findApplicationUserByUsername(username)
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userDaoService.findUserByEmail(email)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException(String.format("User was not found: %s", username)));
+                        new UsernameNotFoundException(String.format("User was not found: %s", email)));
     }
 }

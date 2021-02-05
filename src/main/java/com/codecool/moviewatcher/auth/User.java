@@ -22,28 +22,22 @@ import java.util.Collections;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class ApplicationUser implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Pattern(regexp = "\\b[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\\..+\\b", message = "Email address must be valid")
     @Column(unique=true)
     private String email;
 
-    @NotBlank
-    @Size(min=2, max = 50)
     private String password;
 
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdDate;
 
-    @UpdateTimestamp
-    private Timestamp lastModifiedDate;
-
-    public ApplicationUser(String email, String password) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }

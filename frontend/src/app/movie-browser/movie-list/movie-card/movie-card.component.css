@@ -1,6 +1,6 @@
 .movie-card {
     width: 140px;
-    margin-right: 1.2em;
+    margin-left: 1.2em;
     margin-bottom: 1.2em;
     text-align: center;
     color: var(--clr-white);
@@ -46,13 +46,13 @@
 
 @media screen and (max-width: 1186px) {
     .movie-card {
-        width: 160px;
+        width: 180px;
     }
 }
 
-@media screen and (max-width: 1095px) {
+@media screen and (max-width: 1149px) {
     .movie-card {
-        width: 200px;
+        width: 235px;
     }
 }
 

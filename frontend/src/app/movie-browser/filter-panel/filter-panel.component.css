@@ -97,6 +97,7 @@ select {
 .btn-apply {
   position: sticky;
   bottom: 1%;
+  z-index: 1;
 }
 
 .genres {

@@ -1,6 +1,6 @@
 package com.codecool.moviewatcher.controller;
 
-import com.codecool.moviewatcher.auth.ApplicationUser;
+import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/api/v1/users")
-    public List<ApplicationUser> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 

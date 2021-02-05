@@ -1,7 +1,7 @@
 .movie-list-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .btn {
@@ -13,16 +13,16 @@
   font-size: 1rem;
 }
 
-@media screen and (max-width: 1030px) {
-  .movie-list-container  {
-    width: 70vw;
-    margin: 0 auto;
-  }
-}
+/*@media screen and (max-width: 1030px) {*/
+/*  .movie-list-container  {*/
+/*    width: 70vw;*/
+/*    margin: 0 auto;*/
+/*  }*/
+/*}*/
 
 
-@media screen and (max-width: 942px) {
-  app-movie-card {
-    margin: 0 auto;
-  }
-}
+/*@media screen and (max-width: 942px) {*/
+/*  app-movie-card {*/
+/*    margin: 0 auto;*/
+/*  }*/
+/*}*/

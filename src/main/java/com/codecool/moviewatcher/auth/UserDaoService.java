@@ -2,7 +2,7 @@ package com.codecool.moviewatcher.auth;
 
 import java.util.Optional;
 
-public interface ApplicationUserDao {
+public interface UserDaoService {
 
-    Optional<ApplicationUser> findApplicationUserByUsername(String username);
+    Optional<User> findUserByEmail(String email);
 }

@@ -8,12 +8,12 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class SpringDataJpaApplicationUserDaoService implements ApplicationUserDao {
+public class SpringDataJpaUserDaoService implements UserDaoService {
 
     private final UserRepository userRepository;
 
     @Override
-    public Optional<ApplicationUser> findApplicationUserByUsername(String username) {
+    public Optional<User> findUserByEmail(String username) {
         return userRepository.findByEmail(username);
     }
 }

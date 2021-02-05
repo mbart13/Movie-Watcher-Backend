@@ -1,6 +1,6 @@
 package com.codecool.moviewatcher.jwt;
 
-import com.codecool.moviewatcher.auth.ApplicationUser;
+import com.codecool.moviewatcher.auth.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class JwtUtils {
     private final JwtConfig jwtConfig;
 
     public String generateJwtToken(Authentication authentication) {
-        ApplicationUser userPrincipal = (ApplicationUser) authentication.getPrincipal();
+        User userPrincipal = (User) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
@@ -32,13 +32,5 @@ public class JwtUtils {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-    }
-
-    public boolean validateJwtToken(String authToken) {
-        Jwts.parser()
-                .setSigningKey(jwtConfig.getSecret())
-                .parseClaimsJws(authToken);
-
-        return true;
     }
 }
