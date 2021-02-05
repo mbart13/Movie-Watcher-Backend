@@ -2,7 +2,6 @@ package com.codecool.moviewatcher.controller;
 
 import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.dto.CredentialsDto;
-import com.codecool.moviewatcher.exceptions.ValidationException;
 import com.codecool.moviewatcher.jwt.JwtResponse;
 import com.codecool.moviewatcher.jwt.JwtUtils;
 import com.codecool.moviewatcher.service.UserService;
@@ -27,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/login")
     @ResponseStatus(OK)
-    public JwtResponse login(@RequestBody CredentialsDto credentialsDto) {
+    public JwtResponse login(@RequestBody @Valid CredentialsDto credentialsDto) {
         Authentication authentication = userService.login(credentialsDto);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -47,15 +46,8 @@ public class AuthController {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    @ResponseBody
-    public ResponseEntity<String> handleException(BadCredentialsException badCredentialsException) {
-        return new ResponseEntity<>(badCredentialsException.getMessage(), UNAUTHORIZED);
-    }
-
-    @ExceptionHandler(ValidationException.class)
-    @ResponseBody
-    public ResponseEntity<String> handleValidationException(ValidationException validationException) {
-        return new ResponseEntity<>(validationException.getMessage(), BAD_REQUEST);
+    public ResponseEntity<String> handleException() {
+        return new ResponseEntity<>("Invalid username or password", UNAUTHORIZED);
     }
 
     private JwtResponse toJwtResponse(Authentication authentication) {
