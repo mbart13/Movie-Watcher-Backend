@@ -14,10 +14,9 @@ public class UserController {
 
     private final UserService userService;
 
+    // FOR TESTS ONLY
     @GetMapping("/api/v1/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
-
-
 }
