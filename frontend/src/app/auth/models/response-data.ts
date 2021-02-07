@@ -1,5 +1,7 @@
-export interface ResponseData {
-  userId: number;
-  email: string;
-  jwtToken: string;
+export class ResponseData {
+
+  constructor(public userId: number,
+              public email: string,
+              public jwtToken: string,
+              public expiresIn: number) {}
 }

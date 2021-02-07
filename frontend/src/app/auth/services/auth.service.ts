@@ -13,7 +13,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly USER_DATA = 'userData';
   loggedUser = new BehaviorSubject<User>(null);
   isLoading = false;
 
@@ -32,7 +32,7 @@ export class AuthService {
     return this.http.post<any>(`${environment.backend_base_url}/login`, user)
       .pipe(
         tap((data: ResponseData) => {
-          this.doLoginUser(data.userId, data.email, data.jwtToken);
+          this.doLoginUser(data.userId, data.email, data.jwtToken, +data.expiresIn);
           this.isLoading = false;
         }),
         mapTo(true),
@@ -57,31 +57,48 @@ export class AuthService {
       }));
   }
 
-  private doLoginUser(id: number, email: string, token: string): void {
-    const user = new User(id, email);
+  private doLoginUser(id: number, email: string, token: string, expiresIn: number): void {
+    const expirationDate = new Date(new Date().getTime() + expiresIn);
+    const user = new User(id, email, token, expirationDate);
     this.loggedUser.next(user);
-    this.storeToken(token);
+    this.saveUserData(user);
   }
 
   private doLogoutUser(): void {
     this.loggedUser.next(null);
-    this.removeToken();
+    this.removeUserData();
   }
 
   getJwtToken(): string {
-    return localStorage.getItem(this.JWT_TOKEN);
+    const user: User = JSON.parse(localStorage.getItem(this.USER_DATA));
+    if (user) {
+      return user.jwtToken;
+    }
   }
 
   isLoggedIn(): boolean {
     return !!this.getJwtToken();
   }
 
-  private storeToken(token: string): void {
-    localStorage.setItem(this.JWT_TOKEN, token);
+  autoLogin(): void {
+    const user: User = JSON.parse(localStorage.getItem(this.USER_DATA));
+    if (!user) {
+      return;
+    }
+
+    const retrievedUser = new User(user.id, user.email, user.jwtToken, user.tokenExpirationDate);
+
+    if (retrievedUser.token) {
+      this.loggedUser.next(retrievedUser);
+    }
   }
 
-  private removeToken(): void {
-    localStorage.removeItem(this.JWT_TOKEN);
+  private saveUserData(user: User): void {
+    localStorage.setItem(this.USER_DATA, JSON.stringify(user));
+  }
+
+  private removeUserData(): void {
+    localStorage.removeItem(this.USER_DATA);
   }
 
 }
