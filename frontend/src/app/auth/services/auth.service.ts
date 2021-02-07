@@ -11,11 +11,12 @@ import {User} from '../models/user';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
-
+  private tokenExpirationTimer: any;
   private readonly USER_DATA = 'userData';
   loggedUser = new BehaviorSubject<User>(null);
   isLoading = false;
+
+  constructor(private http: HttpClient) {}
 
   register(user: { email: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${environment.backend_base_url}/register`, user)
@@ -62,11 +63,16 @@ export class AuthService {
     const user = new User(id, email, token, expirationDate);
     this.loggedUser.next(user);
     this.saveUserData(user);
+    this.autoLogout(expiresIn);
   }
 
   private doLogoutUser(): void {
     this.loggedUser.next(null);
     this.removeUserData();
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
   }
 
   getJwtToken(): string {
@@ -81,7 +87,7 @@ export class AuthService {
   }
 
   autoLogin(): void {
-    const user: User = JSON.parse(localStorage.getItem(this.USER_DATA));
+    const user = JSON.parse(localStorage.getItem(this.USER_DATA));
     if (!user) {
       return;
     }
@@ -90,7 +96,15 @@ export class AuthService {
 
     if (retrievedUser.token) {
       this.loggedUser.next(retrievedUser);
+      const expirationDuration = new Date(user.tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
     }
+  }
+
+  autoLogout(expirationDuration: number): void {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.doLogoutUser();
+    }, expirationDuration);
   }
 
   private saveUserData(user: User): void {
