@@ -3,6 +3,7 @@ package com.codecool.moviewatcher.controller;
 import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.dto.CredentialsDto;
 import com.codecool.moviewatcher.exceptions.ValidationException;
+import com.codecool.moviewatcher.jwt.JwtConfig;
 import com.codecool.moviewatcher.jwt.JwtResponse;
 import com.codecool.moviewatcher.jwt.JwtUtils;
 import com.codecool.moviewatcher.service.UserService;
@@ -23,6 +24,7 @@ import static org.springframework.http.HttpStatus.*;
 public class AuthController {
 
     private final JwtUtils jwtUtils;
+    private final JwtConfig jwtConfig;
     private final UserService userService;
 
     @PostMapping("/login")
@@ -60,6 +62,6 @@ public class AuthController {
         String jwtToken = jwtUtils.generateJwtToken(authentication);
         User user = (User) authentication.getPrincipal();
 
-        return new JwtResponse(user.getId(), user.getUsername(), jwtToken);
+        return new JwtResponse(user.getId(), user.getUsername(), jwtToken, jwtConfig.getExpirationTime());
     }
 }

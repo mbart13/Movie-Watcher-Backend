@@ -10,5 +10,6 @@ public class JwtResponse {
     private final long userId;
     private final String email;
     private final String jwtToken;
+    private final int expiresIn;
 
 }

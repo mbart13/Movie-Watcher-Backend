@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11-jdk-oracle
 
 COPY /target/movie-watcher-0.0.1-SNAPSHOT.jar .
 
