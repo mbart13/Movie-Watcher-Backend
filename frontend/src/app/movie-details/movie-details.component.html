@@ -1,6 +1,0 @@
-<div  *ngIf="data | async as data">
-  <ng-container *ngIf="movieService.isLoading">
-      <app-loading-spinner></app-loading-spinner>
-  </ng-container>
-  <app-movie-info class="movie-details-container" [data]="data"></app-movie-info>
-</div>

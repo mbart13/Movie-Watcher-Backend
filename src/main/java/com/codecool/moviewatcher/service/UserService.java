@@ -2,6 +2,7 @@ package com.codecool.moviewatcher.service;
 
 import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.dto.CredentialsDto;
+import com.codecool.moviewatcher.exceptions.EntityNotFoundException;
 import com.codecool.moviewatcher.exceptions.ValidationException;
 import com.codecool.moviewatcher.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,8 +23,9 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() ->  new EntityNotFoundException(String.format("User with id = %d was not found", id)));
     }
 
     public Authentication login(CredentialsDto credentialsDto) {

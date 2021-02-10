@@ -1,21 +1,20 @@
 package com.codecool.moviewatcher.auth;
 
+//import com.codecool.moviewatcher.model.Favorites;
+
+import com.codecool.moviewatcher.model.Movie;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -37,9 +36,26 @@ public class User implements UserDetails {
     @Column(updatable = false)
     private Timestamp createdDate;
 
+    @ManyToMany(mappedBy = "favoritedBy", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Movie> favorites = new HashSet<>();
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public List<Movie> getMoviesAsList(Set<Movie> moviesSet) {
+        return new ArrayList<>(moviesSet);
+    }
+
+    public void addMovieToFavorites(Movie movie) {
+        favorites.add(movie);
+        movie.getFavoritedBy().add(this);
+    }
+
+    public void removeMovieFromFavorites(Movie movie) {
+        favorites.remove(movie);
+        movie.getFavoritedBy().remove(this);
     }
 
     @Override
