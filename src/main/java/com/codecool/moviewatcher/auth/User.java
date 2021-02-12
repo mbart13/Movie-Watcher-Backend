@@ -36,6 +36,9 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "likedBy", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Movie> favorites = new HashSet<>();
 
+    @ManyToMany(mappedBy = "watchlistedBy", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Movie> watchlist = new HashSet<>();
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;
@@ -53,6 +56,16 @@ public class User implements UserDetails {
     public void removeMovieFromFavorites(Movie movie) {
         favorites.remove(movie);
         movie.getLikedBy().remove(this);
+    }
+
+    public void addMovieToWatchlist(Movie movie) {
+        watchlist.add(movie);
+        movie.getWatchlistedBy().add(this);
+    }
+
+    public void removeMovieFromWatchlist(Movie movie) {
+        watchlist.remove(movie);
+        movie.getWatchlistedBy().remove(this);
     }
 
     @Override

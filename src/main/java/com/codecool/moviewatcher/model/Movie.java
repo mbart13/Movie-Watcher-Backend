@@ -29,11 +29,11 @@ public class Movie implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> likedBy = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch  = FetchType.LAZY)
     @JoinTable(
-            name = "movie_genres",
+            name = "watchlist",
             joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id"))
-    private Set<Genre> genres = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> watchlistedBy = new HashSet<>();
 
 }

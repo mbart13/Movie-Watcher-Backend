@@ -33,13 +33,8 @@ public class MovieService {
     }
 
     public void addToFavorites(Long userId, MovieDto movieDto) {
-        Optional<Movie> maybeMovie = movieRepository.findById(movieDto.getId());
-        Movie movie = null;
-        if (maybeMovie.isEmpty()) {
-            movie = movieMapper.movieDtoToMovie(movieDto);
-        }
         User user = userService.getUserById(userId);
-        user.addMovieToFavorites(maybeMovie.orElse(movie));
+        user.addMovieToFavorites(handleIncomingMovie(movieDto));
         userRepository.save(user);
     }
 
@@ -50,4 +45,33 @@ public class MovieService {
         userRepository.save(user);
         return movieMapper.movieToMovieDto(movie);
     }
+
+    public List<MovieDto> getWatchlistMovies(Long id) {
+        User user = userService.getUserById(id);
+        return movieMapper.movieListToMovieDtoList(user.getMoviesAsList(user.getWatchlist()));
+    }
+
+    public void addToWatchlist(Long userId, MovieDto movieDto) {
+        User user = userService.getUserById(userId);
+        user.addMovieToWatchlist(handleIncomingMovie(movieDto));
+        userRepository.save(user);
+    }
+
+    public MovieDto removeFromWatchlist(Long userId, Long movieId) {
+        User user = userService.getUserById(userId);
+        Movie movie = getMovieById(movieId);
+        user.removeMovieFromWatchlist(movie);
+        userRepository.save(user);
+        return movieMapper.movieToMovieDto(movie);
+    }
+
+    private Movie handleIncomingMovie(MovieDto movieDto) {
+        Optional<Movie> maybeMovie = movieRepository.findById(movieDto.getId());
+        Movie movie = null;
+        if (maybeMovie.isEmpty()) {
+            movie = movieMapper.movieDtoToMovie(movieDto);
+        }
+        return maybeMovie.orElse(movie);
+    }
+
 }

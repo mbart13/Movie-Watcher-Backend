@@ -18,20 +18,37 @@ public class MoviesController {
 
     private final MovieService movieService;
 
-    @GetMapping("/{id}/favorites")
-    public List<MovieDto> getFavoriteMovies(@PathVariable Long id) {
-        return movieService.getFavoriteMovies(id);
+    @GetMapping("/{userId}/favorites")
+    public List<MovieDto> getFavoriteMovies(@PathVariable Long userId) {
+        return movieService.getFavoriteMovies(userId);
     }
 
-    @PostMapping("/{id}/favorites")
+    @PostMapping("/{userId}/favorites")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addMovieToFavorites(@PathVariable Long id, @RequestBody MovieDto movieDto) {
-        movieService.addToFavorites(id, movieDto);
+    public void addMovieToFavorites(@PathVariable Long userId, @RequestBody MovieDto movieDto) {
+        movieService.addToFavorites(userId, movieDto);
     }
 
     @DeleteMapping("/{user_id}/favorites/{movie_id}")
     public ResponseEntity<MovieDto> removeMovieFromFavorites(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
         MovieDto movieDto = movieService.removeFromFavorites(userId, movieId);
+        return ResponseEntity.ok(movieDto);
+    }
+
+    @GetMapping("/{userId}/watchlist")
+    public List<MovieDto> getWatchlistMovies(@PathVariable Long userId) {
+        return movieService.getWatchlistMovies(userId);
+    }
+
+    @PostMapping("/{userId}/watchlist")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addMovieToWatchlist(@PathVariable Long userId, @RequestBody MovieDto movieDto) {
+        movieService.addToWatchlist(userId, movieDto);
+    }
+
+    @DeleteMapping("/{user_id}/watchlist/{movie_id}")
+    public ResponseEntity<MovieDto> removeMovieFromWatchlist(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
+        MovieDto movieDto = movieService.removeFromWatchlist(userId, movieId);
         return ResponseEntity.ok(movieDto);
     }
 
