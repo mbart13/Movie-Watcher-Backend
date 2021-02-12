@@ -4,7 +4,7 @@ import com.codecool.moviewatcher.model.Movie;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
 
 @Mapper
 @Component
@@ -14,7 +14,5 @@ public interface MovieMapper {
 
     MovieDto movieToMovieDto(Movie movie);
 
-    List<Movie> movieDtoListToMovieList(List<MovieDto> userDtoList);
-
-    List<MovieDto> movieListToMovieDtoList(List<Movie> userList);
+    Set<MovieDto> movieListToMovieDtoList(Set<Movie> userList);
 }

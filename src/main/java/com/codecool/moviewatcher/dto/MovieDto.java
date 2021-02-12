@@ -22,4 +22,6 @@ public class MovieDto {
     private String posterPath;
     @JsonIgnore
     private Set<User> likedBy;
+    @JsonIgnore
+    private Set<User> watchlistedBy;
 }

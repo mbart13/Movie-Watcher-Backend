@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -27,9 +28,9 @@ public class MovieService {
                 .orElseThrow(() ->  new EntityNotFoundException(String.format("Movie with id = %d was not found", id)));
     }
 
-    public List<MovieDto> getFavoriteMovies(Long id) {
+    public Set<MovieDto> getFavoriteMovies(Long id) {
         User user = userService.getUserById(id);
-        return movieMapper.movieListToMovieDtoList(user.getMoviesAsList(user.getFavorites()));
+        return movieMapper.movieListToMovieDtoList(user.getFavorites());
     }
 
     public void addToFavorites(Long userId, MovieDto movieDto) {
@@ -46,9 +47,9 @@ public class MovieService {
         return movieMapper.movieToMovieDto(movie);
     }
 
-    public List<MovieDto> getWatchlistMovies(Long id) {
+    public Set<MovieDto> getWatchlistMovies(Long id) {
         User user = userService.getUserById(id);
-        return movieMapper.movieListToMovieDtoList(user.getMoviesAsList(user.getWatchlist()));
+        return movieMapper.movieListToMovieDtoList(user.getWatchlist());
     }
 
     public void addToWatchlist(Long userId, MovieDto movieDto) {
@@ -73,5 +74,4 @@ public class MovieService {
         }
         return maybeMovie.orElse(movie);
     }
-
 }

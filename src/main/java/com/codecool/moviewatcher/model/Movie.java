@@ -1,6 +1,7 @@
 package com.codecool.moviewatcher.model;
 
 import com.codecool.moviewatcher.auth.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,7 @@ public class Movie implements Serializable {
     private String posterPath;
 
     @ManyToMany(fetch  = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(
             name = "favorites",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -30,6 +32,7 @@ public class Movie implements Serializable {
     private Set<User> likedBy = new HashSet<>();
 
     @ManyToMany(fetch  = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(
             name = "watchlist",
             joinColumns = @JoinColumn(name = "movie_id"),

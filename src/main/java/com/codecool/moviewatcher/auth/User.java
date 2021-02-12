@@ -44,10 +44,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public List<Movie> getMoviesAsList(Set<Movie> moviesSet) {
-        return new ArrayList<>(moviesSet);
-    }
-
     public void addMovieToFavorites(Movie movie) {
         favorites.add(movie);
         movie.getLikedBy().add(this);
