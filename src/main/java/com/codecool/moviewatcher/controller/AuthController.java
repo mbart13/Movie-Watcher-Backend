@@ -21,6 +21,7 @@ import static org.springframework.http.HttpStatus.*;
 @AllArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/v1")
 public class AuthController {
 
     private final JwtUtils jwtUtils;

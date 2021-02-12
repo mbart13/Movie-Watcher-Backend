@@ -1,7 +1,5 @@
 package com.codecool.moviewatcher.auth;
 
-//import com.codecool.moviewatcher.model.Favorites;
-
 import com.codecool.moviewatcher.model.Movie;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -36,7 +33,7 @@ public class User implements UserDetails {
     @Column(updatable = false)
     private Timestamp createdDate;
 
-    @ManyToMany(mappedBy = "favoritedBy", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy = "likedBy", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Movie> favorites = new HashSet<>();
 
     public User(String email, String password) {
@@ -50,12 +47,12 @@ public class User implements UserDetails {
 
     public void addMovieToFavorites(Movie movie) {
         favorites.add(movie);
-        movie.getFavoritedBy().add(this);
+        movie.getLikedBy().add(this);
     }
 
     public void removeMovieFromFavorites(Movie movie) {
         favorites.remove(movie);
-        movie.getFavoritedBy().remove(this);
+        movie.getLikedBy().remove(this);
     }
 
     @Override

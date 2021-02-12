@@ -12,7 +12,7 @@ import java.util.List;
 @ControllerAdvice
 public class MvcExceptionHandler {
 
-    @ExceptionHandler({MethodArgumentNotValidException.class, ValidationException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<Object> validationErrorHandler(MethodArgumentNotValidException ex){
         List<String> errorsList = new ArrayList<>(ex.getErrorCount());
 

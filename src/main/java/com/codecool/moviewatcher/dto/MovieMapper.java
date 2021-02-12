@@ -12,6 +12,8 @@ public interface MovieMapper {
 
     Movie movieDtoToMovie(MovieDto movieDto);
 
+    MovieDto movieToMovieDto(Movie movie);
+
     List<Movie> movieDtoListToMovieList(List<MovieDto> userDtoList);
 
     List<MovieDto> movieListToMovieDtoList(List<Movie> userList);

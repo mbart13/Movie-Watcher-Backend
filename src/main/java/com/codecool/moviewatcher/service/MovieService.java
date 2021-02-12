@@ -43,10 +43,11 @@ public class MovieService {
         userRepository.save(user);
     }
 
-    public void removeFromFavorites(Long userId, Long movieId) {
+    public MovieDto removeFromFavorites(Long userId, Long movieId) {
         User user = userService.getUserById(userId);
         Movie movie = getMovieById(movieId);
         user.removeMovieFromFavorites(movie);
         userRepository.save(user);
+        return movieMapper.movieToMovieDto(movie);
     }
 }

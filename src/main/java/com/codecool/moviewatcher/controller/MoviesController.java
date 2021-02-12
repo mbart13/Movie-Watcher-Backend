@@ -1,11 +1,8 @@
 package com.codecool.moviewatcher.controller;
 
-import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.dto.MovieDto;
 import com.codecool.moviewatcher.exceptions.EntityNotFoundException;
-import com.codecool.moviewatcher.model.Movie;
 import com.codecool.moviewatcher.service.MovieService;
-import com.codecool.moviewatcher.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +12,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/users")
 public class MoviesController {
 
@@ -32,9 +30,9 @@ public class MoviesController {
     }
 
     @DeleteMapping("/{user_id}/favorites/{movie_id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeMovieFromFavorites(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
-        movieService.removeFromFavorites(userId, movieId);
+    public ResponseEntity<MovieDto> removeMovieFromFavorites(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
+        MovieDto movieDto = movieService.removeFromFavorites(userId, movieId);
+        return ResponseEntity.ok(movieDto);
     }
 
     @ExceptionHandler({EntityNotFoundException.class})
