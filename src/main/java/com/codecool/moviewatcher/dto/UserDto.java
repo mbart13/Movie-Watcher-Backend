@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +17,7 @@ public class UserDto {
     private String password;
     @JsonIgnore
     private Timestamp createdDate;
-    private Set<MovieDto> favorites = new HashSet<>();
-    private Set<MovieDto> watchlist = new HashSet<>();
+    private List<MovieDto> favorites;
+    private List<MovieDto> watchlist;
 
 }

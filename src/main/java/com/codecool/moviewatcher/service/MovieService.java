@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -28,7 +27,7 @@ public class MovieService {
                 .orElseThrow(() ->  new EntityNotFoundException(String.format("Movie with id = %d was not found", id)));
     }
 
-    public Set<MovieDto> getFavoriteMovies(Long id) {
+    public List<MovieDto> getFavoriteMovies(Long id) {
         User user = userService.getUserById(id);
         return movieMapper.movieListToMovieDtoList(user.getFavorites());
     }
@@ -39,15 +38,14 @@ public class MovieService {
         userRepository.save(user);
     }
 
-    public MovieDto removeFromFavorites(Long userId, Long movieId) {
+    public void removeFromFavorites(Long userId, Long movieId) {
         User user = userService.getUserById(userId);
         Movie movie = getMovieById(movieId);
         user.removeMovieFromFavorites(movie);
         userRepository.save(user);
-        return movieMapper.movieToMovieDto(movie);
     }
 
-    public Set<MovieDto> getWatchlistMovies(Long id) {
+    public List<MovieDto> getWatchlistMovies(Long id) {
         User user = userService.getUserById(id);
         return movieMapper.movieListToMovieDtoList(user.getWatchlist());
     }
@@ -58,12 +56,11 @@ public class MovieService {
         userRepository.save(user);
     }
 
-    public MovieDto removeFromWatchlist(Long userId, Long movieId) {
+    public void removeFromWatchlist(Long userId, Long movieId) {
         User user = userService.getUserById(userId);
         Movie movie = getMovieById(movieId);
         user.removeMovieFromWatchlist(movie);
         userRepository.save(user);
-        return movieMapper.movieToMovieDto(movie);
     }
 
     private Movie handleIncomingMovie(MovieDto movieDto) {

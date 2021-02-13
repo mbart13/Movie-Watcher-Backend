@@ -34,10 +34,10 @@ public class User implements UserDetails {
     private Timestamp createdDate;
 
     @ManyToMany(mappedBy = "likedBy", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Movie> favorites = new HashSet<>();
+    private List<Movie> favorites = new ArrayList<>();
 
     @ManyToMany(mappedBy = "watchlistedBy", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Movie> watchlist = new HashSet<>();
+    private List<Movie> watchlist = new ArrayList<>();
 
     public User(String email, String password) {
         this.email = email;

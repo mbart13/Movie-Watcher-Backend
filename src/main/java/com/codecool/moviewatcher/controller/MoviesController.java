@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -25,24 +26,25 @@ public class MoviesController {
     private final UserMapper userMapper;
 
     @GetMapping("/{userId}/favorites")
-    public Set<MovieDto> getFavoriteMovies(@PathVariable Long userId) {
+    public List<MovieDto> getFavoriteMovies(@PathVariable Long userId) {
         return movieService.getFavoriteMovies(userId);
     }
 
     @PostMapping("/{userId}/favorites")
     @ResponseStatus(HttpStatus.CREATED)
     public void addMovieToFavorites(@PathVariable Long userId, @RequestBody MovieDto movieDto) {
+        System.out.println(movieDto);
         movieService.addToFavorites(userId, movieDto);
     }
 
     @DeleteMapping("/{user_id}/favorites/{movie_id}")
-    public ResponseEntity<MovieDto> removeMovieFromFavorites(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
-        MovieDto movieDto = movieService.removeFromFavorites(userId, movieId);
-        return ResponseEntity.ok(movieDto);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeMovieFromFavorites(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
+        movieService.removeFromFavorites(userId, movieId);
     }
 
     @GetMapping("/{userId}/watchlist")
-    public Set<MovieDto> getWatchlistMovies(@PathVariable Long userId) {
+    public List<MovieDto> getWatchlistMovies(@PathVariable Long userId) {
         return movieService.getWatchlistMovies(userId);
     }
 
@@ -53,9 +55,9 @@ public class MoviesController {
     }
 
     @DeleteMapping("/{user_id}/watchlist/{movie_id}")
-    public ResponseEntity<MovieDto> removeMovieFromWatchlist(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
-        MovieDto movieDto = movieService.removeFromWatchlist(userId, movieId);
-        return ResponseEntity.ok(movieDto);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeMovieFromWatchlist(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
+        movieService.removeFromWatchlist(userId, movieId);
     }
 
     @GetMapping("/{user_id}")
