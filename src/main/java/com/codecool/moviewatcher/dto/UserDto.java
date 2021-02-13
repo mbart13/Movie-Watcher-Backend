@@ -1,6 +1,5 @@
 package com.codecool.moviewatcher.dto;
 
-import com.codecool.moviewatcher.model.Movie;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,7 @@ public class UserDto {
     private String password;
     @JsonIgnore
     private Timestamp createdDate;
-    private Set<Movie> favorites = new HashSet<>();
-    private Set<Movie> watchlist = new HashSet<>();
+    private Set<MovieDto> favorites = new HashSet<>();
+    private Set<MovieDto> watchlist = new HashSet<>();
 
 }
