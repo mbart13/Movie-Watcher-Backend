@@ -20,7 +20,7 @@ import static org.springframework.http.HttpStatus.*;
 
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://movie-watcher.vercel.app"})
 @RequestMapping("/api/v1")
 public class AuthController {
 
