@@ -3,7 +3,7 @@ package com.codecool.moviewatcher.controller;
 import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.dto.MovieDto;
 import com.codecool.moviewatcher.dto.UserDto;
-import com.codecool.moviewatcher.dto.UserMapper;
+import com.codecool.moviewatcher.dto.mappers.UserMapper;
 import com.codecool.moviewatcher.exceptions.EntityNotFoundException;
 import com.codecool.moviewatcher.service.MovieService;
 import com.codecool.moviewatcher.service.UserService;
