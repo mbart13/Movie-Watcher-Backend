@@ -34,11 +34,11 @@ public class UserService {
 
     public void registerUser(CredentialsDto credentialsDto) {
         User user = new User(credentialsDto.getEmail(), passwordEncoder.encode(credentialsDto.getPassword()));
-        checkIfUserExists(user.getEmail());
+        checkIfEmailExists(user.getEmail());
         userRepository.save(user);
     }
 
-    private void checkIfUserExists(String email) {
+    public void checkIfEmailExists(String email) {
         Optional<User> maybeUser = userRepository.findByEmail(email);
         if (maybeUser.isPresent()) {
             throw new ValidationException("Email already exists: " + maybeUser.get().getUsername());

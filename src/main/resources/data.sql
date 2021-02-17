@@ -1,6 +1,6 @@
 insert into users (id, email, password)
 values
-(1, 'msbartosik@gmail.com', '$2y$10$.j0E2Z8OkhIu9n7CvTdF5.tUknMUb9eo6cfffSrL7Ua2b02aUsTLi');
+(1, 'msbartosik@gmail.com', '$2y$10$VxHQsCWZkQC4c95EdGF5ouj0k9TPFU3.s2DgZ6wbhXNC.G37IytTO');
 
 insert into movies (id, title, release_date, vote_average, poster_path)
 values

@@ -19,6 +19,6 @@ public class CredentialsDto {
     private String email;
 
     @NotBlank(message = "Password field cannot be blank")
-    @Size(min=2, max = 256, message = "Password field must be between 2 and 256 characters long")
+    @Size(min=8, max = 256, message = "Password field must be between 8 and 256 characters long")
     private String password;
 }

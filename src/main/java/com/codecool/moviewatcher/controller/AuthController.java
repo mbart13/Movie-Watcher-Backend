@@ -2,6 +2,7 @@ package com.codecool.moviewatcher.controller;
 
 import com.codecool.moviewatcher.auth.User;
 import com.codecool.moviewatcher.dto.CredentialsDto;
+import com.codecool.moviewatcher.dto.EmailDto;
 import com.codecool.moviewatcher.exceptions.ValidationException;
 import com.codecool.moviewatcher.jwt.JwtConfig;
 import com.codecool.moviewatcher.jwt.JwtResponse;
@@ -47,6 +48,17 @@ public class AuthController {
     @ResponseStatus(NO_CONTENT)
     public void logout() {
         SecurityContextHolder.getContext().setAuthentication(null);
+    }
+
+    @PostMapping("/email-check")
+    public ResponseEntity<Boolean> emailCheck(@RequestBody EmailDto emailDto) {
+        boolean emailExists = false;
+        try {
+            userService.checkIfEmailExists(emailDto.getEmail());
+        } catch (ValidationException e) {
+            emailExists = true;
+        }
+        return ResponseEntity.ok(emailExists);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
