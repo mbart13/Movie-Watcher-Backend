@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.*;
 
 @AllArgsConstructor
@@ -62,8 +64,8 @@ public class AuthController {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<String> handleException() {
-        return new ResponseEntity<>("Invalid username or password", UNAUTHORIZED);
+    public ResponseEntity<Object> handleException() {
+        return new ResponseEntity<>(List.of("Invalid username or password"), UNAUTHORIZED);
     }
 
     @ExceptionHandler(ValidationException.class)
