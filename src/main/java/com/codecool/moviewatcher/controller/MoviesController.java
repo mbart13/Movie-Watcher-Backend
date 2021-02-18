@@ -32,13 +32,12 @@ public class MoviesController {
     @PostMapping("/{userId}/favorites")
     @ResponseStatus(HttpStatus.CREATED)
     public void addMovieToFavorites(@PathVariable Long userId, @RequestBody MovieDto movieDto) {
-        System.out.println(movieDto);
         movieService.addToFavorites(userId, movieDto);
     }
 
-    @DeleteMapping("/{user_id}/favorites/{movie_id}")
+    @DeleteMapping("/{userId}/favorites/{movieId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeMovieFromFavorites(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
+    public void removeMovieFromFavorites(@PathVariable("userId") Long userId, @PathVariable("movieId") Long movieId) {
         movieService.removeFromFavorites(userId, movieId);
     }
 
@@ -53,14 +52,14 @@ public class MoviesController {
         movieService.addToWatchlist(userId, movieDto);
     }
 
-    @DeleteMapping("/{user_id}/watchlist/{movie_id}")
+    @DeleteMapping("/{userId}/watchlist/{movieId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeMovieFromWatchlist(@PathVariable("user_id") Long userId, @PathVariable("movie_id") Long movieId) {
+    public void removeMovieFromWatchlist(@PathVariable("userId") Long userId, @PathVariable("movieId") Long movieId) {
         movieService.removeFromWatchlist(userId, movieId);
     }
 
-    @GetMapping("/{user_id}")
-    public ResponseEntity<UserDto> getUserData(@PathVariable("user_id") Long userId) {
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDto> getUserData(@PathVariable("userId") Long userId) {
         User user = userService.getUserById(userId);
         return ResponseEntity.ok(userMapper.userToUserDto(user));
     }
