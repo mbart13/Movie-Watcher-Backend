@@ -1,5 +1,6 @@
 package com.codecool.moviewatcher.auth;
 
+import com.codecool.moviewatcher.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApplicationUserService implements UserDetailsService {
 
-    private final UserDaoService userDaoService;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userDaoService.findUserByEmail(email)
+        return userRepository.findByEmail(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(String.format("User was not found: %s", email)));
     }

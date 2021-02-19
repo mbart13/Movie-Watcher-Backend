@@ -69,8 +69,8 @@ public class AuthController {
     }
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<String> handleValidationException(ValidationException validationException) {
-        return new ResponseEntity<>(validationException.getMessage(), BAD_REQUEST);
+    public ResponseEntity<Object> handleValidationException(ValidationException validationException) {
+        return new ResponseEntity<>(List.of(validationException.getMessage()), BAD_REQUEST);
     }
 
     private JwtResponse toJwtResponse(Authentication authentication) {
