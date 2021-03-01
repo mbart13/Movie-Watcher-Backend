@@ -18,6 +18,7 @@ Tools:
 * PostgreSQL;
 * Frontend deployed on Vercel;
 * Backend deployed on Heroku;
+* Docker;
 
 Some interesting technical aspects:
 * lazy loading;
