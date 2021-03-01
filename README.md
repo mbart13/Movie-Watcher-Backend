@@ -30,4 +30,4 @@ Some interesting technical aspects:
 Application allowes: 
 * to filter and search in movie database (powered by TMDB API);
 * to view movie details;
-* create user Account to add movie to favorites and watchlist.
+* create user account to add movies to favorites and watchlist.
