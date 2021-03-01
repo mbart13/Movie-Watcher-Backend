@@ -2,7 +2,7 @@
 
 # Movie Watcher
 https://movie-watcher.vercel.app  
-(since backend is deployed on heroku, some functionalities may work with 30 seconds delay)
+(since backend is deployed on free heroku dyno, some parts of the application will take some time to start)
 
 ## Frontend
 
@@ -16,6 +16,8 @@ Tools:
 * Angular Material for some components;
 * Spring Boot/Spring Security/Spring Data Jpa;
 * PostgreSQL;
+* Frontend deployed on Vercel;
+* Backend deployed on Heroku;
 
 Some interesting technical aspects:
 * lazy loading;
