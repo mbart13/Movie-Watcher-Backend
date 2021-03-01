@@ -21,7 +21,7 @@ Tools:
 * Docker;
 
 Some interesting technical aspects:
-* lazy loading;
+* code splitting;
 * asynchronous and synchronous form validation;
 * autologin and autologout depending if token is not expired;
 * authorization with JWT;
